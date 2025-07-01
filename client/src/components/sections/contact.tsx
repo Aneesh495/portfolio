@@ -163,9 +163,9 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Card className="shadow-lg">
-              <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
+            <Card className="shadow-lg h-full">
+              <CardContent className="p-8 h-full flex flex-col">
+                <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
                   <div>
                     <Label htmlFor="name">Name</Label>
                     <Input
@@ -193,7 +193,7 @@ export default function Contact() {
                     />
                   </div>
                   
-                  <div>
+                  <div className="flex-1">
                     <Label htmlFor="message">Message</Label>
                     <Textarea
                       id="message"
@@ -201,9 +201,9 @@ export default function Contact() {
                       value={formData.message}
                       onChange={handleInputChange}
                       placeholder="Your message..."
-                      rows={4}
+                      rows={8}
                       required
-                      className="mt-2"
+                      className="mt-2 resize-none h-full min-h-[150px]"
                     />
                   </div>
                   

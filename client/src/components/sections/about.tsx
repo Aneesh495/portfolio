@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Users, Code, Download } from "lucide-react";
+import babyPhoto from "@assets/IMG_5011 2_1751406011156.png";
+import resumePdf from "@assets/Aneesh Resume.docx (17)_1751406011157.pdf";
 
 export default function About() {
   return (
@@ -24,7 +26,7 @@ export default function About() {
             className="order-2 lg:order-1"
           >
             <img
-              src="/baby-photo.png"
+              src={babyPhoto}
               alt="Aneesh Krishna - Baby photo"
               className="rounded-2xl shadow-2xl w-full max-w-md mx-auto"
             />
@@ -78,7 +80,7 @@ export default function About() {
               className="shadow-lg hover:shadow-xl transition-all duration-300"
               onClick={() => {
                 const link = document.createElement('a');
-                link.href = '/Aneesh_Krishna_Resume.pdf';
+                link.href = resumePdf;
                 link.download = 'Aneesh_Krishna_Resume.pdf';
                 link.click();
               }}
