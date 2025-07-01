@@ -1,0 +1,72 @@
+Purpose: I want to create a modern, high-performing, animated personal portfolio website that showcases my resume, projects, experiences, skills, and contact information. It should impress recruiters and hiring managers at top tech companies.
+
+
+Build a stunning, responsive, animated personal portfolio website using React.js + Tailwind CSS + Framer Motion.
+
+🎯 Target Audience: Recruiters at top tech firms, collaborators, peers.
+
+🌐 Overall Design:
+- Clean, minimal aesthetic with soft shadows, rounded corners, and modern fonts (Inter or IBM Plex Sans).
+- Light/dark mode toggle.
+- Smooth animations and transitions with Framer Motion.
+- Fully responsive layout.
+
+📌 Pages / Sections:
+
+1. **Home**:
+   - Animated hero section: “Hi, I'm Aneesh Krishna 👋”
+   - Tagline: “Aspiring Software Engineer | Blockchain Enthusiast | CS @ Purdue”
+   - Background animation (e.g., particles or waves)
+
+2. **About**:
+   - Short bio with photo
+   - Education & extracurriculars (Purdue CS Honors + orgs like Boiler Blockchain)
+   - Link to resume download
+
+3. **Projects**:
+   - Card-style layout with animation on hover
+   - Show key projects: Vibe (Java real-time social app), Freelance DAO (Solidity), etc.
+
+4. **Experience**:
+   - Timeline or card format
+   - List internships, research positions, and impact (Retail Hedging, The Data Mine, etc.)
+
+5. **Skills**:
+   - Tech tag cloud or skill grid
+   - Languages, tools, certifications
+
+6. **Games** 🎮:
+   - Dedicated section or separate page (`/games`)
+   - Title: “Just for Fun — Mini Games I Built”
+   - Grid layout with game thumbnails or icons
+   - Each game opens in a modal or its own React route
+   - Suggested games to build:
+     - **Tic Tac Toe** (React state logic)
+     - **2048** (Sliding puzzle with animations)
+     - **Snake** (Canvas + keyboard controls)
+     - **Memory Match Cards** (React hooks & timers)
+     - **Minesweeper Lite** (grid logic & recursion)
+     - **Rock Paper Scissors** (with animation or AI)
+     - **Breakout / Pong** (Canvas physics)
+     - Include links to GitHub repo for each game
+
+7. **Contact**:
+   - Contact form with name, email, and message (React Hook Form + EmailJS)
+   - reCAPTCHA
+   - Links: GitHub, LinkedIn, Email
+
+🧰 Tech Stack:
+- Frontend: React.js + Tailwind CSS
+- Animations: Framer Motion
+- Games: React components and/or HTML Canvas + hooks
+- Deployment: GitHub Pages or Vercel
+- Optional: EmailJS / Netlify Forms for contact
+
+📦 Extras:
+- Navbar with active link highlight
+- SEO tags, social previews
+- Favicon and custom domain ready
+- Easter egg route like `/secret` or `/games/puzzle`
+- Easily expandable to add more games or projects in the future
+
+Make the code modular and scalable — all game components should be in a `/games` folder and dynamically rendered from a list. Use lazy loading for better performance.
