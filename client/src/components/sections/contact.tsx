@@ -7,25 +7,25 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Github, Linkedin } from "lucide-react";
-import ReCAPTCHA from "react-google-recaptcha";
+import { SiX, SiInstagram } from "react-icons/si";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
+    notRobot: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!recaptchaValue) {
+    if (!formData.notRobot) {
       toast({
         title: "Error",
-        description: "Please verify that you're not a robot.",
+        description: "Please pinky promise you're not a robot first!",
         variant: "destructive",
       });
       return;
@@ -39,15 +39,9 @@ export default function Contact() {
         title: "Message Sent!",
         description: "Thank you for your message. I'll get back to you soon!",
       });
-      setFormData({ name: "", email: "", message: "" });
-      setRecaptchaValue(null);
-      recaptchaRef.current?.reset();
+      setFormData({ name: "", email: "", message: "", notRobot: false });
       setIsSubmitting(false);
     }, 1000);
-  };
-
-  const onRecaptchaChange = (value: string | null) => {
-    setRecaptchaValue(value);
   };
 
   const handleInputChange = (
@@ -130,6 +124,36 @@ export default function Contact() {
                   <p className="text-muted-foreground">github.com/Aneesh495</p>
                 </div>
               </motion.a>
+
+              <motion.a
+                href="https://x.com/DKE631"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex items-center p-4 bg-card rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <SiX className="text-primary text-xl mr-4" />
+                <div>
+                  <h4 className="font-semibold">Twitter</h4>
+                  <p className="text-muted-foreground">@DKE631</p>
+                </div>
+              </motion.a>
+
+              <motion.a
+                href="https://www.instagram.com/aneesh.495/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex items-center p-4 bg-card rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <SiInstagram className="text-primary text-xl mr-4" />
+                <div>
+                  <h4 className="font-semibold">Instagram</h4>
+                  <p className="text-muted-foreground">@aneesh.495</p>
+                </div>
+              </motion.a>
             </div>
           </motion.div>
 
@@ -183,12 +207,17 @@ export default function Contact() {
                     />
                   </div>
                   
-                  <div className="flex justify-center">
-                    <ReCAPTCHA
-                      ref={recaptchaRef}
-                      sitekey="6LeoAW8rAAAAAMi5k_FAH0zV8U7lYnvf_JLmFbVH"
-                      onChange={onRecaptchaChange}
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="notRobot"
+                      checked={formData.notRobot}
+                      onCheckedChange={(checked) =>
+                        setFormData({ ...formData, notRobot: !!checked })
+                      }
                     />
+                    <Label htmlFor="notRobot" className="text-sm">
+                      I pinky promise I'm not a robot 🤞
+                    </Label>
                   </div>
                   
                   <Button

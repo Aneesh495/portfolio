@@ -18,10 +18,10 @@ const CARD_VALUES = [
 ];
 
 const DIFFICULTY_MODES = {
-  easy: { size: 4, pairs: 8, label: '4x4 (Easy)' },
-  medium: { size: 6, pairs: 18, label: '6x6 (Medium)' },
-  hard: { size: 8, pairs: 32, label: '8x8 (Hard)' },
-  expert: { size: 10, pairs: 50, label: '10x10 (Expert)' },
+  easy: { size: 5, pairs: 10, label: 'Easy (10 matches)' },
+  medium: { size: 6, pairs: 15, label: 'Medium (15 matches)' },
+  hard: { size: 6, pairs: 20, label: 'Hard (20 matches)' },
+  expert: { size: 7, pairs: 25, label: 'Expert (25 matches)' },
 };
 
 export default function MemoryMatch() {

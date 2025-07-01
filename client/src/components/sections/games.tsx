@@ -10,6 +10,7 @@ import Snake from "@/components/games/snake";
 import MemoryMatch from "@/components/games/memory-match";
 import Minesweeper from "@/components/games/minesweeper";
 import RockPaperScissors from "@/components/games/rock-paper-scissors";
+import ConnectFour from "@/components/games/connect-four";
 
 const games = [
   {
@@ -66,6 +67,15 @@ const games = [
     buttonColor: "bg-indigo-600 hover:bg-indigo-700",
     component: RockPaperScissors,
   },
+  {
+    id: "connect-four",
+    title: "Connect Four",
+    description: "Strategic 4-in-a-row game with AI",
+    icon: "🔴",
+    color: "from-yellow-50 to-yellow-100 dark:from-yellow-900 dark:to-yellow-800",
+    buttonColor: "bg-yellow-600 hover:bg-yellow-700",
+    component: ConnectFour,
+  },
 ];
 
 export default function Games() {
@@ -82,12 +92,25 @@ export default function Games() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">
-            Just for Fun — Mini Games I Built 🎮
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Interactive games built with React and JavaScript
-          </p>
+          <motion.div
+            initial={{ scale: 0.8 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+            className="inline-block"
+          >
+            <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent">
+              Interactive Game Arcade 🎮
+            </h2>
+          </motion.div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+          >
+            A collection of engaging games featuring AI opponents, smooth animations, 
+            and competitive gameplay built with React and TypeScript
+          </motion.p>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
