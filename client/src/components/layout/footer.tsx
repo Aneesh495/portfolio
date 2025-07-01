@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Heart, Code, Coffee } from "lucide-react";
+import { Github, Linkedin, Mail, Heart, Code, Coffee, Youtube } from "lucide-react";
 import { SiX, SiInstagram } from "react-icons/si";
 import { motion } from "framer-motion";
 
@@ -110,6 +110,16 @@ export default function Footer() {
                 rel="noopener noreferrer"
               >
                 <SiInstagram className="h-5 w-5 text-slate-300 group-hover:text-pink-400" />
+              </motion.a>
+              <motion.a
+                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
+                whileHover={{ scale: 1.1, rotate: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-slate-800 hover:bg-slate-700 p-3 rounded-lg transition-colors group"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Youtube className="h-5 w-5 text-slate-300 group-hover:text-red-500" />
               </motion.a>
               <motion.a
                 href="mailto:aneeshkrishnaparthasarathy@gmail.com"
