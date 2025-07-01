@@ -83,7 +83,7 @@ export default function Minesweeper() {
       return;
     }
 
-    const newBoard = [...board];
+    const newBoard = board.map(row => row.map(cell => ({ ...cell })));
     
     if (newBoard[row][col].isMine) {
       // Game over - reveal all mines
@@ -104,7 +104,8 @@ export default function Minesweeper() {
           c < 0 ||
           c >= BOARD_SIZE ||
           newBoard[r][c].isRevealed ||
-          newBoard[r][c].isFlagged
+          newBoard[r][c].isFlagged ||
+          newBoard[r][c].isMine
         ) {
           return;
         }
@@ -142,13 +143,12 @@ export default function Minesweeper() {
       return;
     }
 
-    const newBoard = [...board];
-    newBoard[row][col].isFlagged = !newBoard[row][col].isFlagged;
+    const newBoard = board.map(boardRow => boardRow.map(cell => ({ ...cell })));
+    const wasFlagged = newBoard[row][col].isFlagged;
+    newBoard[row][col].isFlagged = !wasFlagged;
     
     setBoard(newBoard);
-    setMinesLeft(prev => 
-      newBoard[row][col].isFlagged ? prev - 1 : prev + 1
-    );
+    setMinesLeft(prev => wasFlagged ? prev + 1 : prev - 1);
   };
 
   const getCellContent = (cell: Cell) => {

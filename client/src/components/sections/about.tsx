@@ -36,11 +36,11 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="order-1 lg:order-2"
           >
-            <h3 className="text-2xl font-semibold mb-6">Hello! I'm Aneesh Krishna</h3>
+            <h3 className="text-2xl font-semibold mb-6">Hello! I'm Aneesh Krishna Parthasarathy</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              I'm a Computer Science student at Purdue University with a passion for building innovative software solutions. 
-              My journey in tech spans from blockchain development to full-stack applications, always with a focus on 
-              creating meaningful user experiences.
+              I'm a Computer Science student at Purdue University Honors College (Class of 2027) with a focus on Machine Intelligence 
+              and Applied Statistics. My passion lies in building innovative software solutions that bridge the gap between 
+              cutting-edge technology and real-world applications, from blockchain development to data science research.
             </p>
             
             <div className="space-y-4 mb-8">
@@ -51,7 +51,7 @@ export default function About() {
                 className="flex items-center"
               >
                 <GraduationCap className="text-primary mr-3 h-5 w-5" />
-                <span>Computer Science @ Purdue University (Honors)</span>
+                <span>B.S. Computer Science (Machine Intelligence) + Applied Statistics @ Purdue Honors</span>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -60,7 +60,7 @@ export default function About() {
                 className="flex items-center"
               >
                 <Users className="text-primary mr-3 h-5 w-5" />
-                <span>Member of Boiler Blockchain</span>
+                <span>Active in Boiler Blockchain, Purdue DOSA, Tamil Sangam</span>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -69,14 +69,19 @@ export default function About() {
                 className="flex items-center"
               >
                 <Code className="text-primary mr-3 h-5 w-5" />
-                <span>Full-Stack & Blockchain Developer</span>
+                <span>Software Engineer, Data Scientist & Blockchain Developer</span>
               </motion.div>
             </div>
             
             <Button
               size="lg"
               className="shadow-lg hover:shadow-xl transition-all duration-300"
-              onClick={() => window.open('#', '_blank')}
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/Aneesh_Krishna_Resume.pdf';
+                link.download = 'Aneesh_Krishna_Resume.pdf';
+                link.click();
+              }}
             >
               <Download className="mr-2 h-4 w-4" />
               Download Resume
