@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail, Heart, Code, Coffee } from "lucide-react";
+import { SiX, SiInstagram } from "react-icons/si";
 import { motion } from "framer-motion";
 
 export default function Footer() {
@@ -91,7 +92,27 @@ export default function Footer() {
                 <Linkedin className="h-5 w-5 text-slate-300 group-hover:text-blue-400" />
               </motion.a>
               <motion.a
-                href="mailto:aneeshkrishna@purdue.edu"
+                href="https://x.com/DKE631"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-slate-800 hover:bg-slate-700 p-3 rounded-lg transition-colors group"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SiX className="h-5 w-5 text-slate-300 group-hover:text-white" />
+              </motion.a>
+              <motion.a
+                href="https://www.instagram.com/aneesh.495/"
+                whileHover={{ scale: 1.1, rotate: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-slate-800 hover:bg-slate-700 p-3 rounded-lg transition-colors group"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SiInstagram className="h-5 w-5 text-slate-300 group-hover:text-pink-400" />
+              </motion.a>
+              <motion.a
+                href="mailto:aneeshkrishnaparthasarathy@gmail.com"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-slate-800 hover:bg-slate-700 p-3 rounded-lg transition-colors group"
