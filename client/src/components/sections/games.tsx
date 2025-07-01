@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { X } from "lucide-react";
 import TicTacToe from "@/components/games/tic-tac-toe";
 import Game2048 from "@/components/games/game-2048";
@@ -11,6 +11,8 @@ import MemoryMatch from "@/components/games/memory-match";
 import Minesweeper from "@/components/games/minesweeper";
 import RockPaperScissors from "@/components/games/rock-paper-scissors";
 import ConnectFour from "@/components/games/connect-four";
+import WordGuess from "@/components/games/word-guess";
+import Tetris from "@/components/games/tetris";
 
 const games = [
   {
@@ -75,6 +77,24 @@ const games = [
     color: "from-yellow-50 to-yellow-100 dark:from-yellow-900 dark:to-yellow-800",
     buttonColor: "bg-yellow-600 hover:bg-yellow-700",
     component: ConnectFour,
+  },
+  {
+    id: "word-guess",
+    title: "Word Guess",
+    description: "Programming word guessing game",
+    icon: "🔤",
+    color: "from-pink-50 to-pink-100 dark:from-pink-900 dark:to-pink-800",
+    buttonColor: "bg-pink-600 hover:bg-pink-700",
+    component: WordGuess,
+  },
+  {
+    id: "tetris",
+    title: "Tetris",
+    description: "Classic falling blocks puzzle",
+    icon: "🧩",
+    color: "from-teal-50 to-teal-100 dark:from-teal-900 dark:to-teal-800",
+    buttonColor: "bg-teal-600 hover:bg-teal-700",
+    component: Tetris,
   },
 ];
 
@@ -156,6 +176,9 @@ export default function Games() {
             <DialogTitle className="text-2xl font-bold">
               {currentGame?.title}
             </DialogTitle>
+            <DialogDescription>
+              {currentGame?.description}
+            </DialogDescription>
           </DialogHeader>
           <div className="mt-4">
             {currentGame && <currentGame.component />}
