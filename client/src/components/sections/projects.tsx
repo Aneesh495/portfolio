@@ -6,28 +6,28 @@ import { Github, ExternalLink } from "lucide-react";
 
 const projects = [
   {
-    title: "Vibe - Social App",
-    description: "Real-time social application built with Java, featuring live messaging and user interactions.",
+    title: "Vibe - Social Media App",
+    description: "Built a multi-threaded Java back-end server and client GUI (Java Swing) to support real-time messaging, image sharing, friend management, and user search functionality. Engineered persistent, real-time chat with edit/delete message support using Java I/O and socket programming.",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["Java", "Spring Boot", "WebSocket"],
-    githubUrl: "#",
-    liveUrl: "#",
+    technologies: ["Java", "Java Swing", "Socket Programming", "Multi-threading", "Java I/O"],
+    githubUrl: "https://github.com/Aneesh495/VibeSocialMedia",
+    liveUrl: "https://github.com/Aneesh495/VibeSocialMedia",
   },
   {
-    title: "Freelance DAO",
-    description: "Decentralized autonomous organization for freelancers built on Ethereum with smart contracts.",
+    title: "Freelance DAO - Smart Contract Platform",
+    description: "Developed a decentralized freelance platform on Ethereum using Solidity, enabling automated transactions between clients and artists through smart contracts, connected using MetaMask. Designed and implemented an on-chain voting mechanism to resolve disputes with community-based consensus.",
     image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["Solidity", "Ethereum", "Web3.js"],
-    githubUrl: "#",
-    liveUrl: "#",
+    technologies: ["Solidity", "Ethereum", "MetaMask", "Smart Contracts", "Blockchain"],
+    githubUrl: "https://github.com/Aneesh495/freelance_DAO",
+    liveUrl: "https://github.com/Aneesh495/freelance_DAO",
   },
   {
     title: "Portfolio Website",
-    description: "Modern, responsive portfolio website with animations and interactive games.",
+    description: "Modern, animated personal portfolio website showcasing skills, projects, and interactive games. Built with React, TypeScript, and Framer Motion for smooth animations and responsive design.",
     image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["React", "Tailwind", "Framer Motion"],
-    githubUrl: "#",
-    liveUrl: "#",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite"],
+    githubUrl: "https://github.com/Aneesh495/Portfolio-Website",
+    liveUrl: "https://github.com/Aneesh495/Portfolio-Website",
   },
 ];
 

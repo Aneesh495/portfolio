@@ -82,7 +82,7 @@ export default function Contact() {
             
             <div className="space-y-4">
               <motion.a
-                href="mailto:aneesh@example.com"
+                href="mailto:aneeshkrishna@purdue.edu"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="flex items-center p-4 bg-card rounded-lg shadow-lg hover:shadow-xl transition-shadow"
@@ -90,12 +90,12 @@ export default function Contact() {
                 <Mail className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <p className="text-muted-foreground">aneesh@example.com</p>
+                  <p className="text-muted-foreground">aneeshkrishna@purdue.edu</p>
                 </div>
               </motion.a>
               
               <motion.a
-                href="https://linkedin.com/in/aneesh-krishna"
+                href="https://linkedin.com/in/aneesh-krishna-780701253"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
@@ -105,12 +105,12 @@ export default function Contact() {
                 <Linkedin className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">LinkedIn</h4>
-                  <p className="text-muted-foreground">linkedin.com/in/aneesh-krishna</p>
+                  <p className="text-muted-foreground">linkedin.com/in/aneesh-krishna-780701253</p>
                 </div>
               </motion.a>
               
               <motion.a
-                href="https://github.com/aneeshkrishna"
+                href="https://github.com/Aneesh495"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
@@ -120,7 +120,7 @@ export default function Contact() {
                 <Github className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">GitHub</h4>
-                  <p className="text-muted-foreground">github.com/aneeshkrishna</p>
+                  <p className="text-muted-foreground">github.com/Aneesh495</p>
                 </div>
               </motion.a>
             </div>

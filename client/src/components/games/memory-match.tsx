@@ -9,7 +9,14 @@ type Card = {
   isMatched: boolean;
 };
 
-const CARD_VALUES = ['🎯', '🎮', '🚀', '⭐', '🎨', '🎪', '🎭', '🎸'];
+const CARD_VALUES = ['🎯', '🎮', '🚀', '⭐', '🎨', '🎪', '🎭', '🎸', '🎵', '🎨', '🎲', '🎊', '🎈', '🎁', '🎤', '🎧', '🎷', '🎺'];
+
+const DIFFICULTY_MODES = {
+  easy: { size: 4, pairs: 8, label: '4x4 (Easy)' },
+  medium: { size: 5, pairs: 12, label: '5x5 (Medium)' },
+  hard: { size: 6, pairs: 18, label: '6x6 (Hard)' },
+  expert: { size: 7, pairs: 24, label: '7x7 (Expert)' },
+};
 
 export default function MemoryMatch() {
   const [cards, setCards] = useState<Card[]>([]);
@@ -17,9 +24,12 @@ export default function MemoryMatch() {
   const [moves, setMoves] = useState(0);
   const [matches, setMatches] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
+  const [difficulty, setDifficulty] = useState<keyof typeof DIFFICULTY_MODES>('easy');
 
   const initializeGame = () => {
-    const shuffledCards = [...CARD_VALUES, ...CARD_VALUES]
+    const currentMode = DIFFICULTY_MODES[difficulty];
+    const selectedValues = CARD_VALUES.slice(0, currentMode.pairs);
+    const shuffledCards = [...selectedValues, ...selectedValues]
       .sort(() => Math.random() - 0.5)
       .map((value, index) => ({
         id: index,
@@ -40,10 +50,11 @@ export default function MemoryMatch() {
   }, []);
 
   useEffect(() => {
-    if (matches === CARD_VALUES.length) {
+    const currentMode = DIFFICULTY_MODES[difficulty];
+    if (matches === currentMode.pairs) {
       setGameComplete(true);
     }
-  }, [matches]);
+  }, [matches, difficulty]);
 
   useEffect(() => {
     if (flippedCards.length === 2) {
@@ -91,12 +102,37 @@ export default function MemoryMatch() {
     setFlippedCards(prev => [...prev, cardId]);
   };
 
+  const currentMode = DIFFICULTY_MODES[difficulty];
+
   return (
     <div className="text-center">
+      {/* Difficulty Selection */}
+      <div className="mb-4">
+        <p className="text-sm text-muted-foreground mb-2">Difficulty:</p>
+        <div className="flex flex-wrap justify-center gap-2 mb-4">
+          {Object.entries(DIFFICULTY_MODES).map(([key, mode]) => (
+            <button
+              key={key}
+              onClick={() => {
+                setDifficulty(key as keyof typeof DIFFICULTY_MODES);
+                setTimeout(initializeGame, 0);
+              }}
+              className={`px-3 py-1 rounded-md text-sm transition-colors ${
+                difficulty === key
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted hover:bg-accent'
+              }`}
+            >
+              {mode.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="mb-4">
         <p className="text-lg">
           Moves: <span className="font-bold text-primary">{moves}</span> | 
-          Matches: <span className="font-bold text-primary">{matches}/{CARD_VALUES.length}</span>
+          Matches: <span className="font-bold text-primary">{matches}/{currentMode.pairs}</span>
         </p>
       </div>
       
@@ -108,14 +144,23 @@ export default function MemoryMatch() {
         </div>
       )}
       
-      <div className="grid grid-cols-4 gap-2 max-w-sm mx-auto mb-4">
+      <div 
+        className={`grid gap-2 mx-auto mb-4 ${
+          currentMode.size === 4 ? 'grid-cols-4 max-w-sm' :
+          currentMode.size === 5 ? 'grid-cols-5 max-w-md' :
+          currentMode.size === 6 ? 'grid-cols-6 max-w-lg' :
+          'grid-cols-7 max-w-xl'
+        }`}
+      >
         {cards.map((card) => (
           <motion.button
             key={card.id}
             whileHover={{ scale: card.isFlipped || card.isMatched ? 1 : 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => handleCardClick(card.id)}
-            className={`w-16 h-16 rounded-lg text-xl font-bold transition-colors ${
+            className={`${
+              currentMode.size === 7 ? 'w-12 h-12 text-lg' : 'w-16 h-16 text-xl'
+            } rounded-lg font-bold transition-colors ${
               card.isFlipped || card.isMatched
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-muted hover:bg-accent'
