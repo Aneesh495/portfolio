@@ -1,27 +1,28 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Github, Linkedin } from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-    recaptcha: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.recaptcha) {
+    if (!recaptchaValue) {
       toast({
         title: "Error",
         description: "Please verify that you're not a robot.",
@@ -38,9 +39,15 @@ export default function Contact() {
         title: "Message Sent!",
         description: "Thank you for your message. I'll get back to you soon!",
       });
-      setFormData({ name: "", email: "", message: "", recaptcha: false });
+      setFormData({ name: "", email: "", message: "" });
+      setRecaptchaValue(null);
+      recaptchaRef.current?.reset();
       setIsSubmitting(false);
     }, 1000);
+  };
+
+  const onRecaptchaChange = (value: string | null) => {
+    setRecaptchaValue(value);
   };
 
   const handleInputChange = (
@@ -82,7 +89,7 @@ export default function Contact() {
             
             <div className="space-y-4">
               <motion.a
-                href="mailto:aneeshkrishna@purdue.edu"
+                href="mailto:aneeshkrishnaparthasarathy@gmail.com"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="flex items-center p-4 bg-card rounded-lg shadow-lg hover:shadow-xl transition-shadow"
@@ -90,7 +97,7 @@ export default function Contact() {
                 <Mail className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <p className="text-muted-foreground">aneeshkrishna@purdue.edu</p>
+                  <p className="text-muted-foreground">aneeshkrishnaparthasarathy@gmail.com</p>
                 </div>
               </motion.a>
               
@@ -176,17 +183,12 @@ export default function Contact() {
                     />
                   </div>
                   
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="recaptcha"
-                      checked={formData.recaptcha}
-                      onCheckedChange={(checked) =>
-                        setFormData({ ...formData, recaptcha: !!checked })
-                      }
+                  <div className="flex justify-center">
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey="6LeoAW8rAAAAAMi5k_FAH0zV8U7lYnvf_JLmFbVH"
+                      onChange={onRecaptchaChange}
                     />
-                    <Label htmlFor="recaptcha" className="text-sm">
-                      I'm not a robot (reCAPTCHA placeholder)
-                    </Label>
                   </div>
                   
                   <Button

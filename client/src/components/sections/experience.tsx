@@ -11,6 +11,13 @@ const experiences = [
     technologies: ["React", "TypeScript", "HTML", "CSS", "Auth0", "Stripe", "JWT"],
   },
   {
+    title: "Full Stack Intern",
+    company: "PlaytoonIt Inc",
+    period: "2024 - Present",
+    description: "Developed interactive gaming applications and full-stack solutions using modern development frameworks. Collaborated on cross-platform game development projects while implementing scalable backend systems and engaging user interfaces.",
+    technologies: ["C#", "Unity", "Full Stack Development", "Game Development"],
+  },
+  {
     title: "Undergraduate Data Science Researcher",
     company: "The Data Mine - Purdue University",
     period: "Jan 2025 - Present",

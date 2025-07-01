@@ -130,6 +130,14 @@ This is a modern, animated personal portfolio website built for Aneesh Krishna, 
 ```
 Changelog:
 - July 01, 2025. Initial setup
+- July 01, 2025. Major updates implemented:
+  * Updated email address to aneeshkrishnaparthasarathy@gmail.com throughout
+  * Added Twitter and Instagram social links to footer
+  * Updated Memory Match difficulty levels to even grids (6x6, 8x8, 10x10)
+  * Added PlaytoonIt Inc internship experience with C# and Unity skills
+  * Implemented Google reCAPTCHA with provided site/secret keys
+  * Made resume downloadable from About section
+  * Enhanced footer with comprehensive social media integration
 ```
 
 ## User Preferences

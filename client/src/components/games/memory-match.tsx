@@ -9,13 +9,19 @@ type Card = {
   isMatched: boolean;
 };
 
-const CARD_VALUES = ['🎯', '🎮', '🚀', '⭐', '🎨', '🎪', '🎭', '🎸', '🎵', '🎨', '🎲', '🎊', '🎈', '🎁', '🎤', '🎧', '🎷', '🎺'];
+const CARD_VALUES = [
+  '🎯', '🎮', '🚀', '⭐', '🎨', '🎪', '🎭', '🎸', '🎵', '🎲', '🎊', '🎈', 
+  '🎁', '🎤', '🎧', '🎷', '🎺', '🎼', '🎻', '🎹', '🥳', '🎃', '🎄', '🎀',
+  '🎗️', '🎖️', '🏆', '🏅', '🥇', '🥈', '🥉', '⚽', '🏀', '🏈', '⚾', '🎾',
+  '🏐', '🏓', '🏸', '🥅', '🏑', '🏒', '🥍', '🏏', '⛳', '🏹', '🎣', '🥊',
+  '🥋', '🎽'
+];
 
 const DIFFICULTY_MODES = {
   easy: { size: 4, pairs: 8, label: '4x4 (Easy)' },
-  medium: { size: 5, pairs: 12, label: '5x5 (Medium)' },
-  hard: { size: 6, pairs: 18, label: '6x6 (Hard)' },
-  expert: { size: 7, pairs: 24, label: '7x7 (Expert)' },
+  medium: { size: 6, pairs: 18, label: '6x6 (Medium)' },
+  hard: { size: 8, pairs: 32, label: '8x8 (Hard)' },
+  expert: { size: 10, pairs: 50, label: '10x10 (Expert)' },
 };
 
 export default function MemoryMatch() {
