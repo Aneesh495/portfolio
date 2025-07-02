@@ -2,7 +2,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { X } from "lucide-react";
 import TicTacToe from "@/components/games/tic-tac-toe";
 import Game2048 from "@/components/games/game-2048";
@@ -13,6 +19,9 @@ import RockPaperScissors from "@/components/games/rock-paper-scissors";
 import ConnectFour from "@/components/games/connect-four";
 import WordGuess from "@/components/games/word-guess";
 import Tetris from "@/components/games/tetris";
+import Chess from "@/components/games/chess";
+import Battleship from "@/components/games/battleship";
+import WordHunt from "@/components/games/word-hunt";
 
 const games = [
   {
@@ -29,14 +38,15 @@ const games = [
     title: "2048",
     description: "Sliding puzzle game",
     icon: "🔢",
-    color: "from-orange-50 to-orange-100 dark:from-orange-900 dark:to-orange-800",
+    color:
+      "from-orange-50 to-orange-100 dark:from-orange-900 dark:to-orange-800",
     buttonColor: "bg-orange-600 hover:bg-orange-700",
     component: Game2048,
   },
   {
     id: "snake",
     title: "Snake",
-    description: "Classic snake game",
+    description: "Classic snake game with multiple modes",
     icon: "🐍",
     color: "from-green-50 to-green-100 dark:from-green-900 dark:to-green-800",
     buttonColor: "bg-green-600 hover:bg-green-700",
@@ -47,7 +57,8 @@ const games = [
     title: "Memory Match",
     description: "Card matching game",
     icon: "🧠",
-    color: "from-purple-50 to-purple-100 dark:from-purple-900 dark:to-purple-800",
+    color:
+      "from-purple-50 to-purple-100 dark:from-purple-900 dark:to-purple-800",
     buttonColor: "bg-purple-600 hover:bg-purple-700",
     component: MemoryMatch,
   },
@@ -65,7 +76,8 @@ const games = [
     title: "Rock Paper Scissors",
     description: "Classic hand game vs AI",
     icon: "✂️",
-    color: "from-indigo-50 to-indigo-100 dark:from-indigo-900 dark:to-indigo-800",
+    color:
+      "from-indigo-50 to-indigo-100 dark:from-indigo-900 dark:to-indigo-800",
     buttonColor: "bg-indigo-600 hover:bg-indigo-700",
     component: RockPaperScissors,
   },
@@ -74,7 +86,8 @@ const games = [
     title: "Connect Four",
     description: "Strategic 4-in-a-row game with AI",
     icon: "🔴",
-    color: "from-yellow-50 to-yellow-100 dark:from-yellow-900 dark:to-yellow-800",
+    color:
+      "from-yellow-50 to-yellow-100 dark:from-yellow-900 dark:to-yellow-800",
     buttonColor: "bg-yellow-600 hover:bg-yellow-700",
     component: ConnectFour,
   },
@@ -90,18 +103,46 @@ const games = [
   {
     id: "tetris",
     title: "Tetris",
-    description: "Classic falling blocks puzzle",
+    description: "Classic falling blocks puzzle with hold piece",
     icon: "🧩",
     color: "from-teal-50 to-teal-100 dark:from-teal-900 dark:to-teal-800",
     buttonColor: "bg-teal-600 hover:bg-teal-700",
     component: Tetris,
+  },
+  {
+    id: "chess",
+    title: "Chess",
+    description: "Strategic board game with AI opponent",
+    icon: "♔",
+    color: "from-amber-50 to-amber-100 dark:from-amber-900 dark:to-amber-800",
+    buttonColor: "bg-amber-600 hover:bg-amber-700",
+    component: Chess,
+  },
+  {
+    id: "battleship",
+    title: "Battleship",
+    description: "Naval warfare game with smart AI",
+    icon: "🚢",
+    color: "from-cyan-50 to-cyan-100 dark:from-cyan-900 dark:to-cyan-800",
+    buttonColor: "bg-cyan-600 hover:bg-cyan-700",
+    component: Battleship,
+  },
+  {
+    id: "word-hunt",
+    title: "Word Hunt",
+    description: "Find hidden words in the grid",
+    icon: "🔍",
+    color:
+      "from-emerald-50 to-emerald-100 dark:from-emerald-900 dark:to-emerald-800",
+    buttonColor: "bg-emerald-600 hover:bg-emerald-700",
+    component: WordHunt,
   },
 ];
 
 export default function Games() {
   const [selectedGame, setSelectedGame] = useState<string | null>(null);
 
-  const currentGame = games.find(game => game.id === selectedGame);
+  const currentGame = games.find((game) => game.id === selectedGame);
 
   return (
     <section id="games" className="py-20 bg-card">
@@ -128,11 +169,11 @@ export default function Games() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
           >
-            A collection of engaging games featuring AI opponents, smooth animations, 
-            and competitive gameplay built with React and TypeScript
+            A collection of engaging games featuring AI opponents, smooth
+            animations, and competitive gameplay built with React and TypeScript
           </motion.p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {games.map((game, index) => (
             <motion.div
@@ -176,13 +217,9 @@ export default function Games() {
             <DialogTitle className="text-2xl font-bold">
               {currentGame?.title}
             </DialogTitle>
-            <DialogDescription>
-              {currentGame?.description}
-            </DialogDescription>
+            <DialogDescription>{currentGame?.description}</DialogDescription>
           </DialogHeader>
-          <div className="mt-4">
-            {currentGame && <currentGame.component />}
-          </div>
+          <div className="mt-4">{currentGame && <currentGame.component />}</div>
         </DialogContent>
       </Dialog>
     </section>

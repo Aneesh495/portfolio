@@ -3,335 +3,522 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw, Trophy, AlertCircle, CheckCircle, Lightbulb } from "lucide-react";
+import {
+  RotateCcw,
+  Trophy,
+  AlertCircle,
+  CheckCircle,
+  Lightbulb,
+  Trash2,
+} from "lucide-react";
 
 const WORDS = [
-  'REACT', 'TYPESCRIPT', 'JAVASCRIPT', 'PYTHON', 'COMPUTER', 'ALGORITHM', 
-  'DATABASE', 'FRONTEND', 'BACKEND', 'CODING', 'DEVELOPER', 'FRAMEWORK',
-  'VARIABLE', 'FUNCTION', 'OBJECT', 'ARRAY', 'STRING', 'BOOLEAN',
-  'GITHUB', 'NODEJS', 'EXPRESS', 'MONGODB', 'MYSQL', 'DOCKER'
+  "REACT",
+  "VUEJS",
+  "ANGULAR",
+  "NODEJS",
+  "PYTHON",
+  "JAVASCRIPT",
+  "TYPESCRIPT",
+  "HTML",
+  "CSS",
+  "SQL",
+  "MONGODB",
+  "REDIS",
+  "DOCKER",
+  "KUBERNETES",
+  "AWS",
+  "AZURE",
+  "GITHUB",
+  "GITLAB",
+  "JENKINS",
+  "TRAVIS",
+  "WEBPACK",
+  "VITE",
+  "ROLLUP",
+  "BABEL",
+  "ESLINT",
+  "PRETTIER",
+  "JEST",
+  "CYPRESS",
+  "SELENIUM",
+  "PUPPETEER",
+  "EXPRESS",
+  "FASTAPI",
+  "DJANGO",
+  "FLASK",
+  "SPRING",
+  "LARAVEL",
+  "RUBY",
+  "PHP",
+  "GO",
+  "RUST",
+  "SWIFT",
+  "KOTLIN",
+  "SCALA",
+  "ELIXIR",
+  "CLOJURE",
+  "HASKELL",
+  "ERLANG",
+  "OCAML",
+  "F",
+  "RACKET",
 ];
 
+const VALID_WORDS = [
+  "REACT",
+  "VUEJS",
+  "ANGULAR",
+  "NODEJS",
+  "PYTHON",
+  "JAVASCRIPT",
+  "TYPESCRIPT",
+  "HTML",
+  "CSS",
+  "SQL",
+  "MONGODB",
+  "REDIS",
+  "DOCKER",
+  "KUBERNETES",
+  "AWS",
+  "AZURE",
+  "GITHUB",
+  "GITLAB",
+  "JENKINS",
+  "TRAVIS",
+  "WEBPACK",
+  "VITE",
+  "ROLLUP",
+  "BABEL",
+  "ESLINT",
+  "PRETTIER",
+  "JEST",
+  "CYPRESS",
+  "SELENIUM",
+  "PUPPETEER",
+  "EXPRESS",
+  "FASTAPI",
+  "DJANGO",
+  "FLASK",
+  "SPRING",
+  "LARAVEL",
+  "RUBY",
+  "PHP",
+  "GO",
+  "RUST",
+  "SWIFT",
+  "KOTLIN",
+  "SCALA",
+  "ELIXIR",
+  "CLOJURE",
+  "HASKELL",
+  "ERLANG",
+  "OCAML",
+  "F",
+  "RACKET",
+];
+
+const KEYBOARD_ROWS = [
+  ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+  ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+  ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "BACKSPACE"],
+];
+
+type Difficulty = "easy" | "medium" | "hard";
+
 const DIFFICULTIES = {
-  easy: { maxGuesses: 8, label: 'Easy', color: 'bg-green-500' },
-  medium: { maxGuesses: 6, label: 'Medium', color: 'bg-yellow-500' },
-  hard: { maxGuesses: 4, label: 'Hard', color: 'bg-red-500' },
+  easy: { label: "Easy", maxGuesses: 8 },
+  medium: { label: "Medium", maxGuesses: 6 },
+  hard: { label: "Hard", maxGuesses: 5 },
 };
 
-type Difficulty = keyof typeof DIFFICULTIES;
-type LetterState = 'correct' | 'wrong-position' | 'not-in-word' | 'unused';
-
 export default function WordGuess() {
-  const [difficulty, setDifficulty] = useState<Difficulty>('medium');
-  const [currentWord, setCurrentWord] = useState('');
-  const [guesses, setGuesses] = useState<string[]>([]);
-  const [currentGuess, setCurrentGuess] = useState('');
-  const [gameOver, setGameOver] = useState(false);
-  const [won, setWon] = useState(false);
-  const [letterStates, setLetterStates] = useState<Record<string, LetterState>>({});
-  const [showHint, setShowHint] = useState(false);
-  const [scores, setScores] = useState({ wins: 0, losses: 0 });
+  const [difficulty, setDifficulty] = useState<Difficulty>("medium");
+  const [currentWord, setCurrentWord] = useState("");
+  const [guesses, setGuesses] = useState<string[]>(["", "", "", "", "", ""]);
+  const [feedbacks, setFeedbacks] = useState<
+    Array<Array<"correct" | "present" | "absent">>
+  >([]);
+  const [gameState, setGameState] = useState<"playing" | "won" | "lost">(
+    "playing"
+  );
+  const [targetWord, setTargetWord] = useState("");
+  const [currentRow, setCurrentRow] = useState(0);
+  const [error, setError] = useState("");
+  const [stats, setStats] = useState({
+    wins: 0,
+    losses: 0,
+    currentStreak: 0,
+    maxStreak: 0,
+    gamesPlayed: 0,
+    guessDistribution: {} as Record<number, number>,
+  });
+  const [keyboardColors, setKeyboardColors] = useState<Record<string, string>>(
+    {}
+  );
 
   const getRandomWord = useCallback(() => {
     return WORDS[Math.floor(Math.random() * WORDS.length)];
   }, []);
 
+  const getFeedback = useCallback((guess: string, target: string) => {
+    const feedback: Array<"correct" | "present" | "absent"> = [];
+    const targetLetters = target.split("");
+    const guessLetters = guess.split("");
+
+    // First pass: mark correct letters
+    for (let i = 0; i < 5; i++) {
+      if (guessLetters[i] === targetLetters[i]) {
+        feedback[i] = "correct";
+        targetLetters[i] = ""; // Mark as used
+      }
+    }
+
+    // Second pass: mark present letters
+    for (let i = 0; i < 5; i++) {
+      if (feedback[i] !== "correct") {
+        const targetIndex = targetLetters.indexOf(guessLetters[i]);
+        if (targetIndex !== -1) {
+          feedback[i] = "present";
+          targetLetters[targetIndex] = ""; // Mark as used
+        } else {
+          feedback[i] = "absent";
+        }
+      }
+    }
+
+    return feedback;
+  }, []);
+
   const initializeGame = useCallback(() => {
     const word = getRandomWord();
     setCurrentWord(word);
-    setGuesses([]);
-    setCurrentGuess('');
-    setGameOver(false);
-    setWon(false);
-    setLetterStates({});
-    setShowHint(false);
+    setTargetWord(word);
+    setGuesses(["", "", "", "", "", ""]);
+    setFeedbacks([]);
+    setGameState("playing");
+    setCurrentRow(0);
+    setError("");
+    setKeyboardColors({});
   }, [getRandomWord]);
 
   useEffect(() => {
     initializeGame();
-  }, [initializeGame, difficulty]);
+  }, [initializeGame]);
 
-  const getLetterState = useCallback((letter: string, position: number, word: string): LetterState => {
-    if (word[position] === letter) return 'correct';
-    if (word.includes(letter)) return 'wrong-position';
-    return 'not-in-word';
-  }, []);
+  const handleKeyPress = useCallback(
+    (key: string) => {
+      if (gameState !== "playing") return;
 
-  const submitGuess = useCallback(() => {
-    if (currentGuess.length !== currentWord.length || gameOver) return;
-
-    const newGuesses = [...guesses, currentGuess.toUpperCase()];
-    setGuesses(newGuesses);
-
-    // Update letter states
-    const newLetterStates = { ...letterStates };
-    for (let i = 0; i < currentGuess.length; i++) {
-      const letter = currentGuess[i].toUpperCase();
-      const state = getLetterState(letter, i, currentWord);
-      
-      // Only update if we don't have a better state already
-      if (!newLetterStates[letter] || 
-          (newLetterStates[letter] !== 'correct' && state === 'correct') ||
-          (newLetterStates[letter] === 'not-in-word' && state === 'wrong-position')) {
-        newLetterStates[letter] = state;
+      if (key === "ENTER") {
+        handleSubmit();
+      } else if (key === "BACKSPACE") {
+        handleDelete();
+      } else if (key.length === 1 && key.match(/[A-Z]/)) {
+        handleInput(key);
       }
+    },
+    [gameState]
+  );
+
+  const handleInput = useCallback(
+    (letter: string) => {
+      if (currentRow >= 6) return;
+
+      setGuesses((prev) => {
+        const newGuesses = [...prev];
+        if (newGuesses[currentRow].length < 5) {
+          newGuesses[currentRow] += letter;
+        }
+        return newGuesses;
+      });
+    },
+    [currentRow]
+  );
+
+  const handleDelete = useCallback(() => {
+    setGuesses((prev) => {
+      const newGuesses = [...prev];
+      if (newGuesses[currentRow].length > 0) {
+        newGuesses[currentRow] = newGuesses[currentRow].slice(0, -1);
+      }
+      return newGuesses;
+    });
+  }, [currentRow]);
+
+  const handleSubmit = useCallback(() => {
+    if (guesses[currentRow].length !== 5) return;
+
+    const guess = guesses[currentRow].toLowerCase();
+    if (!VALID_WORDS.includes(guess.toUpperCase())) {
+      setError("Not a valid word");
+      setTimeout(() => setError(""), 2000);
+      return;
     }
-    setLetterStates(newLetterStates);
 
-    // Check win condition
-    if (currentGuess.toUpperCase() === currentWord) {
-      setWon(true);
-      setGameOver(true);
-      setScores(prev => ({ ...prev, wins: prev.wins + 1 }));
-    } else if (newGuesses.length >= DIFFICULTIES[difficulty].maxGuesses) {
-      setGameOver(true);
-      setScores(prev => ({ ...prev, losses: prev.losses + 1 }));
+    const feedback = getFeedback(guess, targetWord);
+    setFeedbacks((prev) => [...prev, feedback]);
+
+    // Update keyboard colors
+    const newKeyboardColors = { ...keyboardColors };
+    guess.split("").forEach((letter, index) => {
+      const color = feedback[index];
+      const key = letter.toUpperCase();
+      if (color === "correct") {
+        newKeyboardColors[key] = "correct";
+      } else if (color === "present" && newKeyboardColors[key] !== "correct") {
+        newKeyboardColors[key] = "present";
+      } else if (
+        color === "absent" &&
+        newKeyboardColors[key] !== "correct" &&
+        newKeyboardColors[key] !== "present"
+      ) {
+        newKeyboardColors[key] = "absent";
+      }
+    });
+    setKeyboardColors(newKeyboardColors);
+
+    if (guess === targetWord) {
+      setGameState("won");
+      setStats((prev) => ({
+        ...prev,
+        wins: prev.wins + 1,
+        currentStreak: prev.currentStreak + 1,
+        maxStreak: Math.max(prev.maxStreak, prev.currentStreak + 1),
+        gamesPlayed: prev.gamesPlayed + 1,
+        guessDistribution: {
+          ...prev.guessDistribution,
+          [currentRow + 1]: (prev.guessDistribution[currentRow + 1] || 0) + 1,
+        },
+      }));
+    } else if (currentRow === 5) {
+      setGameState("lost");
+      setStats((prev) => ({
+        ...prev,
+        losses: prev.losses + 1,
+        currentStreak: 0,
+        gamesPlayed: prev.gamesPlayed + 1,
+      }));
+    } else {
+      setCurrentRow((prev) => prev + 1);
     }
+  }, [
+    guesses,
+    currentRow,
+    VALID_WORDS,
+    targetWord,
+    keyboardColors,
+    getFeedback,
+  ]);
 
-    setCurrentGuess('');
-  }, [currentGuess, currentWord, guesses, gameOver, letterStates, getLetterState, difficulty]);
-
-  const handleKeyPress = useCallback((e: React.KeyboardEvent) => {
-    if (gameOver) return;
-    
-    if (e.key === 'Enter') {
-      submitGuess();
-    } else if (e.key === 'Backspace') {
-      setCurrentGuess(prev => prev.slice(0, -1));
-    } else if (/^[a-zA-Z]$/.test(e.key) && currentGuess.length < currentWord.length) {
-      setCurrentGuess(prev => prev + e.key.toUpperCase());
+  const getKeyColor = (key: string) => {
+    const color = keyboardColors[key];
+    switch (color) {
+      case "correct":
+        return "bg-green-500 text-white border-green-600";
+      case "present":
+        return "bg-yellow-500 text-white border-yellow-600";
+      case "absent":
+        return "bg-gray-500 text-white border-gray-600";
+      default:
+        return "bg-white text-gray-800 border-gray-300 hover:bg-gray-50";
     }
-  }, [submitGuess, currentGuess, currentWord.length, gameOver]);
+  };
 
-  const getLetterClass = useCallback((letter: string, position: number, guess: string) => {
-    const state = getLetterState(letter, position, currentWord);
-    switch (state) {
-      case 'correct': return 'bg-green-500 text-white border-green-500';
-      case 'wrong-position': return 'bg-yellow-500 text-white border-yellow-500';
-      case 'not-in-word': return 'bg-gray-500 text-white border-gray-500';
-      default: return 'bg-white border-gray-300';
-    }
-  }, [getLetterState, currentWord]);
+  const startNewGame = useCallback(() => {
+    initializeGame();
+  }, [initializeGame]);
 
-  const getKeyboardLetterClass = useCallback((letter: string) => {
-    const state = letterStates[letter] || 'unused';
-    switch (state) {
-      case 'correct': return 'bg-green-500 text-white';
-      case 'wrong-position': return 'bg-yellow-500 text-white';
-      case 'not-in-word': return 'bg-gray-500 text-white';
-      default: return 'bg-gray-200 hover:bg-gray-300';
-    }
-  }, [letterStates]);
-
-  const getHint = useCallback(() => {
-    const hints: Record<string, string> = {
-      'REACT': 'Popular JavaScript library for building user interfaces',
-      'TYPESCRIPT': 'Superset of JavaScript with static typing',
-      'JAVASCRIPT': 'Programming language that runs in browsers',
-      'PYTHON': 'High-level programming language known for simplicity',
-      'COMPUTER': 'Electronic device for processing data',
-      'ALGORITHM': 'Step-by-step procedure for solving problems',
-      'DATABASE': 'Organized collection of structured information',
-      'FRONTEND': 'User-facing part of a web application',
-      'BACKEND': 'Server-side part of a web application',
-      'CODING': 'Process of creating computer programs',
-      'DEVELOPER': 'Person who creates software applications',
-      'FRAMEWORK': 'Pre-written code structure for development'
-    };
-    return hints[currentWord] || 'A programming-related term';
-  }, [currentWord]);
-
-  const keyboard = 'QWERTYUIOPASDFGHJKLZXCVBNM'.split('');
+  const resetStats = useCallback(() => {
+    setStats({
+      wins: 0,
+      losses: 0,
+      currentStreak: 0,
+      maxStreak: 0,
+      gamesPlayed: 0,
+      guessDistribution: {},
+    });
+    initializeGame();
+  }, [initializeGame]);
 
   return (
     <div className="flex flex-col items-center space-y-6 p-6">
       {/* Header */}
       <div className="text-center space-y-2">
-        <h3 className="text-2xl font-bold">Word Guess</h3>
-        <p className="text-muted-foreground">Guess the programming word!</p>
+        <h3 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+          Word Guess
+        </h3>
+        <p className="text-muted-foreground">
+          Guess the 5-letter word in 6 tries!
+        </p>
       </div>
 
-      {/* Difficulty Selector */}
-      <div className="flex gap-2">
-        {Object.entries(DIFFICULTIES).map(([key, config]) => (
-          <Button
-            key={key}
-            variant={difficulty === key ? 'default' : 'outline'}
-            onClick={() => setDifficulty(key as Difficulty)}
-            size="sm"
-          >
-            {config.label} ({config.maxGuesses} guesses)
-          </Button>
+      {/* Game Grid */}
+      <div className="space-y-2">
+        {guesses.map((guess, rowIndex) => (
+          <div key={rowIndex} className="flex gap-2">
+            {Array.from({ length: 5 }, (_, colIndex) => {
+              const letter = guess[colIndex] || "";
+              const feedback = feedbacks[rowIndex]?.[colIndex];
+
+              let bgColor = "bg-white";
+              let textColor = "text-gray-800";
+              let borderColor = "border-gray-300";
+
+              if (feedback) {
+                switch (feedback) {
+                  case "correct":
+                    bgColor = "bg-green-500";
+                    textColor = "text-white";
+                    borderColor = "border-green-600";
+                    break;
+                  case "present":
+                    bgColor = "bg-yellow-500";
+                    textColor = "text-white";
+                    borderColor = "border-yellow-600";
+                    break;
+                  case "absent":
+                    bgColor = "bg-gray-500";
+                    textColor = "text-white";
+                    borderColor = "border-gray-600";
+                    break;
+                }
+              }
+
+              return (
+                <motion.div
+                  key={colIndex}
+                  className={`w-12 h-12 border-2 flex items-center justify-center text-2xl font-bold ${bgColor} ${textColor} ${borderColor} rounded-md shadow-sm`}
+                  initial={feedback ? { scale: 0 } : false}
+                  animate={feedback ? { scale: 1 } : false}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                    delay: colIndex * 0.1,
+                  }}
+                >
+                  {letter.toUpperCase()}
+                </motion.div>
+              );
+            })}
+          </div>
         ))}
       </div>
 
-      {/* Scores */}
-      <div className="flex gap-4 items-center">
-        <Badge variant="secondary" className="flex items-center gap-2">
-          <Trophy className="h-3 w-3" />
-          Wins: {scores.wins}
-        </Badge>
-        <Badge variant="outline">Losses: {scores.losses}</Badge>
-      </div>
+      {/* Error Message */}
+      {error && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="text-red-500 text-sm font-medium"
+        >
+          {error}
+        </motion.div>
+      )}
 
       {/* Game Status */}
-      <div className="text-center">
-        {gameOver ? (
+      <AnimatePresence>
+        {gameState === "won" && (
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="space-y-2"
+            exit={{ scale: 0 }}
+            className="text-center space-y-2"
           >
-            <Badge variant={won ? 'default' : 'destructive'} className="text-lg px-4 py-2">
-              {won ? (
-                <span className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" />
-                  You Won!
-                </span>
-              ) : (
-                <span className="flex items-center gap-2">
-                  <AlertCircle className="h-4 w-4" />
-                  Game Over
-                </span>
-              )}
+            <Badge
+              variant="default"
+              className="text-lg px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white"
+            >
+              🎉 You Won!
             </Badge>
-            {!won && (
-              <p className="text-sm text-muted-foreground">
-                The word was: <span className="font-mono font-bold">{currentWord}</span>
-              </p>
-            )}
           </motion.div>
-        ) : (
-          <div className="space-y-2">
-            <p className="text-lg">
-              Guesses remaining: <span className="font-bold">{DIFFICULTIES[difficulty].maxGuesses - guesses.length}</span>
-            </p>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowHint(!showHint)}
-              className="flex items-center gap-2"
-            >
-              <Lightbulb className="h-4 w-4" />
-              {showHint ? 'Hide Hint' : 'Show Hint'}
-            </Button>
-            <AnimatePresence>
-              {showHint && (
-                <motion.p
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="text-sm text-muted-foreground italic"
-                >
-                  💡 {getHint()}
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </div>
         )}
-      </div>
-
-      {/* Game Board */}
-      <div className="space-y-2">
-        {/* Previous guesses */}
-        {guesses.map((guess, guessIndex) => (
+        {gameState === "lost" && (
           <motion.div
-            key={guessIndex}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex gap-2"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            className="text-center space-y-2"
           >
-            {Array.from({ length: currentWord.length }, (_, i) => (
-              <div
-                key={i}
-                className={`w-12 h-12 border-2 rounded-lg flex items-center justify-center font-bold text-lg ${
-                  getLetterClass(guess[i], i, guess)
-                }`}
-              >
-                {guess[i]}
-              </div>
-            ))}
+            <Badge variant="destructive" className="text-lg px-6 py-3">
+              💀 Game Over! The word was: {targetWord.toUpperCase()}
+            </Badge>
           </motion.div>
-        ))}
-
-        {/* Current guess */}
-        {!gameOver && (
-          <div className="flex gap-2">
-            {Array.from({ length: currentWord.length }, (_, i) => (
-              <div
-                key={i}
-                className="w-12 h-12 border-2 border-gray-300 rounded-lg flex items-center justify-center font-bold text-lg bg-white"
-              >
-                {currentGuess[i] || ''}
-              </div>
-            ))}
-          </div>
         )}
+      </AnimatePresence>
 
-        {/* Remaining slots */}
-        {Array.from({ length: Math.max(0, DIFFICULTIES[difficulty].maxGuesses - guesses.length - (gameOver ? 0 : 1)) }, (_, i) => (
-          <div key={`empty-${i}`} className="flex gap-2">
-            {Array.from({ length: currentWord.length }, (_, j) => (
-              <div
-                key={j}
-                className="w-12 h-12 border-2 border-gray-200 rounded-lg bg-gray-50"
-              />
+      {/* Keyboard */}
+      <div className="space-y-2">
+        {KEYBOARD_ROWS.map((row, rowIndex) => (
+          <div key={rowIndex} className="flex gap-1 justify-center">
+            {row.map((key) => (
+              <motion.button
+                key={key}
+                onClick={() => handleKeyPress(key)}
+                disabled={gameState !== "playing"}
+                className={`px-3 py-4 text-sm font-bold border-2 rounded-md transition-all duration-200 shadow-sm ${getKeyColor(
+                  key
+                )}`}
+                whileHover={gameState === "playing" ? { scale: 1.05 } : {}}
+                whileTap={gameState === "playing" ? { scale: 0.95 } : {}}
+              >
+                {key}
+              </motion.button>
             ))}
           </div>
         ))}
       </div>
 
-      {/* Input */}
-      {!gameOver && (
-        <div className="space-y-4">
-          <Input
-            value={currentGuess}
-            onChange={(e) => {
-              const value = e.target.value.toUpperCase().slice(0, currentWord.length);
-              if (/^[A-Z]*$/.test(value)) {
-                setCurrentGuess(value);
-              }
-            }}
-            onKeyDown={handleKeyPress}
-            placeholder={`Enter ${currentWord.length}-letter word`}
-            className="text-center font-mono text-lg"
-            maxLength={currentWord.length}
-          />
-          <Button 
-            onClick={submitGuess} 
-            disabled={currentGuess.length !== currentWord.length}
-            className="w-full"
-          >
-            Submit Guess
-          </Button>
-        </div>
-      )}
-
-      {/* Virtual Keyboard */}
-      <div className="space-y-2">
-        <div className="flex flex-wrap gap-1 justify-center max-w-md">
-          {keyboard.map((letter) => (
-            <button
-              key={letter}
-              onClick={() => {
-                if (!gameOver && currentGuess.length < currentWord.length) {
-                  setCurrentGuess(prev => prev + letter);
-                }
-              }}
-              className={`w-8 h-8 rounded text-sm font-bold transition-colors ${getKeyboardLetterClass(letter)}`}
-              disabled={gameOver}
-            >
-              {letter}
-            </button>
-          ))}
+      {/* Stats */}
+      <div className="space-y-4 bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl border border-blue-200">
+        <h4 className="text-sm font-medium text-blue-800">Statistics</h4>
+        <div className="grid grid-cols-2 gap-4 text-sm">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-600">
+              {stats.gamesPlayed}
+            </div>
+            <div className="text-muted-foreground">Games</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-green-600">
+              {Math.round((stats.wins / Math.max(stats.gamesPlayed, 1)) * 100)}%
+            </div>
+            <div className="text-muted-foreground">Win Rate</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-yellow-600">
+              {stats.currentStreak}
+            </div>
+            <div className="text-muted-foreground">Current Streak</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-purple-600">
+              {stats.maxStreak}
+            </div>
+            <div className="text-muted-foreground">Max Streak</div>
+          </div>
         </div>
       </div>
 
-      {/* Controls */}
+      {/* Game Controls */}
       <div className="flex gap-4">
-        <Button onClick={initializeGame} variant="outline" className="flex items-center gap-2">
+        <Button
+          onClick={startNewGame}
+          variant="outline"
+          className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white border-0"
+        >
           <RotateCcw className="h-4 w-4" />
           New Game
+        </Button>
+        <Button
+          onClick={resetStats}
+          variant="outline"
+          className="flex items-center gap-2 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white border-0"
+        >
+          <Trash2 className="h-4 w-4" />
+          Reset Stats
         </Button>
       </div>
     </div>
