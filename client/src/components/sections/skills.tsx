@@ -4,19 +4,61 @@ import { Card, CardContent } from "@/components/ui/card";
 const skillCategories = [
   {
     title: "Languages",
-    skills: ["Java", "C", "C++", "C#", "Python", "R", "JavaScript", "TypeScript", "Solidity", "SQL", "HTML5", "CSS", "LaTeX", "Bash"],
+    skills: [
+      "Java",
+      "C",
+      "C++",
+      "C#",
+      "Python",
+      "R",
+      "JavaScript",
+      "TypeScript",
+      "Solidity",
+      "SQL",
+      "HTML5",
+      "CSS",
+      "LaTeX",
+      "Bash",
+    ],
   },
   {
     title: "Frameworks & Libraries",
-    skills: ["React", "Node.js", "Redux.js", "Express.js", "Tailwind CSS", "Matplotlib"],
+    skills: [
+      "React",
+      "Next.js",
+      "Node.js",
+      "Redux.js",
+      "Express.js",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Matplotlib",
+    ],
   },
   {
     title: "Technologies & Tools",
-    skills: ["GitHub", "UNIX/Linux", "MySQL", "REST APIs", "VS Code", "Docker", "Git"],
+    skills: [
+      "GitHub",
+      "Git",
+      "UNIX/Linux",
+      "MySQL",
+      "MongoDB",
+      "Redis",
+      "REST APIs",
+      "GraphQL",
+      "VS Code",
+      "Docker",
+    ],
   },
   {
     title: "Specializations",
-    skills: ["Machine Learning", "Data Science", "Blockchain", "Algorithm Design", "Statistical Analysis", "Full Stack Development"],
+    skills: [
+      "Machine Learning",
+      "Data Science",
+      "Blockchain",
+      "Algorithm Design",
+      "Statistical Analysis",
+      "Full Stack Development",
+    ],
   },
 ];
 
@@ -31,9 +73,11 @@ export default function Skills() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold mb-4">Skills & Technologies</h2>
-          <p className="text-xl text-muted-foreground">Technologies I work with</p>
+          <p className="text-xl text-muted-foreground">
+            Technologies I work with
+          </p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
@@ -53,9 +97,9 @@ export default function Skills() {
                         key={skill}
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ 
-                          duration: 0.3, 
-                          delay: categoryIndex * 0.1 + skillIndex * 0.05 
+                        transition={{
+                          duration: 0.3,
+                          delay: categoryIndex * 0.1 + skillIndex * 0.05,
                         }}
                         whileHover={{ scale: 1.05, y: -2 }}
                         className="skill-tag px-3 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium cursor-default"

@@ -1,10 +1,18 @@
-import { Github, Linkedin, Mail, Heart, Code, Coffee, Youtube } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Heart,
+  Code,
+  Coffee,
+  Youtube,
+} from "lucide-react";
 import { SiX, SiInstagram } from "react-icons/si";
 import { motion } from "framer-motion";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <motion.footer
       initial={{ opacity: 0 }}
@@ -25,11 +33,13 @@ export default function Footer() {
               <div className="w-8 h-8 bg-gradient-to-r from-primary to-purple-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">AK</span>
               </div>
-              <span className="text-white font-semibold text-xl">Aneesh Krishna</span>
+              <span className="text-white font-semibold text-xl">
+                Aneesh Krishna
+              </span>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed">
-              Computer Science student at Purdue University passionate about building innovative 
-              software solutions that make a difference.
+              Computer Science student at Purdue University passionate about
+              building innovative software solutions that make a difference.
             </p>
           </motion.div>
 
@@ -131,8 +141,8 @@ export default function Footer() {
               </motion.a>
             </div>
             <p className="text-slate-400 text-xs leading-relaxed">
-              Open to new opportunities and exciting collaborations.
-              Feel free to reach out!
+              Open to new opportunities and exciting collaborations. Feel free
+              to reach out!
             </p>
           </motion.div>
         </div>
@@ -152,7 +162,7 @@ export default function Footer() {
               <span>•</span>
               <span>All rights reserved.</span>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

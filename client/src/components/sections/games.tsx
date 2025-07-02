@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { X } from "lucide-react";
+import { X, Gamepad2 } from "lucide-react";
 import TicTacToe from "@/components/games/tic-tac-toe";
 import Game2048 from "@/components/games/game-2048";
 import Snake from "@/components/games/snake";
@@ -159,8 +159,12 @@ export default function Games() {
             transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
             className="inline-block"
           >
-            <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent">
-              Interactive Game Arcade 🎮
+            <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent flex items-center justify-center gap-2">
+              <Gamepad2
+                className="inline-block h-10 w-10 mr-2"
+                strokeWidth={2}
+              />
+              Interactive Game Arcade
             </h2>
           </motion.div>
           <motion.p
