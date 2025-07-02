@@ -206,25 +206,9 @@ export default function WordGuess() {
     initializeGame();
   }, [initializeGame]);
 
-  const handleKeyPress = useCallback(
-    (key: string) => {
-      if (gameState !== "playing") return;
-
-      if (key === "ENTER") {
-        handleSubmit();
-      } else if (key === "BACKSPACE") {
-        handleDelete();
-      } else if (key.length === 1 && key.match(/[A-Z]/)) {
-        handleInput(key);
-      }
-    },
-    [gameState]
-  );
-
   const handleInput = useCallback(
     (letter: string) => {
       if (currentRow >= 6) return;
-
       setGuesses((prev) => {
         const newGuesses = [...prev];
         if (newGuesses[currentRow].length < 5) {
@@ -248,18 +232,12 @@ export default function WordGuess() {
 
   const handleSubmit = useCallback(() => {
     if (guesses[currentRow].length !== 5) return;
+    const guess = guesses[currentRow].toUpperCase();
 
-    const guess = guesses[currentRow].toLowerCase();
-    if (!VALID_WORDS.includes(guess.toUpperCase())) {
-      setError("Not a valid word");
-      setTimeout(() => setError(""), 2000);
-      return;
-    }
-
+    // Allow all 5-letter guesses, don't validate against word list
     const feedback = getFeedback(guess, targetWord);
     setFeedbacks((prev) => [...prev, feedback]);
 
-    // Update keyboard colors
     const newKeyboardColors = { ...keyboardColors };
     guess.split("").forEach((letter, index) => {
       const color = feedback[index];
@@ -302,14 +280,29 @@ export default function WordGuess() {
     } else {
       setCurrentRow((prev) => prev + 1);
     }
-  }, [
-    guesses,
-    currentRow,
-    VALID_WORDS,
-    targetWord,
-    keyboardColors,
-    getFeedback,
-  ]);
+  }, [guesses, currentRow, targetWord, keyboardColors, getFeedback]);
+
+  const handleKeyPress = useCallback(
+    (key: string) => {
+      if (gameState !== "playing") return;
+      if (key === "ENTER") {
+        handleSubmit();
+      } else if (key === "BACKSPACE") {
+        handleDelete();
+      } else if (key.length === 1 && key.match(/[A-Z]/)) {
+        handleInput(key);
+      }
+    },
+    [gameState, handleSubmit, handleDelete, handleInput]
+  );
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      handleKeyPress(event.key.toUpperCase());
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyPress]);
 
   const getKeyColor = (key: string) => {
     const color = keyboardColors[key];
@@ -498,7 +491,7 @@ export default function WordGuess() {
               {stats.maxStreak}
             </div>
             <div className="text-muted-foreground">Max Streak</div>
-        </div>
+          </div>
         </div>
       </div>
 

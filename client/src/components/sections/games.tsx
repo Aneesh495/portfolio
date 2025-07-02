@@ -160,11 +160,37 @@ export default function Games() {
             className="inline-block"
           >
             <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent flex items-center justify-center gap-2">
-              <Gamepad2
-                className="inline-block h-10 w-10 mr-2"
-                strokeWidth={2}
-              />
+              <motion.div
+                animate={{
+                  rotate: [0, 10, -10, 0],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Gamepad2
+                  className="inline-block h-10 w-10 mr-2"
+                  strokeWidth={2}
+                />
+              </motion.div>
               Interactive Game Arcade
+              <motion.div
+                animate={{
+                  rotate: [0, -10, 10, 0],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
+              >
+                🎮
+              </motion.div>
             </h2>
           </motion.div>
           <motion.p
