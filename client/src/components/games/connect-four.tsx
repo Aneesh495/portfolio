@@ -135,17 +135,43 @@ export default function ConnectFour() {
       // Check for draw
       if (isBoardFull(board)) return 0;
 
-      // Simple evaluation based on potential winning positions
+      // Enhanced evaluation based on potential winning positions and board control
       let score = 0;
+      
+      // Evaluate each position for potential wins
       for (let row = 0; row < ROWS; row++) {
         for (let col = 0; col < COLS; col++) {
           if (board[row][col] === 0) {
             const testBoard = board.map((r) => [...r]);
+            
+            // Test AI move
             testBoard[row][col] = 2;
-            if (checkWin(testBoard, row, col, 2)) score += 10;
+            if (checkWin(testBoard, row, col, 2)) {
+              score += 50; // High value for winning moves
+            } else {
+              // Check for 3-in-a-row opportunities
+              score += countConsecutive(testBoard, row, col, 2) * 10;
+            }
 
+            // Test player move (blocking)
             testBoard[row][col] = 1;
-            if (checkWin(testBoard, row, col, 1)) score -= 10;
+            if (checkWin(testBoard, row, col, 1)) {
+              score -= 40; // Block opponent wins
+            } else {
+              // Check for opponent's 3-in-a-row opportunities
+              score -= countConsecutive(testBoard, row, col, 1) * 8;
+            }
+          }
+        }
+      }
+
+      // Center control bonus
+      for (let col = 2; col <= 4; col++) {
+        for (let row = ROWS - 1; row >= 0; row--) {
+          if (board[row][col] === 2) {
+            score += 5;
+          } else if (board[row][col] === 1) {
+            score -= 5;
           }
         }
       }
@@ -154,6 +180,41 @@ export default function ConnectFour() {
     },
     [checkWin, isBoardFull]
   );
+
+  // Helper function to count consecutive pieces
+  const countConsecutive = useCallback((board: number[][], row: number, col: number, player: number): number => {
+    const directions = [
+      [0, 1], // horizontal
+      [1, 0], // vertical
+      [1, 1], // diagonal down-right
+      [1, -1], // diagonal down-left
+    ];
+
+    let maxCount = 0;
+    for (const [dr, dc] of directions) {
+      let count = 1;
+
+      // Check in positive direction
+      for (let i = 1; i < 4; i++) {
+        const r = row + dr * i;
+        const c = col + dc * i;
+        if (r < 0 || r >= ROWS || c < 0 || c >= COLS || board[r][c] !== player) break;
+        count++;
+      }
+
+      // Check in negative direction
+      for (let i = 1; i < 4; i++) {
+        const r = row - dr * i;
+        const c = col - dc * i;
+        if (r < 0 || r >= ROWS || c < 0 || c >= COLS || board[r][c] !== player) break;
+        count++;
+      }
+
+      maxCount = Math.max(maxCount, count);
+    }
+
+    return maxCount;
+  }, []);
 
   const minimax = useCallback(
     (
@@ -209,6 +270,40 @@ export default function ConnectFour() {
       const maxDepth =
         difficulty === "easy" ? 2 : difficulty === "medium" ? 4 : 6;
 
+      // For easy difficulty, add some randomness
+      if (difficulty === "easy") {
+        const randomChance = Math.random();
+        if (randomChance < 0.3) {
+          // 30% chance to make a random move
+          const availableMoves = [];
+          for (let col = 0; col < COLS; col++) {
+            if (getLowestEmptyRow(board, col) !== -1) {
+              availableMoves.push(col);
+            }
+          }
+          if (availableMoves.length > 0) {
+            return availableMoves[Math.floor(Math.random() * availableMoves.length)];
+          }
+        }
+      }
+
+      // For medium difficulty, sometimes make suboptimal moves
+      if (difficulty === "medium") {
+        const randomChance = Math.random();
+        if (randomChance < 0.2) {
+          // 20% chance to make a suboptimal move
+          const availableMoves = [];
+          for (let col = 0; col < COLS; col++) {
+            if (getLowestEmptyRow(board, col) !== -1) {
+              availableMoves.push(col);
+            }
+          }
+          if (availableMoves.length > 0) {
+            return availableMoves[Math.floor(Math.random() * availableMoves.length)];
+          }
+        }
+      }
+
       for (let col = 0; col < COLS; col++) {
         const row = makeMove(board, col, 2);
         if (row !== null) {
@@ -224,7 +319,7 @@ export default function ConnectFour() {
 
       return bestMove;
     },
-    [makeMove, minimax, difficulty]
+    [makeMove, minimax, difficulty, getLowestEmptyRow]
   );
 
   const handleColumnClick = useCallback(

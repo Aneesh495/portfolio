@@ -115,6 +115,13 @@ export default function Battleship() {
     }
   }, [currentPhase, initializeAiBoard]);
 
+  // Initialize the game properly
+  useEffect(() => {
+    if (currentPhase === "placing" && currentShipIndex === 0) {
+      setSelectedShip(SHIPS[0].type);
+    }
+  }, [currentPhase, currentShipIndex]);
+
   const canPlaceShip = useCallback(
     (
       gameState: GameState,
@@ -188,7 +195,7 @@ export default function Battleship() {
   const handleCellClick = useCallback(
     (row: number, col: number) => {
       if (currentPhase === "placing") {
-        if (!selectedShip) return;
+        if (!selectedShip || currentShipIndex >= SHIPS.length) return;
 
         const shipConfig = SHIPS[currentShipIndex];
         if (
@@ -210,11 +217,16 @@ export default function Battleship() {
           );
 
           setPlayerBoard(newPlayerBoard);
-          setCurrentShipIndex(currentShipIndex + 1);
+          const nextShipIndex = currentShipIndex + 1;
+          setCurrentShipIndex(nextShipIndex);
 
-          if (currentShipIndex + 1 >= SHIPS.length) {
+          if (nextShipIndex >= SHIPS.length) {
             setCurrentPhase("playing");
             setSelectedShip(null);
+            // Initialize AI board when starting to play
+            initializeAiBoard();
+          } else {
+            setSelectedShip(SHIPS[nextShipIndex].type);
           }
         }
       } else if (currentPhase === "playing" && currentPlayer === "player") {
@@ -246,14 +258,6 @@ export default function Battleship() {
           if (shipIndex !== -1) {
             newAiBoard.ships[shipIndex].hits++;
           }
-
-          // Check if ship is sunk
-          if (
-            newAiBoard.ships[shipIndex].hits ===
-            newAiBoard.ships[shipIndex].size
-          ) {
-            // Ship sunk logic
-          }
         } else {
           newAiBoard.board[row][col] = "miss";
         }
@@ -280,6 +284,7 @@ export default function Battleship() {
       placeShip,
       currentPlayer,
       aiBoard,
+      initializeAiBoard,
     ]
   );
 
@@ -295,6 +300,23 @@ export default function Battleship() {
   const handleCellLeave = useCallback(() => {
     setHoverPosition(null);
   }, []);
+
+  const getAiShot = useCallback(() => {
+    // Improved AI: random shot but avoid already shot positions
+    let row: number, col: number;
+    let attempts = 0;
+    do {
+      row = Math.floor(Math.random() * BOARD_SIZE);
+      col = Math.floor(Math.random() * BOARD_SIZE);
+      attempts++;
+      // Prevent infinite loop
+      if (attempts > 100) break;
+    } while (
+      playerBoard.shots.some((shot) => shot.row === row && shot.col === col)
+    );
+
+    return { row, col };
+  }, [playerBoard.shots]);
 
   // AI turn
   useEffect(() => {
@@ -342,20 +364,7 @@ export default function Battleship() {
 
       return () => clearTimeout(timeout);
     }
-  }, [currentPhase, currentPlayer, gameOver, playerBoard]);
-
-  const getAiShot = useCallback(() => {
-    // Simple AI: random shot
-    let row, col;
-    do {
-      row = Math.floor(Math.random() * BOARD_SIZE);
-      col = Math.floor(Math.random() * BOARD_SIZE);
-    } while (
-      playerBoard.shots.some((shot) => shot.row === row && shot.col === col)
-    );
-
-    return { row, col };
-  }, [playerBoard.shots]);
+  }, [currentPhase, currentPlayer, gameOver, playerBoard, getAiShot]);
 
   const resetGame = useCallback(() => {
     setPlayerBoard({
@@ -390,33 +399,73 @@ export default function Battleship() {
   const renderBoard = useCallback(
     (gameState: GameState, isPlayerBoard: boolean) => {
       return (
-        <div className="grid grid-cols-10 gap-1 p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-lg border-2 border-blue-300">
+        <div className="grid grid-cols-10 gap-1 p-6 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-3xl shadow-2xl border-4 border-blue-300">
           {gameState.board.map((row, rowIndex) =>
-            row.map((cell, colIndex) => (
-              <motion.button
-                key={`${rowIndex}-${colIndex}`}
-                onClick={() => handleCellClick(rowIndex, colIndex)}
-                onMouseEnter={() => handleCellHover(rowIndex, colIndex)}
-                onMouseLeave={handleCellLeave}
-                disabled={
-                  gameOver ||
-                  (currentPhase === "playing" && currentPlayer === "ai")
+            row.map((cell, colIndex) => {
+              // Check if this cell is part of a ship placement preview
+              let isPreview = false;
+              if (
+                currentPhase === "placing" &&
+                isPlayerBoard &&
+                hoverPosition &&
+                selectedShip
+              ) {
+                const shipConfig = SHIPS[currentShipIndex];
+                const positions = [];
+
+                for (let i = 0; i < shipConfig.size; i++) {
+                  const newRow =
+                    shipOrientation === "horizontal"
+                      ? hoverPosition.row
+                      : hoverPosition.row + i;
+                  const newCol =
+                    shipOrientation === "horizontal"
+                      ? hoverPosition.col + i
+                      : hoverPosition.col;
+                  if (
+                    newRow >= 0 &&
+                    newRow < BOARD_SIZE &&
+                    newCol >= 0 &&
+                    newCol < BOARD_SIZE
+                  ) {
+                    positions.push({ row: newRow, col: newCol });
+                  }
                 }
-                className={`w-10 h-10 border-2 font-bold text-lg transition-all duration-200 rounded-md shadow-sm ${
-                  cell === "hit"
-                    ? "bg-red-500 text-white border-red-600"
-                    : cell === "miss"
-                    ? "bg-gray-400 text-white border-gray-500"
-                    : cell === "ship" && isPlayerBoard
-                    ? "bg-blue-500 text-white border-blue-600"
-                    : "bg-white text-gray-800 border-gray-300 hover:bg-gray-50"
-                }`}
-                whileHover={!gameOver ? { scale: 1.05 } : {}}
-                whileTap={!gameOver ? { scale: 0.95 } : {}}
-              >
-                {cell === "hit" ? "💥" : cell === "miss" ? "💧" : ""}
-              </motion.button>
-            ))
+
+                isPreview = positions.some(
+                  (pos) => pos.row === rowIndex && pos.col === colIndex
+                );
+              }
+
+              return (
+                <motion.button
+                  key={`${rowIndex}-${colIndex}`}
+                  onClick={() => handleCellClick(rowIndex, colIndex)}
+                  onMouseEnter={() => handleCellHover(rowIndex, colIndex)}
+                  onMouseLeave={handleCellLeave}
+                  disabled={
+                    gameOver ||
+                    (currentPhase === "playing" && currentPlayer === "ai") ||
+                    (currentPhase === "placing" && !isPlayerBoard)
+                  }
+                  className={`w-12 h-12 border-2 font-bold text-lg transition-all duration-300 rounded-lg shadow-md ${
+                    cell === "hit"
+                      ? "bg-gradient-to-br from-red-500 to-red-600 text-white border-red-700 shadow-lg"
+                      : cell === "miss"
+                      ? "bg-gradient-to-br from-gray-400 to-gray-500 text-white border-gray-600 shadow-lg"
+                      : cell === "ship" && isPlayerBoard
+                      ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white border-blue-700 shadow-lg"
+                      : isPreview
+                      ? "bg-gradient-to-br from-green-400 to-green-500 text-white border-green-600 shadow-lg"
+                      : "bg-gradient-to-br from-white to-gray-50 text-gray-700 border-gray-300 hover:bg-gradient-to-br hover:from-blue-50 hover:to-indigo-50 hover:border-blue-400 hover:shadow-lg"
+                  }`}
+                  whileHover={!gameOver ? { scale: 1.1, rotate: 2 } : {}}
+                  whileTap={!gameOver ? { scale: 0.95 } : {}}
+                >
+                  {cell === "hit" ? "💥" : cell === "miss" ? "💧" : ""}
+                </motion.button>
+              );
+            })
           )}
         </div>
       );
@@ -428,29 +477,50 @@ export default function Battleship() {
       gameOver,
       currentPhase,
       currentPlayer,
+      hoverPosition,
+      selectedShip,
+      currentShipIndex,
+      shipOrientation,
     ]
   );
 
   return (
-    <div className="flex flex-col items-center space-y-6 p-6">
+    <div className="flex flex-col items-center space-y-8 p-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen">
       {/* Header */}
-      <div className="text-center space-y-2">
-        <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          Battleship
-        </h3>
-        <p className="text-muted-foreground">Sink all enemy ships to win!</p>
+      <div className="text-center space-y-4">
+        <motion.h3
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent"
+        >
+          ⚓ Naval Battle ⚓
+        </motion.h3>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-lg text-gray-600 font-medium"
+        >
+          Sink all enemy ships to claim victory!
+        </motion.p>
       </div>
 
       {/* Settings and Stats */}
-      <div className="flex gap-4 items-center">
-        <div className="flex items-center gap-2">
-          <Settings className="h-4 w-4" />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="flex gap-6 items-center bg-white/80 backdrop-blur-sm p-4 rounded-2xl shadow-lg border border-white/20"
+      >
+        <div className="flex items-center gap-3">
+          <Settings className="h-5 w-5 text-blue-600" />
           <select
             value={difficulty}
             onChange={(e) =>
               setDifficulty(e.target.value as "easy" | "medium" | "hard")
             }
-            className="px-3 py-2 text-sm border rounded-lg bg-background shadow-sm"
+            className="px-4 py-2 text-sm border-2 border-blue-200 rounded-xl bg-white/90 shadow-sm focus:border-blue-400 focus:outline-none transition-all"
             aria-label="AI difficulty level"
           >
             <option value="easy">Easy</option>
@@ -459,121 +529,178 @@ export default function Battleship() {
           </select>
         </div>
 
-        <Badge
-          variant="secondary"
-          className="flex items-center gap-2 bg-red-600 text-white"
-        >
-          <User className="h-4 w-4" />
-          Player: {scores.player}
-        </Badge>
+        <div className="flex gap-4">
+          <div className="flex items-center gap-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-xl shadow-md">
+            <User className="h-4 w-4" />
+            <span className="font-semibold">{scores.player}</span>
+          </div>
 
-        <Badge
-          variant="outline"
-          className="flex items-center gap-2 bg-blue-100 border-blue-300 text-blue-800"
-        >
-          <Bot className="h-4 w-4" />
-          AI: {scores.ai}
-        </Badge>
-      </div>
+          <div className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-xl shadow-md">
+            <Bot className="h-4 w-4" />
+            <span className="font-semibold">{scores.ai}</span>
+          </div>
+        </div>
+      </motion.div>
 
       {/* Game Boards */}
-      <div className="flex gap-8 items-start">
+      <div className="flex flex-col lg:flex-row gap-8 items-start w-full max-w-6xl">
         {/* Player Board */}
-        <div className="flex flex-col items-center space-y-4">
-          <h4 className="text-lg font-semibold text-blue-800">Your Fleet</h4>
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="flex flex-col items-center space-y-6 flex-1"
+        >
+          <div className="text-center space-y-2">
+            <h4 className="text-2xl font-bold text-blue-800">🚢 Your Fleet</h4>
+            <p className="text-sm text-gray-600">
+              Place your ships strategically
+            </p>
+          </div>
           {renderBoard(playerBoard, true)}
-        </div>
+
+          {/* Ship Placement Controls */}
+          {currentPhase === "placing" && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="space-y-4 bg-gradient-to-br from-blue-100 to-purple-100 p-6 rounded-2xl border-2 border-blue-200 shadow-lg w-full max-w-md"
+            >
+              <h5 className="text-lg font-semibold text-blue-800 text-center">
+                ⚙️ Ship Placement
+              </h5>
+              <div className="space-y-4">
+                <div className="flex items-center justify-center gap-3">
+                  <span className="text-sm font-medium text-gray-700">
+                    Orientation:
+                  </span>
+                  <Button
+                    onClick={() =>
+                      setShipOrientation(
+                        shipOrientation === "horizontal"
+                          ? "vertical"
+                          : "horizontal"
+                      )
+                    }
+                    variant="outline"
+                    size="sm"
+                    className="text-sm bg-white/80 hover:bg-white transition-all border-2 border-blue-300 hover:border-blue-400"
+                  >
+                    {shipOrientation === "horizontal"
+                      ? "↔ Horizontal"
+                      : "↕ Vertical"}
+                  </Button>
+                </div>
+                <div className="text-center space-y-2">
+                  <div className="text-lg font-bold text-blue-800">
+                    {SHIPS[currentShipIndex]?.type} (
+                    {SHIPS[currentShipIndex]?.size} cells)
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Ships remaining: {SHIPS.length - currentShipIndex}
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300"
+                      style={{
+                        width: `${
+                          ((SHIPS.length - currentShipIndex) / SHIPS.length) *
+                          100
+                        }%`,
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </motion.div>
 
         {/* AI Board */}
-        <div className="flex flex-col items-center space-y-4">
-          <h4 className="text-lg font-semibold text-purple-800">
-            Enemy Waters
-          </h4>
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="flex flex-col items-center space-y-6 flex-1"
+        >
+          <div className="text-center space-y-2">
+            <h4 className="text-2xl font-bold text-purple-800">
+              🌊 Enemy Waters
+            </h4>
+            <p className="text-sm text-gray-600">
+              Find and destroy enemy ships
+            </p>
+          </div>
           {renderBoard(aiBoard, false)}
-        </div>
+        </motion.div>
       </div>
 
       {/* Game Status */}
       <AnimatePresence>
         {gameOver && (
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-            className="text-center space-y-2"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            className="text-center space-y-4"
           >
-            <Badge
-              variant="default"
-              className="text-lg px-6 py-3 bg-green-600 text-white"
-            >
-              {winner === "player" ? "🎉 You Won!" : "🤖 AI Won!"}
-            </Badge>
+            <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-8 py-4 rounded-2xl shadow-2xl text-xl font-bold">
+              {winner === "player"
+                ? "🎉 Victory! You Won!"
+                : "💀 Defeat! AI Won!"}
+            </div>
           </motion.div>
         )}
         {currentPhase === "placing" && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             className="text-center"
           >
-            <Badge
-              variant="outline"
-              className="text-lg px-4 py-2 bg-blue-100 border-blue-300 text-blue-800"
-            >
-              Place your ships: {SHIPS[currentShipIndex]?.type}
-            </Badge>
+            <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-xl shadow-lg text-lg font-semibold">
+              🚢 Place your ships: {SHIPS[currentShipIndex]?.type}
+            </div>
           </motion.div>
         )}
         {currentPhase === "playing" && currentPlayer === "ai" && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             className="text-center"
           >
-            <Badge
-              variant="outline"
-              className="text-lg px-4 py-2 bg-purple-100 border-purple-300 text-purple-800"
-            >
+            <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl shadow-lg text-lg font-semibold">
               🤖 AI is thinking...
-            </Badge>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Side Panel */}
-      <div className="space-y-6 bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl border border-blue-200">
-        {/* Controls */}
-        <div className="space-y-2">
-          <h4 className="text-sm font-medium text-blue-800">Controls</h4>
-          <div className="text-xs text-gray-600 space-y-1">
-            <div>Click to place ships or fire shots</div>
-            <div>Sink all enemy ships to win</div>
-            <div>AI difficulty: {difficulty}</div>
-          </div>
-        </div>
-      </div>
-
       {/* Game Controls */}
-      <div className="flex gap-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 1.0 }}
+        className="flex gap-6"
+      >
         <Button
           onClick={resetGame}
           variant="outline"
-          className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white border-0"
+          className="flex items-center gap-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
         >
-          <RotateCcw className="h-4 w-4" />
+          <RotateCcw className="h-5 w-5" />
           New Game
         </Button>
         <Button
           onClick={resetScores}
           variant="outline"
-          className="flex items-center gap-2 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white border-0"
+          className="flex items-center gap-3 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white border-0 px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
         >
-          <Trophy className="h-4 w-4" />
+          <Trophy className="h-5 w-5" />
           Reset Scores
         </Button>
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -235,54 +235,97 @@ export default function WordHunt() {
     (row: number, col: number) => {
       if (gameState !== "playing" || !gameData) return;
 
-      setSelectedCells((prev) => {
-        const newSelected = [...prev, { row, col }];
-
-        // Check if we have a valid word
-        if (newSelected.length >= gameData.minWordLength) {
-          const word = newSelected
-            .map((cell) => gameData.grid[cell.row][cell.col])
-            .join("");
-
-          const foundWord = gameData.words.find(
-            (w) => w.word === word && !w.found
-          );
-
-          if (foundWord) {
-            setFoundWords((prev) => [...prev, word]);
-            setScore((prev) => prev + word.length * 10);
-
-            // Mark word as found
-            setGameData((prev) => {
-              if (!prev) return prev;
-              return {
-                ...prev,
-                words: prev.words.map((w) =>
-                  w.word === word ? { ...w, found: true } : w
-                ),
-              };
-            });
-          }
-        }
-
-        return newSelected;
-      });
+      // Start a new selection
+      setSelectedCells([{ row, col }]);
+      setIsDragging(true);
     },
     [gameState, gameData]
   );
 
-  const handleCellHover = useCallback(
+  const handleCellMouseDown = useCallback(
     (row: number, col: number) => {
-      if (gameState !== "playing" || isDragging) return;
+      if (gameState !== "playing" || !gameData) return;
+
+      // Start dragging
+      setSelectedCells([{ row, col }]);
       setIsDragging(true);
-      handleCellClick(row, col);
     },
-    [gameState, isDragging, handleCellClick]
+    [gameState, gameData]
   );
 
-  const handleCellLeave = useCallback(() => {
+  const handleCellMouseEnter = useCallback(
+    (row: number, col: number) => {
+      if (gameState !== "playing" || !gameData || !isDragging) return;
+
+      setSelectedCells((prev) => {
+        if (prev.length === 0) return [{ row, col }];
+
+        // Check if this cell is adjacent to the last selected cell
+        const lastCell = prev[prev.length - 1];
+        const rowDiff = Math.abs(row - lastCell.row);
+        const colDiff = Math.abs(col - lastCell.col);
+
+        // Allow horizontal, vertical, and diagonal movement
+        if (rowDiff <= 1 && colDiff <= 1 && rowDiff + colDiff > 0) {
+          // Check if this cell is already selected
+          const isAlreadySelected = prev.some(
+            (cell) => cell.row === row && cell.col === col
+          );
+          if (!isAlreadySelected) {
+            const newSelected = [...prev, { row, col }];
+
+            // Check if we have a valid word
+            if (newSelected.length >= gameData.minWordLength) {
+              const word = newSelected
+                .map((cell) => gameData.grid[cell.row][cell.col])
+                .join("");
+              const foundWord = gameData.words.find(
+                (w) => w.word === word && !w.found
+              );
+
+              if (foundWord) {
+                setFoundWords((prev) => [...prev, word]);
+                setScore((prev) => prev + word.length * 10);
+
+                // Mark word as found
+                setGameData((prev) => {
+                  if (!prev) return prev;
+                  return {
+                    ...prev,
+                    words: prev.words.map((w) =>
+                      w.word === word ? { ...w, found: true } : w
+                    ),
+                  };
+                });
+
+                // Clear selection after finding a word
+                return [];
+              }
+            }
+
+            return newSelected;
+          }
+        }
+        return prev;
+      });
+    },
+    [gameState, gameData, isDragging]
+  );
+
+  const handleCellMouseUp = useCallback(() => {
     setIsDragging(false);
     setSelectedCells([]);
+  }, []);
+
+  // Add global mouse up listener
+  useEffect(() => {
+    const handleGlobalMouseUp = () => {
+      setIsDragging(false);
+      setSelectedCells([]);
+    };
+
+    window.addEventListener("mouseup", handleGlobalMouseUp);
+    return () => window.removeEventListener("mouseup", handleGlobalMouseUp);
   }, []);
 
   const useHint = useCallback(() => {
@@ -313,7 +356,8 @@ export default function WordHunt() {
     if (!showHint || !gameData) return false;
     const unfoundWords = gameData.words.filter((w) => !w.found);
     if (unfoundWords.length === 0) return false;
-    const hintWord = unfoundWords[0];
+    const hintWord =
+      unfoundWords[Math.floor(Math.random() * unfoundWords.length)];
     return hintWord.positions.some((pos) => pos.row === row && pos.col === col);
   };
 
@@ -380,8 +424,9 @@ export default function WordHunt() {
                 <motion.button
                   key={`${rowIndex}-${colIndex}`}
                   onClick={() => handleCellClick(rowIndex, colIndex)}
-                  onMouseEnter={() => handleCellHover(rowIndex, colIndex)}
-                  onMouseLeave={handleCellLeave}
+                  onMouseDown={() => handleCellMouseDown(rowIndex, colIndex)}
+                  onMouseEnter={() => handleCellMouseEnter(rowIndex, colIndex)}
+                  onMouseUp={handleCellMouseUp}
                   disabled={gameState !== "playing"}
                   className={`w-12 h-12 border-2 font-bold text-xl transition-all duration-200 rounded-md shadow-sm ${
                     isCellSelected(rowIndex, colIndex)

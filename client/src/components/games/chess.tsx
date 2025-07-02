@@ -420,29 +420,47 @@ export default function Chess() {
   );
 
   // AI Logic
-  const evaluateBoard = useCallback((board: Board): number => {
-    const pieceValues = {
-      pawn: 1,
-      knight: 3,
-      bishop: 3,
-      rook: 5,
-      queen: 9,
-      king: 1000,
-    };
-    let score = 0;
+  const evaluateBoard = useCallback(
+    (board: Board): number => {
+      const pieceValues = {
+        pawn: 1,
+        knight: 3,
+        bishop: 3,
+        rook: 5,
+        queen: 9,
+        king: 1000,
+      };
+      let score = 0;
 
-    for (let row = 0; row < BOARD_SIZE; row++) {
-      for (let col = 0; col < BOARD_SIZE; col++) {
-        const piece = board[row][col];
-        if (piece) {
-          const value = pieceValues[piece.type];
-          score += piece.color === "white" ? value : -value;
+      // Material evaluation
+      for (let row = 0; row < BOARD_SIZE; row++) {
+        for (let col = 0; col < BOARD_SIZE; col++) {
+          const piece = board[row][col];
+          if (piece) {
+            const value = pieceValues[piece.type];
+            score += piece.color === "white" ? value : -value;
+          }
         }
       }
-    }
 
-    return score;
-  }, []);
+      // Simple position evaluation for medium+ difficulty
+      if (difficulty !== "easy") {
+        // Center control bonus
+        for (let row = 3; row <= 4; row++) {
+          for (let col = 3; col <= 4; col++) {
+            const piece = board[row][col];
+            if (piece) {
+              const bonus = piece.color === "white" ? 0.1 : -0.1;
+              score += bonus;
+            }
+          }
+        }
+      }
+
+      return score;
+    },
+    [difficulty]
+  );
 
   const getSearchDepth = useCallback((): number => {
     switch (difficulty) {
@@ -451,7 +469,7 @@ export default function Chess() {
       case "medium":
         return 3;
       case "hard":
-        return 4;
+        return 3;
       default:
         return 3;
     }
@@ -533,6 +551,23 @@ export default function Chess() {
 
       if (allMoves.length === 0) return null;
 
+      // For easy difficulty, add randomness
+      if (difficulty === "easy" && Math.random() < 0.3) {
+        return allMoves[Math.floor(Math.random() * allMoves.length)];
+      }
+
+      // For medium difficulty, sometimes make suboptimal moves
+      if (difficulty === "medium" && Math.random() < 0.2) {
+        const randomMove =
+          allMoves[Math.floor(Math.random() * allMoves.length)];
+        const newBoard = makeMove(randomMove.from, randomMove.to, board);
+        const randomScore = evaluateBoard(newBoard);
+        if (randomScore > -5) {
+          // Only if the move isn't too bad
+          return randomMove;
+        }
+      }
+
       let bestScore = -Infinity;
       let bestMove = allMoves[0];
 
@@ -553,7 +588,15 @@ export default function Chess() {
 
       return bestMove;
     },
-    [getValidMoves, makeMove, isKingInCheck, minimax, getSearchDepth]
+    [
+      getValidMoves,
+      makeMove,
+      isKingInCheck,
+      minimax,
+      getSearchDepth,
+      difficulty,
+      evaluateBoard,
+    ]
   );
 
   // AI Move Effect
@@ -665,7 +708,7 @@ export default function Chess() {
                   <div
                     className={`text-4xl ${
                       piece.color === "white"
-                        ? "text-white drop-shadow-lg"
+                        ? "text-white drop-shadow-lg bg-gray-800 rounded-full p-1"
                         : "text-gray-900 drop-shadow-lg"
                     }`}
                   >
@@ -721,10 +764,10 @@ export default function Chess() {
         </div>
       </div>
 
-      <div className="flex gap-8 items-start">
+      <div className="flex flex-col items-center space-y-6">
         {/* Game Board */}
         <div className="flex flex-col items-center space-y-4">
-          <div className="bg-amber-800 p-4 rounded-lg shadow-lg">
+          <div className="bg-amber-800 p-6 rounded-lg shadow-lg">
             {renderBoard()}
           </div>
 
@@ -789,8 +832,8 @@ export default function Chess() {
           </AnimatePresence>
         </div>
 
-        {/* Side Panel */}
-        <div className="space-y-6">
+        {/* Stats and Controls - Moved below board */}
+        <div className="flex gap-8 items-start">
           {/* Stats */}
           <div className="space-y-3">
             <h4 className="text-sm font-medium">Score</h4>

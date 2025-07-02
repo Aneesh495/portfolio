@@ -39,7 +39,7 @@ export default function About() {
             className="order-1 lg:order-2"
           >
             <h3 className="text-2xl font-semibold mb-6">
-              Hello! I'm Aneesh Krishna Parthasarathy
+              Hello! I'm Aneesh Krishna
             </h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
               Honors CS + Stats @ Purdue | SWE Intern @ Retail Hedging | Machine
