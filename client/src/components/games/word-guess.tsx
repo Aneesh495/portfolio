@@ -498,7 +498,7 @@ export default function WordGuess() {
               {stats.maxStreak}
             </div>
             <div className="text-muted-foreground">Max Streak</div>
-          </div>
+        </div>
         </div>
       </div>
 
