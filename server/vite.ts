@@ -4,6 +4,7 @@ import path from "path";
 import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
 import { nanoid } from "nanoid";
+import react from "@vitejs/plugin-react";
 
 const viteLogger = createLogger();
 
@@ -19,8 +20,29 @@ export function log(message: string, source = "express") {
 }
 
 export async function setupVite(app: Express, server: Server) {
-  // Only import viteConfig in development
-  const viteConfig = (await import("../vite.config.ts")).default;
+  // Create inline vite config instead of importing external file
+  const viteConfig = {
+    plugins: [react()],
+    resolve: {
+      alias: {
+        "@": path.resolve(process.cwd(), "client", "src"),
+        "@shared": path.resolve(process.cwd(), "shared"),
+        "@assets": path.resolve(process.cwd(), "attached_assets"),
+      },
+    },
+    root: path.resolve(process.cwd(), "client"),
+    build: {
+      outDir: path.resolve(process.cwd(), "dist/public"),
+      emptyOutDir: true,
+    },
+    server: {
+      fs: {
+        strict: true,
+        deny: ["**/.*"],
+      },
+    },
+  };
+
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },

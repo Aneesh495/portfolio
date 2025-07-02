@@ -14,6 +14,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
     notRobot: false,
   });
@@ -32,14 +33,20 @@ export default function Contact() {
     }
 
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
       toast({
         title: "Message Sent!",
         description: "Thank you for your message. I'll get back to you soon!",
       });
-      setFormData({ name: "", email: "", message: "", notRobot: false });
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+        notRobot: false,
+      });
       setIsSubmitting(false);
     }, 1000);
   };
@@ -64,7 +71,7 @@ export default function Contact() {
             Have a project in mind? Let's work together!
           </p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Info */}
           <motion.div
@@ -76,11 +83,12 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
               <p className="text-muted-foreground mb-8">
-                I'm always open to discussing new opportunities, innovative projects, 
-                or just having a conversation about technology and software development.
+                I'm always open to discussing new opportunities, innovative
+                projects, or just having a conversation about technology and
+                software development.
               </p>
             </div>
-            
+
             <div className="space-y-4">
               <motion.a
                 href="mailto:aneeshkrishnaparthasarathy@gmail.com"
@@ -91,10 +99,12 @@ export default function Contact() {
                 <Mail className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <p className="text-muted-foreground">aneeshkrishnaparthasarathy@gmail.com</p>
+                  <p className="text-muted-foreground">
+                    aneeshkrishnaparthasarathy@gmail.com
+                  </p>
                 </div>
               </motion.a>
-              
+
               <motion.a
                 href="https://linkedin.com/in/aneesh-krishna-780701253"
                 target="_blank"
@@ -106,10 +116,12 @@ export default function Contact() {
                 <Linkedin className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">LinkedIn</h4>
-                  <p className="text-muted-foreground">linkedin.com/in/aneesh-krishna-780701253</p>
+                  <p className="text-muted-foreground">
+                    linkedin.com/in/aneesh-krishna-780701253
+                  </p>
                 </div>
               </motion.a>
-              
+
               <motion.a
                 href="https://github.com/Aneesh495"
                 target="_blank"
@@ -164,36 +176,47 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
           >
             <Card className="shadow-lg h-full">
-              <CardContent className="p-8 h-full flex flex-col">
-                <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
-                  <div>
-                    <Label htmlFor="name">Name</Label>
+              <CardContent className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Name</Label>
+                      <Input
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Your name"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="your.email@example.com"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Subject</Label>
                     <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
                       onChange={handleInputChange}
-                      placeholder="Your Name"
+                      placeholder="What's this about?"
                       required
-                      className="mt-2"
                     />
                   </div>
-                  
-                  <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="your.email@example.com"
-                      required
-                      className="mt-2"
-                    />
-                  </div>
-                  
-                  <div className="flex-1">
+
+                  <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
                     <Textarea
                       id="message"
@@ -201,31 +224,29 @@ export default function Contact() {
                       value={formData.message}
                       onChange={handleInputChange}
                       placeholder="Your message..."
-                      rows={8}
+                      className="min-h-[120px] resize-none"
                       required
-                      className="mt-2 resize-none h-full min-h-[150px]"
                     />
                   </div>
-                  
+
                   <div className="flex items-center space-x-2">
                     <Checkbox
-                      id="notRobot"
+                      id="not-robot"
                       checked={formData.notRobot}
                       onCheckedChange={(checked) =>
                         setFormData({ ...formData, notRobot: !!checked })
                       }
                     />
-                    <Label htmlFor="notRobot" className="text-sm">
-                      I pinky promise I'm not a robot 🤞
+                    <Label
+                      htmlFor="not-robot"
+                      className="text-sm text-muted-foreground"
+                    >
+                      I pinky promise I'm not a robot 🤖
                     </Label>
                   </div>
-                  
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    {isSubmitting ? "Sending..." : "Send Message"}
+
+                  <Button type="submit" className="w-full">
+                    Send Message
                   </Button>
                 </form>
               </CardContent>

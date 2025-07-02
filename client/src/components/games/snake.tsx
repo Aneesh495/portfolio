@@ -1,294 +1,374 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { motion, AnimatePresence } from "framer-motion";
+import { Settings, RotateCcw, Trophy } from "lucide-react";
 
-type Direction = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
+const BOARD_SIZE = 20;
+const INITIAL_SNAKE = [{ x: 10, y: 10 }];
+const INITIAL_DIRECTION = { x: 0, y: -1 };
+
 type Position = { x: number; y: number };
+type Direction = { x: number; y: number };
+type Difficulty = "easy" | "medium" | "hard";
 
-const CANVAS_SIZE = 400;
-const UNIT = 20;
-const GAME_UNITS = CANVAS_SIZE / UNIT;
+const DIFFICULTIES = {
+  easy: { speed: 150 },
+  medium: { speed: 100 },
+  hard: { speed: 70 },
+};
 
 export default function Snake() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [snake, setSnake] = useState<Position[]>([{ x: 0, y: 0 }]);
-  const [food, setFood] = useState<Position>({ x: 0, y: 0 });
-  const [direction, setDirection] = useState<Direction>('RIGHT');
-  const [gameRunning, setGameRunning] = useState(false);
+  const [snake, setSnake] = useState<Position[]>(INITIAL_SNAKE);
+  const [direction, setDirection] = useState<Direction>(INITIAL_DIRECTION);
+  const [food, setFood] = useState<Position>({ x: 5, y: 5 });
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [highScore, setHighScore] = useState(() => {
-    return parseInt(localStorage.getItem('snake-high-score') || '0');
-  });
-  const [gameSpeed, setGameSpeed] = useState(150);
-  const [powerUp, setPowerUp] = useState<Position | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [difficulty, setDifficulty] = useState<Difficulty>("medium");
+  const [stats, setStats] = useState({ wins: 0, losses: 0 });
+  const gameLoopRef = useRef<NodeJS.Timeout>();
+
+  const config = DIFFICULTIES[difficulty];
 
   const generateFood = useCallback(() => {
-    const newFood = {
-      x: Math.floor(Math.random() * GAME_UNITS) * UNIT,
-      y: Math.floor(Math.random() * GAME_UNITS) * UNIT,
-    };
+    let newFood: Position;
+    do {
+      newFood = {
+        x: Math.floor(Math.random() * BOARD_SIZE),
+        y: Math.floor(Math.random() * BOARD_SIZE),
+      };
+    } while (
+      snake.some(
+        (segment) => segment.x === newFood.x && segment.y === newFood.y
+      )
+    );
     setFood(newFood);
-  }, []);
+  }, [snake]);
 
   const resetGame = useCallback(() => {
-    setSnake([{ x: 0, y: 0 }]);
-    setDirection('RIGHT');
+    setSnake(INITIAL_SNAKE);
+    setDirection(INITIAL_DIRECTION);
     setScore(0);
     setGameOver(false);
-    setGameRunning(false);
-    setGameSpeed(150);
-    setPowerUp(null);
+    setIsPlaying(false);
     generateFood();
   }, [generateFood]);
 
-  useEffect(() => {
-    generateFood();
-  }, [generateFood]);
+  const startGame = useCallback(() => {
+    resetGame();
+    setIsPlaying(true);
+  }, [resetGame]);
 
-  const checkCollision = useCallback((head: Position, snakeBody: Position[]) => {
-    // Check wall collision
-    if (head.x < 0 || head.x >= CANVAS_SIZE || head.y < 0 || head.y >= CANVAS_SIZE) {
-      return true;
+  const endGame = useCallback(() => {
+    setIsPlaying(false);
+    setGameOver(true);
+    setStats((prev) => ({ ...prev, losses: prev.losses + 1 }));
+    if (score > highScore) {
+      setHighScore(score);
     }
-    // Check self collision
-    for (const segment of snakeBody) {
-      if (head.x === segment.x && head.y === segment.y) {
-        return true;
-      }
-    }
-    return false;
-  }, []);
+  }, [score, highScore]);
 
   const moveSnake = useCallback(() => {
-    if (!gameRunning || gameOver) return;
+    if (!isPlaying || gameOver) return;
 
-    setSnake(prevSnake => {
-      const newSnake = [...prevSnake];
-      const head = { ...newSnake[0] };
+    setSnake((prevSnake) => {
+      const head = prevSnake[0];
+      const newHead = {
+        x: head.x + direction.x,
+        y: head.y + direction.y,
+      };
 
-      switch (direction) {
-        case 'UP':
-          head.y -= UNIT;
-          break;
-        case 'DOWN':
-          head.y += UNIT;
-          break;
-        case 'LEFT':
-          head.x -= UNIT;
-          break;
-        case 'RIGHT':
-          head.x += UNIT;
-          break;
+      // Check wall collision
+      if (
+        newHead.x < 0 ||
+        newHead.x >= BOARD_SIZE ||
+        newHead.y < 0 ||
+        newHead.y >= BOARD_SIZE
+      ) {
+        endGame();
+        return prevSnake;
       }
 
-      newSnake.unshift(head);
+      // Check self collision
+      if (
+        prevSnake.some(
+          (segment) => segment.x === newHead.x && segment.y === newHead.y
+        )
+      ) {
+        endGame();
+        return prevSnake;
+      }
 
-      // Check if food is eaten
-      if (head.x === food.x && head.y === food.y) {
-        const newScore = score + 10;
-        setScore(newScore);
-        
-        // Update high score
-        if (newScore > highScore) {
-          setHighScore(newScore);
-          localStorage.setItem('snake-high-score', newScore.toString());
-        }
-        
-        // Increase speed every 50 points
-        if (newScore % 50 === 0 && gameSpeed > 80) {
-          setGameSpeed(prev => prev - 10);
-        }
-        
-        // Generate power-up occasionally
-        if (Math.random() < 0.2) {
-          const powerUpPos = {
-            x: Math.floor(Math.random() * GAME_UNITS) * UNIT,
-            y: Math.floor(Math.random() * GAME_UNITS) * UNIT,
-          };
-          setPowerUp(powerUpPos);
-          // Remove power-up after 5 seconds
-          setTimeout(() => setPowerUp(null), 5000);
-        }
-        
+      const newSnake = [newHead, ...prevSnake];
+
+      // Check food collision
+      if (newHead.x === food.x && newHead.y === food.y) {
+        setScore((prev) => prev + 10);
         generateFood();
       } else {
-        newSnake.pop();
-      }
-
-      // Check if power-up is eaten
-      if (powerUp && head.x === powerUp.x && head.y === powerUp.y) {
-        setScore(prev => prev + 25);
-        setPowerUp(null);
-        // Don't pop tail for power-up (extra growth)
-        newSnake.push(newSnake[newSnake.length - 1]);
-      }
-
-      // Check collision
-      if (checkCollision(head, newSnake.slice(1))) {
-        setGameOver(true);
-        setGameRunning(false);
+        newSnake.pop(); // Remove tail if no food eaten
       }
 
       return newSnake;
     });
-  }, [direction, food, powerUp, score, highScore, gameSpeed, gameRunning, gameOver, generateFood, checkCollision]);
+  }, [isPlaying, gameOver, direction, food, endGame, generateFood]);
 
-  const draw = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Clear canvas with gradient background
-    const gradient = ctx.createLinearGradient(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-    gradient.addColorStop(0, 'rgb(15, 23, 42)'); // slate-900
-    gradient.addColorStop(1, 'rgb(30, 41, 59)'); // slate-800
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-
-    // Draw grid
-    ctx.strokeStyle = 'rgba(148, 163, 184, 0.1)'; // slate-400 with opacity
-    ctx.lineWidth = 1;
-    for (let i = 0; i < GAME_UNITS; i++) {
-      ctx.beginPath();
-      ctx.moveTo(i * UNIT, 0);
-      ctx.lineTo(i * UNIT, CANVAS_SIZE);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(0, i * UNIT);
-      ctx.lineTo(CANVAS_SIZE, i * UNIT);
-      ctx.stroke();
+  // Game loop
+  useEffect(() => {
+    if (isPlaying && !gameOver) {
+      gameLoopRef.current = setInterval(moveSnake, config.speed);
     }
-
-    // Draw food with glow effect
-    ctx.shadowColor = 'rgb(239, 68, 68)';
-    ctx.shadowBlur = 10;
-    ctx.fillStyle = 'rgb(239, 68, 68)'; // red-500
-    ctx.fillRect(food.x + 2, food.y + 2, UNIT - 4, UNIT - 4);
-    ctx.shadowBlur = 0;
-
-    // Draw power-up if available
-    if (powerUp) {
-      ctx.shadowColor = 'rgb(255, 215, 0)';
-      ctx.shadowBlur = 15;
-      ctx.fillStyle = 'rgb(255, 215, 0)'; // gold
-      ctx.fillRect(powerUp.x + 2, powerUp.y + 2, UNIT - 4, UNIT - 4);
-      ctx.shadowBlur = 0;
-    }
-
-    // Draw snake with enhanced visuals
-    snake.forEach((segment, index) => {
-      if (index === 0) {
-        // Snake head with glow
-        ctx.shadowColor = 'rgb(34, 197, 94)';
-        ctx.shadowBlur = 8;
-        ctx.fillStyle = 'rgb(34, 197, 94)'; // green-500
-      } else {
-        // Snake body
-        ctx.shadowBlur = 0;
-        ctx.fillStyle = `rgb(74, 222, 128)`; // green-400
+    return () => {
+      if (gameLoopRef.current) {
+        clearInterval(gameLoopRef.current);
       }
-      
-      ctx.fillRect(segment.x + 1, segment.y + 1, UNIT - 2, UNIT - 2);
-      
-      // Add subtle border
-      ctx.strokeStyle = 'rgb(21, 128, 61)'; // green-700
-      ctx.lineWidth = 1;
-      ctx.strokeRect(segment.x + 1, segment.y + 1, UNIT - 2, UNIT - 2);
-    });
-    
-    ctx.shadowBlur = 0;
-  }, [snake, food, powerUp]);
+    };
+  }, [isPlaying, gameOver, moveSnake, config.speed]);
 
-  useEffect(() => {
-    draw();
-  }, [draw]);
-
-  useEffect(() => {
-    const gameInterval = setInterval(() => {
-      moveSnake();
-    }, gameSpeed);
-
-    return () => clearInterval(gameInterval);
-  }, [moveSnake, gameSpeed]);
-
+  // Handle keyboard input
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (!gameRunning && !gameOver) return;
+      if (e.code === "Space") {
+        e.preventDefault();
+        if (gameOver) {
+          startGame();
+        } else if (!isPlaying) {
+          setIsPlaying(true);
+        } else {
+          setIsPlaying(false);
+        }
+        return;
+      }
 
-      switch (e.key) {
-        case 'ArrowUp':
+      if (!isPlaying || gameOver) return;
+
+      switch (e.code) {
+        case "ArrowUp":
           e.preventDefault();
-          if (direction !== 'DOWN') setDirection('UP');
+          if (direction.y === 0) setDirection({ x: 0, y: -1 });
           break;
-        case 'ArrowDown':
+        case "ArrowDown":
           e.preventDefault();
-          if (direction !== 'UP') setDirection('DOWN');
+          if (direction.y === 0) setDirection({ x: 0, y: 1 });
           break;
-        case 'ArrowLeft':
+        case "ArrowLeft":
           e.preventDefault();
-          if (direction !== 'RIGHT') setDirection('LEFT');
+          if (direction.x === 0) setDirection({ x: -1, y: 0 });
           break;
-        case 'ArrowRight':
+        case "ArrowRight":
           e.preventDefault();
-          if (direction !== 'LEFT') setDirection('RIGHT');
+          if (direction.x === 0) setDirection({ x: 1, y: 0 });
           break;
       }
     };
 
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [direction, gameRunning, gameOver]);
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [isPlaying, gameOver, direction, startGame]);
 
-  const startGame = () => {
-    setGameRunning(true);
-    setGameOver(false);
-  };
+  // Initialize game
+  useEffect(() => {
+    generateFood();
+  }, [generateFood]);
+
+  const renderBoard = useCallback(() => {
+    const board = [];
+    for (let y = 0; y < BOARD_SIZE; y++) {
+      for (let x = 0; x < BOARD_SIZE; x++) {
+        const isSnake = snake.some(
+          (segment) => segment.x === x && segment.y === y
+        );
+        const isHead = snake[0]?.x === x && snake[0]?.y === y;
+        const isFood = food.x === x && food.y === y;
+
+        let bgColor = "bg-white";
+        let borderColor = "border-green-200";
+
+        if (isHead) {
+          bgColor = "bg-green-800";
+          borderColor = "border-green-900";
+        } else if (isSnake) {
+          bgColor = "bg-green-600";
+          borderColor = "border-green-700";
+        } else if (isFood) {
+          bgColor = "bg-red-500";
+          borderColor = "border-red-600";
+        }
+
+        board.push(
+          <div
+            key={`${x}-${y}`}
+            className={`w-3 h-3 border ${bgColor} ${borderColor} rounded-sm`}
+          />
+        );
+      }
+    }
+    return board;
+  }, [snake, food]);
+
+  const resetStats = useCallback(() => {
+    setStats({ wins: 0, losses: 0 });
+    setHighScore(0);
+    resetGame();
+  }, [resetGame]);
 
   return (
-    <div className="text-center">
-      <div className="mb-4 space-y-2">
-        <div className="flex justify-center space-x-6 text-lg">
-          <p>Score: <span className="font-bold text-primary">{score}</span></p>
-          <p>High Score: <span className="font-bold text-yellow-600 dark:text-yellow-400">{highScore}</span></p>
+    <div className="flex flex-col items-center space-y-6 p-6">
+      {/* Header */}
+      <div className="text-center space-y-2">
+        <h3 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+          Snake
+        </h3>
+        <p className="text-muted-foreground">Eat food to grow longer!</p>
+      </div>
+
+      {/* Settings and Stats */}
+      <div className="flex gap-4 items-center">
+        <div className="flex items-center gap-2">
+          <Settings className="h-4 w-4" />
+          <select
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value as Difficulty)}
+            className="px-3 py-2 text-sm border rounded-lg bg-background shadow-sm"
+            aria-label="Game difficulty level"
+          >
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
         </div>
-        <div className="text-sm text-muted-foreground">
-          <p>Speed Level: {Math.floor((150 - gameSpeed) / 10) + 1}</p>
-          {powerUp && <p className="text-yellow-600 dark:text-yellow-400 font-medium">⭐ Power-up available! +25 points</p>}
+
+        <Badge
+          variant="secondary"
+          className="flex items-center gap-2 bg-green-600 text-white"
+        >
+          Score: {score}
+        </Badge>
+
+        <Badge
+          variant="outline"
+          className="flex items-center gap-2 bg-yellow-100 border-yellow-300 text-yellow-800"
+        >
+          <Trophy className="h-4 w-4" />
+          High: {highScore}
+        </Badge>
+      </div>
+
+      {/* Game Board */}
+      <div className="flex flex-col items-center space-y-4">
+        <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl shadow-lg border-2 border-green-300">
+          <div
+            className="grid gap-0"
+            style={{
+              gridTemplateColumns: `repeat(${BOARD_SIZE}, minmax(0, 1fr))`,
+            }}
+          >
+            {renderBoard()}
+          </div>
+        </div>
+
+        {/* Game Status */}
+        <AnimatePresence>
+          {gameOver && (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+              className="text-center space-y-2"
+            >
+              <Badge
+                variant="destructive"
+                className="text-lg px-6 py-3 bg-red-600 text-white"
+              >
+                💀 Game Over! Score: {score}
+              </Badge>
+            </motion.div>
+          )}
+          {!isPlaying && !gameOver && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-center"
+            >
+              <Badge
+                variant="outline"
+                className="text-lg px-4 py-2 bg-blue-100 border-blue-300 text-blue-800"
+              >
+                Press Space to Start
+              </Badge>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Side Panel */}
+      <div className="space-y-6 bg-gradient-to-br from-green-50 to-blue-50 p-6 rounded-xl border border-green-200">
+        {/* Stats */}
+        <div className="space-y-3">
+          <h4 className="text-sm font-medium text-green-800">Statistics</h4>
+          <div className="space-y-2">
+            <Badge
+              variant="outline"
+              className="flex items-center gap-2 w-full justify-between bg-white border-green-300 text-green-800"
+            >
+              <span>Games Won</span>
+              <span>{stats.wins}</span>
+            </Badge>
+            <Badge
+              variant="outline"
+              className="flex items-center gap-2 w-full justify-between bg-white border-green-300 text-green-800"
+            >
+              <span>Games Lost</span>
+              <span>{stats.losses}</span>
+            </Badge>
+            <Badge
+              variant="outline"
+              className="flex items-center gap-2 w-full justify-between bg-white border-green-300 text-green-800"
+            >
+              <span>Win Rate</span>
+              <span>
+                {Math.round(
+                  (stats.wins / Math.max(stats.wins + stats.losses, 1)) * 100
+                )}
+                %
+              </span>
+            </Badge>
+          </div>
+        </div>
+
+        {/* Controls */}
+        <div className="space-y-2">
+          <h4 className="text-sm font-medium text-green-800">Controls</h4>
+          <div className="text-xs text-gray-600 space-y-1">
+            <div>Arrow keys to move</div>
+            <div>Space to start/pause</div>
+            <div>Eat red food to grow</div>
+            <div>Don't hit walls or yourself</div>
+          </div>
         </div>
       </div>
-      
-      <canvas
-        ref={canvasRef}
-        width={CANVAS_SIZE}
-        height={CANVAS_SIZE}
-        className="border-2 border-slate-600 dark:border-slate-400 rounded-lg mx-auto block shadow-lg"
-      />
-      
-      <div className="mt-4">
-        {gameOver && (
-          <div className="mb-4">
-            <p className="text-lg font-bold text-destructive mb-2">Game Over! 🐍</p>
-            {score === highScore && score > 0 && (
-              <p className="text-sm text-yellow-600 dark:text-yellow-400 font-medium">🎉 New High Score!</p>
-            )}
-          </div>
-        )}
-        <p className="text-sm text-muted-foreground mb-4">
-          Use arrow keys to control the snake<br/>
-          <span className="text-xs">Red squares = Food (+10), Gold squares = Power-ups (+25)</span>
-        </p>
-        <div className="space-x-2">
-          {!gameRunning ? (
-            <Button onClick={startGame} disabled={gameOver}>
-              Start Game
-            </Button>
-          ) : null}
-          <Button onClick={resetGame} variant="outline">
-            Reset Game
-          </Button>
-        </div>
+
+      {/* Game Controls */}
+      <div className="flex gap-4">
+        <Button
+          onClick={startGame}
+          variant="outline"
+          className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white border-0"
+        >
+          <RotateCcw className="h-4 w-4" />
+          New Game
+        </Button>
+        <Button
+          onClick={resetStats}
+          variant="outline"
+          className="flex items-center gap-2 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white border-0"
+        >
+          <Trophy className="h-4 w-4" />
+          Reset Stats
+        </Button>
       </div>
     </div>
   );
