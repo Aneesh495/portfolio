@@ -18,8 +18,8 @@ const projects = [
     description: "Developed a decentralized freelance platform on Ethereum using Solidity, enabling automated transactions between clients and artists through smart contracts, connected using MetaMask. Designed and implemented an on-chain voting mechanism to resolve disputes with community-based consensus.",
     image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
     technologies: ["Solidity", "Ethereum", "MetaMask", "Smart Contracts", "Blockchain"],
-    githubUrl: "https://github.com/Aneesh495/freelance_DAO",
-    liveUrl: "https://github.com/Aneesh495/freelance_DAO",
+    githubUrl: "https://github.com/Aneesh495/freelanceDAO",
+    liveUrl: "https://github.com/Aneesh495/freelanceDAO",
   },
   {
     title: "Portfolio Website",
