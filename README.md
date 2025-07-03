@@ -10,7 +10,7 @@ A modern, high-performing, animated personal portfolio website built with React,
   - **Battleship**: Spacious, modern UI, smart AI, and classic rules (auto-miss around sunk ships).
   - **Word Hunt**: Guess words by clicking first and last letter or by drag, with clear highlights for found words.
   - **Word Guess**: Only real 5-letter words, always 5 boxes per row.
-- **Contact Form**: Submissions routed to your email via EmailJS (see setup below).
+- **Contact Form**: Submissions are routed to your email.
 - **Mobile Friendly**: Works great on all devices.
 
 ## 🚀 Getting Started
@@ -26,18 +26,13 @@ A modern, high-performing, animated personal portfolio website built with React,
    npm install
    ```
 
-3. **Configure Contact Form:**
-   - Sign up at [EmailJS](https://www.emailjs.com/).
-   - Create a service and template.
-   - Replace the placeholders in `client/src/components/sections/contact.tsx` with your EmailJS service ID, template ID, and public key.
-
-4. **Run the development server:**
+3. **Run the development server:**
    ```sh
    npm run dev
    ```
    Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-5. **Build for production:**
+4. **Build for production:**
    ```sh
    npm run build
    ```
@@ -54,10 +49,10 @@ A modern, high-performing, animated personal portfolio website built with React,
 - Enjoy a soft fade transition for a pleasant experience.
 
 ## 📬 Contact
-- All form submissions go to your configured email (see setup above).
+- All form submissions go to your configured email.
 
 ## 📦 Tech Stack
-- React, TypeScript, Vite, Tailwind CSS, Framer Motion, EmailJS
+- React, TypeScript, Vite, Tailwind CSS, Framer Motion
 
 ---
 
