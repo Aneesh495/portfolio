@@ -33,32 +33,35 @@ export function ThemeProvider({
 
   useEffect(() => {
     const root = window.document.documentElement;
-
     root.classList.remove("light", "dark");
-
+    // Add a transition class for smooth fade
+    root.classList.add("theme-fade-transition");
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
         .matches
         ? "dark"
         : "light";
-
       root.classList.add(systemTheme);
       return;
     }
-
     root.classList.add(theme);
   }, [theme]);
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
+    setTheme: (newTheme: Theme) => {
+      localStorage.setItem(storageKey, newTheme);
+      setTheme(newTheme);
     },
   };
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
+      <style>{`
+        .theme-fade-transition {
+          transition: background-color 0.3s ease, color 0.3s ease;
+        }
+      `}</style>
       {children}
     </ThemeProviderContext.Provider>
   );
