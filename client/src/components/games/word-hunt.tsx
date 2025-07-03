@@ -256,25 +256,24 @@ export default function WordHunt() {
   const handleCellMouseEnter = useCallback(
     (row: number, col: number) => {
       if (gameState !== "playing" || !gameData || !isDragging) return;
-
       setSelectedCells((prev) => {
         if (prev.length === 0) return [{ row, col }];
-
-        // Check if this cell is adjacent to the last selected cell
+        const firstCell = prev[0];
+        // Only allow straight lines
+        if (row !== firstCell.row && col !== firstCell.col) return prev;
+        // Only allow contiguous selection
         const lastCell = prev[prev.length - 1];
         const rowDiff = Math.abs(row - lastCell.row);
         const colDiff = Math.abs(col - lastCell.col);
-
-        // Allow horizontal, vertical, and diagonal movement
-        if (rowDiff <= 1 && colDiff <= 1 && rowDiff + colDiff > 0) {
-          // Check if this cell is already selected
+        if (
+          (rowDiff === 1 && colDiff === 0) ||
+          (rowDiff === 0 && colDiff === 1)
+        ) {
           const isAlreadySelected = prev.some(
             (cell) => cell.row === row && cell.col === col
           );
           if (!isAlreadySelected) {
             const newSelected = [...prev, { row, col }];
-
-            // Check if we have a valid word
             if (newSelected.length >= gameData.minWordLength) {
               const word = newSelected
                 .map((cell) => gameData.grid[cell.row][cell.col])
@@ -282,12 +281,9 @@ export default function WordHunt() {
               const foundWord = gameData.words.find(
                 (w) => w.word === word && !w.found
               );
-
               if (foundWord) {
                 setFoundWords((prev) => [...prev, word]);
                 setScore((prev) => prev + word.length * 10);
-
-                // Mark word as found
                 setGameData((prev) => {
                   if (!prev) return prev;
                   return {
@@ -297,12 +293,10 @@ export default function WordHunt() {
                     ),
                   };
                 });
-
-                // Clear selection after finding a word
+                // Optionally: show a toast or feedback
                 return [];
               }
             }
-
             return newSelected;
           }
         }

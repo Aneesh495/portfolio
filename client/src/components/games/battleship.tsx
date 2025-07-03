@@ -27,7 +27,7 @@ interface GameState {
   shots: { row: number; col: number }[];
 }
 
-const BOARD_SIZE = 10;
+const BOARD_SIZE = 8;
 
 const SHIPS: { type: ShipType; size: number }[] = [
   { type: "carrier", size: 5 },
@@ -399,7 +399,7 @@ export default function Battleship() {
   const renderBoard = useCallback(
     (gameState: GameState, isPlayerBoard: boolean) => {
       return (
-        <div className="grid grid-cols-10 gap-1 p-6 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-3xl shadow-2xl border-4 border-blue-300">
+        <div className="grid grid-cols-8 gap-2 p-6 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-3xl shadow-2xl border-4 border-blue-300">
           {gameState.board.map((row, rowIndex) =>
             row.map((cell, colIndex) => {
               // Check if this cell is part of a ship placement preview
