@@ -192,6 +192,27 @@ export default function Battleship() {
     []
   );
 
+  // Helper to mark all surrounding tiles as miss when a ship is sunk
+  function markSurroundingMisses(board: GameState, ship: Ship) {
+    for (const pos of ship.positions) {
+      for (let dr = -1; dr <= 1; dr++) {
+        for (let dc = -1; dc <= 1; dc++) {
+          const r = pos.row + dr;
+          const c = pos.col + dc;
+          if (
+            r >= 0 &&
+            r < BOARD_SIZE &&
+            c >= 0 &&
+            c < BOARD_SIZE &&
+            board.board[r][c] === "empty"
+          ) {
+            board.board[r][c] = "miss";
+          }
+        }
+      }
+    }
+  }
+
   const handleCellClick = useCallback(
     (row: number, col: number) => {
       if (currentPhase === "placing") {
@@ -257,6 +278,13 @@ export default function Battleship() {
 
           if (shipIndex !== -1) {
             newAiBoard.ships[shipIndex].hits++;
+            // If ship is sunk, mark surrounding tiles
+            if (
+              newAiBoard.ships[shipIndex].hits ===
+              newAiBoard.ships[shipIndex].size
+            ) {
+              markSurroundingMisses(newAiBoard, newAiBoard.ships[shipIndex]);
+            }
           }
         } else {
           newAiBoard.board[row][col] = "miss";
@@ -345,6 +373,16 @@ export default function Battleship() {
 
           if (shipIndex !== -1) {
             newPlayerBoard.ships[shipIndex].hits++;
+            // If ship is sunk, mark surrounding tiles
+            if (
+              newPlayerBoard.ships[shipIndex].hits ===
+              newPlayerBoard.ships[shipIndex].size
+            ) {
+              markSurroundingMisses(
+                newPlayerBoard,
+                newPlayerBoard.ships[shipIndex]
+              );
+            }
           }
         } else {
           newPlayerBoard.board[aiShot.row][aiShot.col] = "miss";

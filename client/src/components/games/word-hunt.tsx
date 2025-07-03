@@ -355,6 +355,15 @@ export default function WordHunt() {
     return hintWord.positions.some((pos) => pos.row === row && pos.col === col);
   };
 
+  // Helper to check if a cell is part of any found word
+  const isCellInFoundWord = (row: number, col: number) => {
+    if (!gameData) return false;
+    return gameData.words.some(
+      (w) =>
+        w.found && w.positions.some((pos) => pos.row === row && pos.col === col)
+    );
+  };
+
   if (!gameData) {
     return <div>Loading...</div>;
   }
@@ -425,6 +434,8 @@ export default function WordHunt() {
                   className={`w-12 h-12 border-2 font-bold text-xl transition-all duration-200 rounded-md shadow-sm ${
                     isCellSelected(rowIndex, colIndex)
                       ? "bg-blue-500 text-white border-blue-600"
+                      : isCellInFoundWord(rowIndex, colIndex)
+                      ? "bg-green-400 text-white border-green-600"
                       : isCellInHint(rowIndex, colIndex)
                       ? "bg-yellow-400 text-yellow-800 border-yellow-500"
                       : "bg-white text-gray-800 border-gray-300 hover:bg-gray-50"
