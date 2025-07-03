@@ -1,68 +1,64 @@
-# Portfolio-Website
+# Aneesh Krishna Portfolio Website
 
-A modern, high-performing, animated personal portfolio website featuring a suite of interactive mini-games with AI, a contact form, and project/skills showcase.
+A modern, high-performing, animated personal portfolio website built with React, TypeScript, and Vite. Showcases projects, skills, and a suite of interactive games with beautiful UI and smooth transitions.
 
-## 🚀 Features
-- **Beautiful Animated UI**: Modern, responsive, and mobile-friendly design.
-- **Mini-Games**: Play Chess, Battleship, Snake, Minesweeper, Connect Four, Memory Match, Tetris, Word Hunt, Word Guess, and more.
-- **AI Opponents**: Challenge AI in Chess, Battleship, Connect Four, and Word Hunt with multiple difficulty levels.
-- **Contact Form**: Secure, styled contact form with validation.
-- **Project & Skills Sections**: Showcase your work and skills interactively.
-- **Dark/Light Theme**: Toggle between dark and light modes.
+## ✨ Features
 
-## 🕹️ Mini-Games
-- **Chess**: Play against a smart AI or a friend.
-- **Battleship**: Classic game with AI.
-- **Snake**: Inspired by Google Snake.
-- **Minesweeper**: Classic logic puzzle.
-- **Connect Four**: Play against AI with increasing difficulty.
-- **Memory Match**: Flip cards and match pairs.
-- **Tetris**: Classic block puzzle.
-- **Word Hunt**: Find words in a grid.
-- **Word Guess**: Guess the hidden word.
+- **Modern Design**: Clean, responsive, and visually appealing layout.
+- **Animated Light/Dark Mode**: Simple, gentle fade transition for theme switching.
+- **Interactive Game Arcade**: Includes Chess, Battleship, Word Guess, Word Hunt, and more.
+  - **Battleship**: Spacious, modern UI, smart AI, and classic rules (auto-miss around sunk ships).
+  - **Word Hunt**: Guess words by clicking first and last letter or by drag, with clear highlights for found words.
+  - **Word Guess**: Only real 5-letter words, always 5 boxes per row.
+- **Contact Form**: Submissions routed to your email via EmailJS (see setup below).
+- **Mobile Friendly**: Works great on all devices.
 
-## 🛠️ Tech Stack
-- **Frontend**: React, TypeScript, Tailwind CSS, Framer Motion
-- **Backend**: Node.js, Express, TypeScript
-- **Database**: Drizzle ORM (if enabled)
-- **Build Tool**: Vite
+## 🚀 Getting Started
 
-## 📦 Setup & Development
 1. **Clone the repo:**
-   ```bash
-   git clone https://github.com/yourusername/Portfolio-Website.git
-   cd Portfolio-Website
+   ```sh
+   git clone https://github.com/your-username/your-portfolio.git
+   cd your-portfolio
    ```
+
 2. **Install dependencies:**
-   ```bash
+   ```sh
    npm install
    ```
-3. **Run in development:**
-   ```bash
+
+3. **Configure Contact Form:**
+   - Sign up at [EmailJS](https://www.emailjs.com/).
+   - Create a service and template.
+   - Replace the placeholders in `client/src/components/sections/contact.tsx` with your EmailJS service ID, template ID, and public key.
+
+4. **Run the development server:**
+   ```sh
    npm run dev
    ```
-   The site will be available at [http://localhost:5001](http://localhost:5001)
+   Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-4. **Build for production:**
-   ```bash
+5. **Build for production:**
+   ```sh
    npm run build
-   npm start
    ```
 
-## 🌐 Deployment
-- Deployable to Vercel, Netlify, or any Node.js host.
-- Ensure environment variables are set for production.
+## 🕹️ Game Highlights
 
-## 📁 Project Structure
-- `client/` - Frontend React app
-- `server/` - Express backend
-- `public/` - Static assets (including favicon)
-- `shared/` - Shared types/schema
+- **Battleship**: Spacious, easy-to-use board, auto-miss for sunk ships, beautiful colors.
+- **Word Hunt**: Click or drag to guess, only straight lines, found words stay highlighted.
+- **Word Guess**: Real 5-letter words, always 5 boxes, smooth feedback.
+- **Chess, Connect Four, and more**: Smart AI, difficulty levels, and modern UI.
 
-## ✨ Credits
-- Built by Aneesh Krishna
-- Powered by React, TypeScript, Tailwind, and open-source libraries
+## 🌓 Light/Dark Mode
+- Toggle with the switch in the navbar.
+- Enjoy a soft fade transition for a pleasant experience.
+
+## 📬 Contact
+- All form submissions go to your configured email (see setup above).
+
+## 📦 Tech Stack
+- React, TypeScript, Vite, Tailwind CSS, Framer Motion, EmailJS
 
 ---
 
-Enjoy the games and explore the portfolio! 
+**Built with ❤️ by Aneesh Krishna** 
