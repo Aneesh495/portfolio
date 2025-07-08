@@ -9,7 +9,28 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { X, Gamepad2 } from "lucide-react";
+import {
+  X,
+  Gamepad2,
+  Sparkles,
+  Zap,
+  Target,
+  Brain,
+  Bomb,
+  Scissors,
+  Circle,
+  Type,
+  Puzzle,
+  Crown,
+  Ship,
+  Search,
+  Grid3X3,
+  FileText,
+  Search as SearchIcon,
+  Hash,
+  Move,
+  HelpCircle,
+} from "lucide-react";
 import TicTacToe from "@/components/games/tic-tac-toe";
 import Game2048 from "@/components/games/game-2048";
 import Snake from "@/components/games/snake";
@@ -27,114 +48,109 @@ const games = [
   {
     id: "tic-tac-toe",
     title: "Tic Tac Toe",
-    description: "Classic 3x3 grid game",
-    icon: "🎯",
-    color: "from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800",
-    buttonColor: "bg-blue-600 hover:bg-blue-700",
+    tagline: "Strategic Showdown",
+    description: "Classic 3x3 grid game with AI opponent",
+    icon: Hash,
+    color: "from-blue-500 to-purple-600",
     component: TicTacToe,
   },
   {
     id: "2048",
     title: "2048",
-    description: "Sliding puzzle game",
-    icon: "🔢",
-    color:
-      "from-orange-50 to-orange-100 dark:from-orange-900 dark:to-orange-800",
-    buttonColor: "bg-orange-600 hover:bg-orange-700",
+    tagline: "Slide to Victory",
+    description: "Addictive sliding puzzle game",
+    icon: Target,
+    color: "from-orange-500 to-red-600",
     component: Game2048,
   },
   {
     id: "snake",
     title: "Snake",
+    tagline: "Slither & Survive",
     description: "Classic snake game with multiple modes",
-    icon: "🐍",
-    color: "from-green-50 to-green-100 dark:from-green-900 dark:to-green-800",
-    buttonColor: "bg-green-600 hover:bg-green-700",
+    icon: Move,
+    color: "from-green-500 to-emerald-600",
     component: Snake,
   },
   {
     id: "memory-match",
     title: "Memory Match",
-    description: "Card matching game",
-    icon: "🧠",
-    color:
-      "from-purple-50 to-purple-100 dark:from-purple-900 dark:to-purple-800",
-    buttonColor: "bg-purple-600 hover:bg-purple-700",
+    tagline: "Train Your Brain",
+    description: "Card matching game to test memory",
+    icon: Brain,
+    color: "from-purple-500 to-violet-600",
     component: MemoryMatch,
   },
   {
     id: "minesweeper",
     title: "Minesweeper",
-    description: "Mine detection puzzle",
-    icon: "💣",
-    color: "from-red-50 to-red-100 dark:from-red-900 dark:to-red-800",
-    buttonColor: "bg-red-600 hover:bg-red-700",
+    tagline: "Navigate the Danger",
+    description: "Mine detection puzzle game",
+    icon: Bomb,
+    color: "from-red-500 to-rose-600",
     component: Minesweeper,
   },
   {
     id: "rock-paper-scissors",
     title: "Rock Paper Scissors",
-    description: "Classic hand game vs AI",
-    icon: "✂️",
-    color:
-      "from-indigo-50 to-indigo-100 dark:from-indigo-900 dark:to-indigo-800",
-    buttonColor: "bg-indigo-600 hover:bg-indigo-700",
+    tagline: "Beat the AI",
+    description: "Classic hand game vs AI opponent",
+    icon: Scissors,
+    color: "from-indigo-500 to-blue-600",
     component: RockPaperScissors,
   },
   {
     id: "connect-four",
     title: "Connect Four",
+    tagline: "Four in a Row",
     description: "Strategic 4-in-a-row game with AI",
-    icon: "🔴",
-    color:
-      "from-yellow-50 to-yellow-100 dark:from-yellow-900 dark:to-yellow-800",
-    buttonColor: "bg-yellow-600 hover:bg-yellow-700",
+    icon: Grid3X3,
+    color: "from-yellow-500 to-amber-600",
     component: ConnectFour,
   },
   {
     id: "word-guess",
     title: "Word Guess",
+    tagline: "Code Your Way",
     description: "Programming word guessing game",
-    icon: "🔤",
-    color: "from-pink-50 to-pink-100 dark:from-pink-900 dark:to-pink-800",
-    buttonColor: "bg-pink-600 hover:bg-pink-700",
+    icon: HelpCircle,
+    color: "from-pink-500 to-rose-600",
     component: WordGuess,
   },
   {
     id: "tetris",
     title: "Tetris",
-    description: "Classic falling blocks puzzle with hold piece",
-    icon: "🧩",
-    color: "from-teal-50 to-teal-100 dark:from-teal-900 dark:to-teal-800",
-    buttonColor: "bg-teal-600 hover:bg-teal-700",
+    tagline: "Stack & Clear",
+    description: "Classic falling blocks puzzle",
+    icon: Puzzle,
+    color: "from-teal-500 to-cyan-600",
     component: Tetris,
   },
   {
     id: "chess",
     title: "Chess",
-    description: "Strategic board game with AI opponent",
-    icon: "♔",
-    color: "from-amber-50 to-amber-100 dark:from-amber-900 dark:to-amber-800",
-    buttonColor: "bg-amber-600 hover:bg-amber-700",
+    tagline: "Master the Board",
+    description: "Strategic board game with AI",
+    icon: Crown,
+    color: "from-amber-500 to-yellow-600",
     component: Chess,
   },
   {
     id: "battleship",
     title: "Battleship",
+    tagline: "Naval Warfare",
     description: "Naval warfare game with smart AI",
-    icon: "🚢",
-    color: "from-cyan-50 to-cyan-100 dark:from-cyan-900 dark:to-cyan-800",
-    buttonColor: "bg-cyan-600 hover:bg-cyan-700",
+    icon: Ship,
+    color: "from-cyan-500 to-blue-600",
     component: Battleship,
   },
   {
     id: "word-hunt",
     title: "Word Hunt",
+    tagline: "Find the Hidden",
     description: "Find hidden words in the grid",
-    icon: "🔍",
-    color:
-      "from-emerald-50 to-emerald-100 dark:from-emerald-900 dark:to-emerald-800",
-    buttonColor: "bg-emerald-600 hover:bg-emerald-700",
+    icon: SearchIcon,
+    color: "from-emerald-500 to-green-600",
     component: WordHunt,
   },
 ];
@@ -145,7 +161,7 @@ export default function Games() {
   const currentGame = games.find((game) => game.id === selectedGame);
 
   return (
-    <section id="games" className="py-20 bg-card">
+    <section id="games" className="py-20 bg-muted/50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -159,7 +175,7 @@ export default function Games() {
             transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
             className="inline-block"
           >
-            <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent flex items-center justify-center gap-2">
+            <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
               <motion.div
                 animate={{
                   rotate: [0, 10, -10, 0],
@@ -171,12 +187,9 @@ export default function Games() {
                   ease: "easeInOut",
                 }}
               >
-                <Gamepad2
-                  className="inline-block h-10 w-10 mr-2"
-                  strokeWidth={2}
-                />
+                <Gamepad2 className="h-8 w-8 text-primary" strokeWidth={2} />
               </motion.div>
-              Interactive Game Arcade
+              Interactive Games
               <motion.div
                 animate={{
                   rotate: [0, -10, 10, 0],
@@ -188,6 +201,7 @@ export default function Games() {
                   ease: "easeInOut",
                   delay: 0.5,
                 }}
+                className="text-3xl"
               >
                 🎮
               </motion.div>
@@ -204,35 +218,79 @@ export default function Games() {
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {games.map((game, index) => (
             <motion.div
               key={game.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              className="game-card cursor-pointer"
+              className="game-card"
               onClick={() => setSelectedGame(game.id)}
             >
-              <Card className={`bg-gradient-to-br ${game.color} shadow-lg`}>
+              <Card className="h-full shadow-lg hover:shadow-xl transition-all duration-300">
                 <CardContent className="p-6 text-center">
-                  <div className="text-center mb-4">
-                    <div className="text-4xl mb-4">{game.icon}</div>
-                    <h3 className="text-xl font-semibold">{game.title}</h3>
-                    <p className="text-muted-foreground text-sm">
-                      {game.description}
-                    </p>
-                  </div>
-                  <Button
-                    className={`${game.buttonColor} text-white transition-colors`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedGame(game.id);
-                    }}
+                  {/* Game Icon */}
+                  <motion.div
+                    className="flex justify-center mb-4"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
                   >
-                    Play Now
-                  </Button>
+                    <div
+                      className={`p-3 rounded-xl bg-gradient-to-r ${game.color} shadow-md`}
+                    >
+                      <game.icon
+                        className="h-6 w-6 text-white"
+                        strokeWidth={2}
+                      />
+                    </div>
+                  </motion.div>
+
+                  {/* Game Title */}
+                  <motion.h3
+                    className="text-xl font-semibold mb-2"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    {game.title}
+                  </motion.h3>
+
+                  {/* Tagline */}
+                  <p className="text-sm font-medium text-primary mb-2 tracking-wide">
+                    {game.tagline}
+                  </p>
+
+                  {/* Description */}
+                  <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                    {game.description}
+                  </p>
+
+                  {/* Play Button */}
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Button
+                      className={`w-full bg-gradient-to-r ${game.color} text-white font-medium shadow-md hover:shadow-lg transition-all duration-300`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedGame(game.id);
+                      }}
+                    >
+                      <motion.div
+                        animate={{ rotate: [0, 360] }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                        className="mr-2"
+                      >
+                        <Gamepad2 className="h-4 w-4" strokeWidth={2} />
+                      </motion.div>
+                      Play Now
+                    </Button>
+                  </motion.div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -242,7 +300,7 @@ export default function Games() {
 
       {/* Game Modal */}
       <Dialog open={!!selectedGame} onOpenChange={() => setSelectedGame(null)}>
-        <DialogContent className="max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold">
               {currentGame?.title}
