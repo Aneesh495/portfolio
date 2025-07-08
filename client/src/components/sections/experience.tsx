@@ -35,9 +35,11 @@ const experiences = [
       "Leveraged Python to analyze Indiana state datasets, uncovering key trends, anomalies, and predictive patterns. Delivered data-driven insights to inform strategic decisions for public agencies and private-sector stakeholders.",
     technologies: [
       "Python",
+      "R",
       "Data Analytics",
       "Statistical Modeling",
       "Predictive Analytics",
+      "Data Cleansing",
     ],
   },
   {
@@ -52,6 +54,7 @@ const experiences = [
       "Statistical Analysis",
       "Sentiment Analysis",
       "Survey Data",
+      "Data Preprocessing"
     ],
   },
   {
@@ -65,6 +68,7 @@ const experiences = [
       "E-commerce",
       "Digital Marketing",
       "Backend Development",
+      "Retail Sales"
     ],
   },
 ];
