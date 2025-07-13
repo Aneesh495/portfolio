@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Mail, Github, Linkedin } from "lucide-react";
 import { SiX, SiInstagram } from "react-icons/si";
 import { Checkbox } from "@/components/ui/checkbox";
+import emailjs from "emailjs-com";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -21,11 +22,16 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init("3szyYwUHYkxdKk9K5");
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.notRobot) {
       toast({
-        title: "Error",
+        title: "OOPS!",
         description: "Please pinky promise you're not a robot first!",
         variant: "destructive",
       });
@@ -34,21 +40,57 @@ export default function Contact() {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Send contact form email
+      const contactResult = await emailjs.send(
+        "Portfolio",
+        "template_20kxpp9",
+        {
+          user_name: formData.name,
+          user_email: formData.email,
+          subject: formData.subject,
+          user_message: formData.message,
+        },
+        "3szyYwUHYkxdKk9K5"
+      );
+
+      // Send auto-reply email
+      const autoReplyResult = await emailjs.send(
+        "Portfolio",
+        "template_fzcofzq",
+        {
+          user_name: formData.name,
+          user_email: formData.email,
+          subject: formData.subject,
+        },
+        "3szyYwUHYkxdKk9K5"
+      );
+
+      if (contactResult.status === 200 && autoReplyResult.status === 200) {
+        toast({
+          title: "Message Sent!",
+          description: "Thanks for the message. I'll get back to you soon!",
+        });
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+          notRobot: false,
+        });
+      } else {
+        throw new Error("Failed to send email");
+      }
+    } catch (error) {
+      console.error("EmailJS Error:", error);
       toast({
-        title: "Message Sent!",
-        description: "Thank you for your message. I'll get back to you soon!",
+        title: "Error",
+        description: "Failed to send message. Please try again later.",
+        variant: "destructive",
       });
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-        notRobot: false,
-      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleInputChange = (
@@ -245,8 +287,12 @@ export default function Contact() {
                     </Label>
                   </div>
 
-                  <Button type="submit" className="w-full">
-                    Send Message
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </CardContent>
