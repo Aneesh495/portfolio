@@ -30,6 +30,7 @@ import {
   Hash,
   Move,
   HelpCircle,
+  Feather,
 } from "lucide-react";
 import TicTacToe from "@/components/games/tic-tac-toe";
 import Game2048 from "@/components/games/game-2048";
@@ -43,6 +44,9 @@ import Tetris from "@/components/games/tetris";
 import Chess from "@/components/games/chess";
 import Battleship from "@/components/games/battleship";
 import WordHunt from "@/components/games/word-hunt";
+import FlappyBird from "@/components/games/flappy-bird";
+import Breakout from "@/components/games/breakout";
+import PuzzlePlatformer from "@/components/games/puzzle-platformer";
 
 const games = [
   {
@@ -153,6 +157,33 @@ const games = [
     color: "from-emerald-500 to-green-600",
     component: WordHunt,
   },
+  /*{
+    id: "flappy-bird",
+    title: "Flappy Bird",
+    tagline: "Soar & Survive",
+    description: "Spectacular flying game with particle effects",
+    icon: Feather,
+    color: "from-sky-400 to-blue-600",
+    component: FlappyBird,
+  },
+  {
+    id: "breakout",
+    title: "Breakout",
+    tagline: "Smash & Destroy",
+    description: "Classic brick-breaking with power-ups",
+    icon: Target,
+    color: "from-purple-500 to-pink-600",
+    component: Breakout,
+  },
+  {
+    id: "puzzle-platformer",
+    title: "Puzzle Platformer",
+    tagline: "Think & Jump",
+    description: "Unique gravity-based puzzle adventure",
+    icon: Puzzle,
+    color: "from-indigo-500 to-purple-600",
+    component: PuzzlePlatformer,
+  },*/
 ];
 
 export default function Games() {

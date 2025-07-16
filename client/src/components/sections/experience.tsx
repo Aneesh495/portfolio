@@ -7,8 +7,15 @@ const experiences = [
     title: "Software Engineering Intern",
     company: "Retail Hedging LLC",
     period: "May 2025 - Aug 2025",
-    description:
-      "Developed a sleek splash page and optimized front-end interface using HTML, CSS, React, and TypeScript. Engineered a secure JWT-based Auth0–Stripe integration with tiered access control and dynamic claim injection. Built an intuitive options trading UI that enhanced user experience, speed, and interaction efficiency.",
+    description: [
+      "Architected and delivered a production-grade, fully responsive splash page and authentication system using React, TypeScript, and Material UI, emphasizing accessibility, performance, and mobile-first design.",
+      "Engineered a secure, end-to-end authentication and access control system integrating Auth0 and Stripe, leveraging custom JWT flows, asymmetric encryption, and tier-based feature gating.",
+      "Developed a robust Node.js/Express backend for secure Stripe API integration, subscription validation, and cryptographically signed token issuance.",
+      "Led the migration from polling-based to token-authenticated, one-time fetch flows, significantly improving efficiency and security.",
+      "Built advanced UI components with animated navigation, route-aware logic, and seamless Auth0 integration, enhancing user experience and engagement.",
+      "Established best practices for secure key management, .env handling, and GitHub-based CI/CD, ensuring codebase integrity and rapid iteration.",
+      "Collaborated cross-functionally with product, design, and security teams to deliver features on aggressive timelines, consistently exceeding expectations.",
+    ],
     technologies: [
       "React",
       "TypeScript",
@@ -23,16 +30,26 @@ const experiences = [
     title: "Full Stack Intern",
     company: "PlaytoonIt Inc",
     period: "June 2025 - Present",
-    description:
-      "Developed interactive gaming applications and full-stack solutions using modern development frameworks. Collaborated on cross-platform game development projects while implementing scalable backend systems and engaging user interfaces.",
+    description: [
+      "Spearheaded the development of interactive gaming applications and full-stack solutions using cutting-edge frameworks and cloud technologies.",
+      "Engineered scalable, cross-platform game architectures in Unity and C#, integrating advanced AI/LLM features for dynamic gameplay and personalized user experiences.",
+      "Collaborated with multidisciplinary teams to deliver high-performance, visually engaging games, optimizing for both web and mobile platforms.",
+      "Implemented robust backend systems, real-time multiplayer logic, and secure data pipelines, ensuring seamless user engagement and data integrity.",
+      "Automated CI/CD pipelines and cloud deployments, reducing release cycles and improving code quality through rigorous testing and code reviews.",
+    ],
     technologies: ["C#", "Unity", "Full Stack Development", "Game Development"],
   },
   {
     title: "Undergraduate Data Science Researcher",
     company: "The Data Mine - Purdue University",
     period: "Jan 2025 - Present",
-    description:
-      "Leveraged Python to analyze Indiana state datasets, uncovering key trends, anomalies, and predictive patterns. Delivered data-driven insights to inform strategic decisions for public agencies and private-sector stakeholders.",
+    description: [
+      "Conducted advanced analysis of real-world datasets using Python and R, uncovering actionable insights and driving data-driven decision-making.",
+      "Led exploratory data analysis, statistical modeling, and interactive data visualization projects, presenting findings to academic and industry stakeholders.",
+      "Collaborated with interdisciplinary teams to refine research questions, design experiments, and communicate results through technical reports and presentations.",
+      "Developed reproducible data pipelines, automated data cleaning, and implemented best practices for data integrity and version control.",
+      "Demonstrated expertise in data wrangling, feature engineering, and the effective communication of complex results to both technical and non-technical audiences.",
+    ],
     technologies: [
       "Python",
       "R",
@@ -46,29 +63,38 @@ const experiences = [
     title: "Data Science & Statistics Researcher",
     company: "Purdue University",
     period: "March 2025 - Present",
-    description:
-      "Analyzed 18,000+ student survey responses from Japan and the U.S. to assess evolving educational values and life priorities. Modeled sentiment trends pre/during/post-COVID using R and Python to guide institutional research.",
+    description: [
+      "Analyzed 18,000+ student survey responses from Japan and the U.S. to assess evolving educational values and life priorities, leveraging advanced statistical and machine learning techniques.",
+      "Modeled sentiment trends pre/during/post-COVID using R and Python, providing actionable insights to guide institutional research and policy.",
+      "Designed and implemented reproducible data pipelines, automated data cleaning, and robust data validation processes.",
+      "Presented findings to cross-functional teams, translating complex analyses into clear, impactful recommendations for academic leadership.",
+    ],
     technologies: [
       "R",
       "Python",
       "Statistical Analysis",
       "Sentiment Analysis",
       "Survey Data",
-      "Data Preprocessing"
+      "Data Preprocessing",
     ],
   },
   {
     title: "Retail Sales Associate & Web Developer",
     company: "Marcia's Attic",
     period: "Jun 2022 - Aug 2022",
-    description:
-      "Designed and maintained an e-commerce site with product listings, stock status, and backend fixes. Increased retail visibility by 80% through targeted digital marketing and web optimizations.",
+    description: [
+      "Designed, developed, and maintained the company’s e-commerce website, managing product listings, inventory updates, and backend troubleshooting to ensure a seamless shopping experience.",
+      "Increased online visibility by 80% through targeted digital marketing campaigns, SEO optimization, and creative content strategies.",
+      "Provided exceptional in-store customer service, leveraging sales expertise and deep product knowledge to drive revenue and customer satisfaction.",
+      "Blended creative writing with technical web design to enhance product presentation, resulting in higher engagement and conversion rates.",
+      "Collaborated with management to align digital strategy with brand goals, utilizing analytics to inform ongoing improvements.",
+    ],
     technologies: [
       "Web Development",
       "E-commerce",
       "Digital Marketing",
       "Backend Development",
-      "Retail Sales"
+      "Retail Sales",
     ],
   },
 ];
@@ -113,9 +139,11 @@ export default function Experience() {
                     <p className="text-muted-foreground mb-4">
                       {experience.period}
                     </p>
-                    <p className="text-foreground mb-4 leading-relaxed">
-                      {experience.description}
-                    </p>
+                    <ul className="list-disc list-inside text-foreground mb-4">
+                      {experience.description.map((bullet, bulletIndex) => (
+                        <li key={bulletIndex}>{bullet}</li>
+                      ))}
+                    </ul>
                     <div className="flex flex-wrap gap-2">
                       {experience.technologies.map((tech) => (
                         <Badge
