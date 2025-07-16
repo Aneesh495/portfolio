@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Github, Linkedin } from "lucide-react";
-import { SiX, SiInstagram } from "react-icons/si";
+import { SiInstagram, SiSpotify } from "react-icons/si";
 import { Checkbox } from "@/components/ui/checkbox";
 import emailjs from "emailjs-com";
 
@@ -141,14 +141,12 @@ export default function Contact() {
                 <Mail className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <p className="text-muted-foreground">
-                    aneeshkrishnaparthasarathy@gmail.com
-                  </p>
+                  <p className="text-muted-foreground">Send me an email!</p>
                 </div>
               </motion.a>
 
               <motion.a
-                href="https://linkedin.com/in/aneesh-krishna-780701253"
+                href="www.linkedin.com/in/aneesh495"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
@@ -159,7 +157,7 @@ export default function Contact() {
                 <div>
                   <h4 className="font-semibold">LinkedIn</h4>
                   <p className="text-muted-foreground">
-                    linkedin.com/in/aneesh-krishna-780701253
+                    Connect with me professionally!
                   </p>
                 </div>
               </motion.a>
@@ -175,22 +173,24 @@ export default function Contact() {
                 <Github className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">GitHub</h4>
-                  <p className="text-muted-foreground">github.com/Aneesh495</p>
+                  <p className="text-muted-foreground"> Check out my work!</p>
                 </div>
               </motion.a>
 
               <motion.a
-                href="https://x.com/DKE631"
+                href="https://open.spotify.com/user/wrljxtsfh4n10lh6r3r50m9yf?si=f07588f60ddb43ec"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="flex items-center p-4 bg-card rounded-lg shadow-lg hover:shadow-xl transition-shadow"
               >
-                <SiX className="text-primary text-xl mr-4" />
+                <SiSpotify className="text-primary text-xl mr-4" />
                 <div>
-                  <h4 className="font-semibold">Twitter</h4>
-                  <p className="text-muted-foreground">@DKE631</p>
+                  <h4 className="font-semibold">Spotify</h4>
+                  <p className="text-muted-foreground">
+                    Check out my music taste!
+                  </p>
                 </div>
               </motion.a>
 
@@ -205,7 +205,9 @@ export default function Contact() {
                 <SiInstagram className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Instagram</h4>
-                  <p className="text-muted-foreground">@aneesh.495</p>
+                  <p className="text-muted-foreground">
+                    Connect with me personally!
+                  </p>
                 </div>
               </motion.a>
             </div>

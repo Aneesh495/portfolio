@@ -7,7 +7,7 @@ import {
   Coffee,
   Youtube,
 } from "lucide-react";
-import { SiX, SiInstagram } from "react-icons/si";
+import { SiInstagram, SiSpotify } from "react-icons/si";
 import { motion } from "framer-motion";
 
 export default function Footer() {
@@ -102,14 +102,14 @@ export default function Footer() {
                 <Linkedin className="h-5 w-5 text-slate-300 group-hover:text-blue-400" />
               </motion.a>
               <motion.a
-                href="https://x.com/DKE631"
+                href="https://open.spotify.com/user/wrljxtsfh4n10lh6r3r50m9yf?si=f07588f60ddb43ec"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-slate-800 hover:bg-slate-700 p-3 rounded-lg transition-colors group"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <SiX className="h-5 w-5 text-slate-300 group-hover:text-white" />
+                <SiSpotify className="h-5 w-5 text-slate-300 group-hover:text-green-400" />
               </motion.a>
               <motion.a
                 href="https://www.instagram.com/aneesh.495/"
