@@ -173,7 +173,7 @@ export default function Contact() {
                 <Github className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">GitHub</h4>
-                  <p className="text-muted-foreground"> Check out my work!</p>
+                  <p className="text-muted-foreground"> Check out more of my work!</p>
                 </div>
               </motion.a>
 
