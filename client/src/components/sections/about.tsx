@@ -68,7 +68,7 @@ export default function About() {
               >
                 <Users className="text-primary mr-3 h-5 w-5" />
                 <span>
-                  Active in Boiler Blockchain, Purdue DOSA, Tamil Sangam
+                  Active in Boiler Blockchain, The Data Mine, Purdue Cricket
                 </span>
               </motion.div>
               <motion.div
