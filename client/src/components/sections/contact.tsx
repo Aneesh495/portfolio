@@ -141,7 +141,7 @@ export default function Contact() {
                 <Mail className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <p className="text-muted-foreground">Feel free to email me about anything!</p>
+                  <p className="text-muted-foreground">Best way to reach me</p>
                 </div>
               </motion.a>
 
@@ -157,7 +157,7 @@ export default function Contact() {
                 <div>
                   <h4 className="font-semibold">LinkedIn</h4>
                   <p className="text-muted-foreground">
-                    Connect with me professionally!
+                    Connect with me professionally
                   </p>
                 </div>
               </motion.a>
@@ -173,7 +173,7 @@ export default function Contact() {
                 <Github className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">GitHub</h4>
-                  <p className="text-muted-foreground"> Check out more of my work!</p>
+                  <p className="text-muted-foreground"> Check out more of my work</p>
                 </div>
               </motion.a>
 
