@@ -141,7 +141,7 @@ export default function Contact() {
                 <Mail className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <p className="text-muted-foreground">Send me an email!</p>
+                  <p className="text-muted-foreground">Feel free to email me about anything!</p>
                 </div>
               </motion.a>
 
