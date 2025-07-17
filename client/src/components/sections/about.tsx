@@ -43,7 +43,7 @@ export default function About() {
               Hello! I'm Aneesh Krishna
             </h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Honors CS + Stats @ Purdue | SWE Intern @ Retail Hedging | Full
+              Honors CS + Stats @ Purdue | SWE @ Retail Hedging | Full
               Stack @PlaytoonIt | Product Oriented & Data-Driven
             </p>
 
