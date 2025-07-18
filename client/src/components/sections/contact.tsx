@@ -189,7 +189,7 @@ export default function Contact() {
                 <div>
                   <h4 className="font-semibold">Spotify</h4>
                   <p className="text-muted-foreground">
-                    Check out my music taste!
+                    Check out my music taste
                   </p>
                 </div>
               </motion.a>
@@ -206,7 +206,7 @@ export default function Contact() {
                 <div>
                   <h4 className="font-semibold">Instagram</h4>
                   <p className="text-muted-foreground">
-                    Connect with me personally!
+                    Connect with me personally
                   </p>
                 </div>
               </motion.a>
