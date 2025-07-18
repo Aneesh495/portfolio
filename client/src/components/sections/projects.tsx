@@ -51,7 +51,7 @@ const projects = [
       "Vite",
     ],
     githubUrl: "https://github.com/Aneesh495/Portfolio-Website",
-    liveUrl: "https://tinyurl.com/Aneesh-Krishna",
+    liveUrl: "https://portfolio-website-tau-weld-45.vercel.app/",
   },
   {
     title: "Priced-In Splash Page",
@@ -84,7 +84,7 @@ const projects = [
       "Recharts",
     ],
     githubUrl: "https://github.com/Aneesh495/LocalStorageStats",
-    liveUrl: "https://tinyurl.com/LocalStorageStats",
+    liveUrl: "https://local-storage-stats.vercel.app/",
   },
   {
     title: "Email Confirmation App",
