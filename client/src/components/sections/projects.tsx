@@ -84,7 +84,7 @@ const projects = [
       "Recharts",
     ],
     githubUrl: "https://github.com/Aneesh495/LocalStorageStats",
-    liveUrl: "https://github.com/Aneesh495/LocalStorageStats",
+    liveUrl: "https://tinyurl.com/LocalStorageStats",
   },
   {
     title: "Email Confirmation App",
