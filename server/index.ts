@@ -1,10 +1,34 @@
 import express, { type Request, Response, NextFunction } from "express";
+import compression from 'compression';
+import helmet from 'helmet';
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
+// Security headers
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      "script-src": [
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'"
+      ],
+      "img-src": ["'self'", "data:", "blob:"],
+      "connect-src": ["'self'", "https://*.vercel-insights.com"],
+    },
+  },
+  crossOriginEmbedderPolicy: false, // Required for Vite HMR
+}));
+
+// Enable gzip compression
+app.use(compression({ level: 6 }));
+
+// Body parsers
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: false, limit: '10kb' }));
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -47,7 +71,23 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
+  // Static file serving with cache control
+  const staticOptions = {
+    maxAge: '1y',
+    immutable: true,
+    etag: true,
+    lastModified: true,
+    setHeaders: (res: Response, path: string) => {
+      if (path.endsWith('.html')) {
+        // HTML files should not be cached
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+      }
+    }
+  };
+
+  // Serve static files with cache control
+  app.use(express.static('dist/public', staticOptions));
+
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
