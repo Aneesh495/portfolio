@@ -62,7 +62,7 @@ const experiences = [
   {
     title: "Data Science & Statistics Researcher",
     company: "Purdue University",
-    period: "March 2025 - Present",
+    period: "Mar 2025 - Present",
     description: [
       "Analyzed 18,000+ student survey responses from Japan and the U.S. to assess evolving educational values and life priorities, leveraging advanced statistical and machine learning techniques.",
       "Modeled sentiment trends pre/during/post-COVID using R and Python, providing actionable insights to guide institutional research and policy.",
