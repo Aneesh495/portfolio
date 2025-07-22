@@ -1,13 +1,39 @@
-import { useEffect } from "react";
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
-import Hero from "@/components/sections/hero";
-import About from "@/components/sections/about";
-import Projects from "@/components/sections/projects";
-import Experience from "@/components/sections/experience";
-import Skills from "@/components/sections/skills";
-import Games from "@/components/sections/games";
-import Contact from "@/components/sections/contact";
+import { Suspense, lazy, useEffect, useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
+import { Loader2 } from 'lucide-react';
+
+// Lazy load heavy components
+const Navbar = lazy(() => import('@/components/layout/navbar'));
+const Footer = lazy(() => import('@/components/layout/footer'));
+const Hero = lazy(() => import('@/components/sections/hero'));
+const About = lazy(() => import('@/components/sections/about'));
+const Projects = lazy(() => import('@/components/sections/projects'));
+const Experience = lazy(() => import('@/components/sections/experience'));
+const Skills = lazy(() => import('@/components/sections/skills'));
+const Games = lazy(() => import('@/components/sections/games'));
+const Contact = lazy(() => import('@/components/sections/contact'));
+
+// Loading component for sections
+const SectionLoading = () => (
+  <div className="flex h-64 w-full items-center justify-center">
+    <Loader2 className="h-8 w-8 animate-spin" />
+  </div>
+);
+
+// Wrapper component for lazy loaded sections with animation
+const LazySection = ({ children }: { children: React.ReactNode }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-100px' }}
+    transition={{ duration: 0.5 }}
+    className="w-full"
+  >
+    <Suspense fallback={<SectionLoading />}>
+      {children}
+    </Suspense>
+  </motion.div>
+);
 
 export default function Home() {
   useEffect(() => {
@@ -60,19 +86,77 @@ export default function Home() {
     };
   }, []);
 
+  // Only load heavy components after initial render
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Section wrapper component to handle IDs
+  const Section = ({ id, children }: { id: string; children: React.ReactNode }) => (
+    <section id={id} className="scroll-mt-20">
+      {children}
+    </section>
+  );
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Experience />
-        <Skills />
-        <Games />
-        <Contact />
+    <div className="min-h-screen bg-background">
+      {isClient && (
+        <Suspense fallback={null}>
+          <Navbar />
+        </Suspense>
+      )}
+      
+      <main className="overflow-hidden">
+        <LazySection>
+          <Section id="home">
+            <Hero />
+          </Section>
+        </LazySection>
+        
+        <LazySection>
+          <Section id="about">
+            <About />
+          </Section>
+        </LazySection>
+        
+        <LazySection>
+          <Section id="skills">
+            <Skills />
+          </Section>
+        </LazySection>
+        
+        <LazySection>
+          <Section id="experience">
+            <Experience />
+          </Section>
+        </LazySection>
+        
+        <LazySection>
+          <Section id="projects">
+            <Projects />
+          </Section>
+        </LazySection>
+        
+        <LazySection>
+          <Section id="games">
+            <Games />
+          </Section>
+        </LazySection>
+        
+        <LazySection>
+          <Section id="contact">
+            <Contact />
+          </Section>
+        </LazySection>
       </main>
-      <Footer />
+      
+      {isClient && (
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
+      )}
     </div>
   );
 }
