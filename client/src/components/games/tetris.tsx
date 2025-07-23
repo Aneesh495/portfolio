@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
@@ -343,17 +344,6 @@ export default function Tetris() {
 
     const ghostPiece = getGhostPiece(currentPiece, board);
     const dropDistance = ghostPiece.y - currentPiece.y;
-
-    setCurrentPiece(ghostPiece);
-    setScore((prev) => prev + dropDistance * 2);
-  }, [currentPiece, board, gameOver, paused, getGhostPiece]);
-
-  const resetGame = useCallback(() => {
-    setBoard(
-      Array(BOARD_HEIGHT)
-        .fill(null)
-        .map(() => Array(BOARD_WIDTH).fill(EMPTY_CELL))
-    );
     setCurrentPiece(null);
     setNextPiece(null);
     setHeldPiece(null);

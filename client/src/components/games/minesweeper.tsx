@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { Settings, Clock, Trophy, RotateCcw } from "lucide-react";
@@ -41,6 +42,11 @@ export default function Minesweeper() {
   const config = DIFFICULTIES[difficulty];
 
   const initializeBoard = useCallback(() => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Minesweeper"
+    });
     const newBoard: Cell[][] = [];
     for (let i = 0; i < config.rows; i++) {
       newBoard[i] = [];

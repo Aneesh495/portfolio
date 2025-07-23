@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
@@ -51,6 +52,17 @@ export default function FlappyBird() {
   });
   const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+
+  // Track game start for analytics
+  useEffect(() => {
+    if (gameStarted) {
+      logEvent({
+        action: "start_game",
+        category: "Game",
+        label: "Flappy Bird"
+      });
+    }
+  }, [gameStarted]);
   const [paused, setPaused] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
   const [combo, setCombo] = useState(0);

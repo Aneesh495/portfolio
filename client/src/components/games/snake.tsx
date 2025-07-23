@@ -57,6 +57,11 @@ export default function Snake() {
   }, [generateFood]);
 
   const startGame = useCallback(() => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Snake"
+    });
     resetGame();
     setIsPlaying(true);
   }, [resetGame]);

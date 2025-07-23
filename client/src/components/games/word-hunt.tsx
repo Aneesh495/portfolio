@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
@@ -325,7 +326,12 @@ export default function WordHunt() {
     [difficulty]
   );
 
-  const startNewGame = useCallback(() => {
+  const resetGame = useCallback(() => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Word Hunt"
+    });
     const words =
       difficulty === "easy"
         ? EASY_WORDS

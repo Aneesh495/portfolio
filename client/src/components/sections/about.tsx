@@ -4,6 +4,7 @@ import { GraduationCap, Users, Code, Download } from "lucide-react";
 import babyPhoto from "@assets/IMG_5011 2_1751406011156.png";
 //import resumePdf from "@assets/Aneesh Resume.docx (17)_1751406011157.pdf"; //for later use lol
 import resumePdf from "./resume.pdf";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 
 export default function About() {
   return (
@@ -92,6 +93,11 @@ export default function About() {
                 link.href = resumePdf;
                 link.download = "Aneesh_Krishna_Resume.pdf";
                 link.click();
+                logEvent({
+                  action: "download_resume",
+                  category: "Resume",
+                  label: "About Section",
+                });
               }}
             >
               <Download className="mr-2 h-4 w-4" />
