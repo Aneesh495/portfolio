@@ -10,6 +10,7 @@ import { Mail, Github, Linkedin } from "lucide-react";
 import { SiInstagram, SiSpotify } from "react-icons/si";
 import { Checkbox } from "@/components/ui/checkbox";
 import emailjs from "emailjs-com";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -77,6 +78,11 @@ export default function Contact() {
           subject: "",
           message: "",
           notRobot: false,
+        });
+        logEvent({
+          action: "submit_contact_form",
+          category: "Contact",
+          label: "Contact Section",
         });
       } else {
         throw new Error("Failed to send email");
@@ -184,6 +190,11 @@ export default function Contact() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="flex items-center p-4 bg-card rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                onClick={() => logEvent({
+                  action: "click_social_link",
+                  category: "Social",
+                  label: "Spotify"
+                })}
               >
                 <SiSpotify className="text-primary text-xl mr-4" />
                 <div>
@@ -201,6 +212,11 @@ export default function Contact() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="flex items-center p-4 bg-card rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                onClick={() => logEvent({
+                  action: "click_social_link",
+                  category: "Social",
+                  label: "Instagram"
+                })}
               >
                 <SiInstagram className="text-primary text-xl mr-4" />
                 <div>

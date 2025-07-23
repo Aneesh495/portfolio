@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
@@ -380,10 +381,20 @@ export default function MemoryMatch() {
   };
 
   const startNewGame = useCallback(() => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Memory Match"
+    });
     initializeGame();
   }, [initializeGame]);
 
   const resetStats = useCallback(() => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Memory Match"
+    });
     setStats({ wins: 0, losses: 0 });
     setHighScore(0);
     initializeGame();

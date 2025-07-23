@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,6 +27,11 @@ export default function ConnectFour() {
   );
 
   const initializeGame = useCallback(() => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Connect Four"
+    });
     setBoard(
       Array(ROWS)
         .fill(null)

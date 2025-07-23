@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
@@ -33,6 +34,11 @@ export default function RockPaperScissors() {
   };
 
   const playGame = (choice: Choice) => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Rock Paper Scissors"
+    });
     if (isPlaying) return;
     
     setIsPlaying(true);

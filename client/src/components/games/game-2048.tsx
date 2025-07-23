@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
@@ -36,6 +37,11 @@ export default function Game2048() {
   }, []);
 
   const initializeGame = useCallback(() => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "2048"
+    });
     let newBoard: Board = Array(BOARD_SIZE).fill(null).map(() => Array(BOARD_SIZE).fill(0));
     newBoard = addRandomTile(newBoard);
     newBoard = addRandomTile(newBoard);

@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -357,10 +358,20 @@ export default function WordGuess() {
   };
 
   const startNewGame = useCallback(() => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Word Guess"
+    });
     initializeGame();
   }, [initializeGame]);
 
-  const resetStats = useCallback(() => {
+  const resetGame = useCallback(() => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Word Guess"
+    });
     setStats({
       wins: 0,
       losses: 0,

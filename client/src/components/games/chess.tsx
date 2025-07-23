@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
@@ -55,6 +56,11 @@ export default function Chess() {
   );
 
   const initializeBoard = useCallback((): Board => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Chess"
+    });
     const board: Board = Array(BOARD_SIZE)
       .fill(null)
       .map(() => Array(BOARD_SIZE).fill(null));

@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
@@ -24,6 +25,15 @@ const BRICK_COLS = 10;
 const POWERUP_SIZE = 20;
 
 // Set more moderate ball speeds
+
+// Track game start for analytics
+useEffect(() => {
+  logEvent({
+    action: "start_game",
+    category: "Game",
+    label: "Breakout"
+  });
+}, []);
 const INITIAL_BALL_SPEED = 4;
 const MIN_BALL_SPEED = 4;
 const MAX_BALL_SPEED = 10;

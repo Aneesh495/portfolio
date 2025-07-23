@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { SiInstagram, SiSpotify } from "react-icons/si";
 import { motion } from "framer-motion";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -61,10 +62,14 @@ export default function Footer() {
                 { href: "#contact", label: "Contact" },
               ].map((link) => (
                 <motion.a
-                  key={link.href}
                   href={link.href}
                   whileHover={{ x: 4 }}
                   className="text-slate-300 hover:text-primary transition-colors text-sm"
+                  onClick={() => logEvent({
+                    action: "click_social_link",
+                    category: "Social",
+                    label: link.label
+                  })}
                 >
                   {link.label}
                 </motion.a>

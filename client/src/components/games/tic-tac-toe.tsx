@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
@@ -108,6 +109,11 @@ export default function TicTacToe() {
   }, [currentPlayer, isAIMode, board, winner, isDraw]);
 
   const resetGame = () => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Tic Tac Toe"
+    });
     setBoard(Array(9).fill(null));
     setCurrentPlayer('X');
     setWinner(null);
