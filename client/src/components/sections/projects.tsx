@@ -87,21 +87,21 @@ const projects = [
     liveUrl: "https://local-storage-stats.vercel.app/",
   },
   {
-    title: "Email Confirmation App",
+    title: "AI Contract & Resume Analyzer",
     description:
-      "Developed a secure, full-stack email confirmation system with user registration, email verification, and robust authentication. Integrated Gmail SMTP, Google reCAPTCHA, and MySQL for secure session handling, responsive UI, and detailed logging, ensuring high deliverability and compliance.",
+      "Engineered a full-stack AI-powered platform to parse, analyze, and summarize resumes and contracts using LLMs and NLP techniques. Integrated file upload with secure parsing, keyword extraction, and named entity recognition. Designed a responsive UI and modular backend to streamline hiring and legal workflows with high accuracy.",
     image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&h=400&q=80",
     technologies: [
       "Node.js",
       "Express.js",
-      "MySQL",
-      "Gmail SMTP",
-      "reCAPTCHA",
-      "HTML/CSS",
+      "OpenAI API",
+      "React",
+      "Tailwind CSS",
+      "Multer",
     ],
-    githubUrl: "https://github.com/Aneesh495/email-confirmation-app",
-    liveUrl: "https://github.com/Aneesh495/email-confirmation-app",
+    githubUrl: "https://github.com/Aneesh495/Contract-Analyzer",
+    liveUrl: "https://github.com/Aneesh495/Contract-Analyzer",
   },
 ];
 
