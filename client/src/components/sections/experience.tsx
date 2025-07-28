@@ -6,7 +6,7 @@ const experiences = [
   {
     title: "Software Engineering Intern",
     company: "Retail Hedging LLC",
-    period: "Mar 2025 - May2025",
+    period: "Feb 2025 - May2025",
     description: [
       "Architected and delivered a production-grade, fully responsive splash page and authentication system using React, TypeScript, and Material UI, emphasizing accessibility, performance, and mobile-first design.",
       "Engineered a secure, end-to-end authentication and access control system integrating Auth0 and Stripe, leveraging custom JWT flows, asymmetric encryption, and tier-based feature gating.",
