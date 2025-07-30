@@ -105,23 +105,6 @@ const experiences = [
     ],
   },
   {
-    title: "President & Co-Founder",
-    company: "National Computer Science Honor Society",
-    period: "Aug 2021 – Jun 2023",
-    description: [
-      "Rebuilt and scaled the chapter, driving over 300% membership growth in the 2022–23 school year.",
-      "Led 35+ weekly meetings and mentored 45+ active members to foster collaboration and growth.",
-      "Organized 15+ high-impact events annually, including coding competitions, speaker panels, and workshops.",
-      "Delegated responsibilities and managed executive board operations to ensure smooth execution of chapter initiatives.",
-    ],
-    technologies: [
-      "Leadership",
-      "Public Speaking",
-      "Event Management",
-      "Mentorship",
-    ],
-  },
-  {
     title: "Retail Sales Associate & Web Developer",
     company: "Marcia's Attic",
     period: "Jun 2022 – Aug 2022",
@@ -138,6 +121,23 @@ const experiences = [
       "Digital Marketing",
       "Backend Development",
       "Retail Sales",
+    ],
+  },
+  {
+    title: "President & Co-Founder",
+    company: "National Computer Science Honor Society",
+    period: "Aug 2021 – Jun 2023",
+    description: [
+      "Rebuilt and scaled the chapter, driving over 300% membership growth in the 2022–23 school year.",
+      "Led 35+ weekly meetings and mentored 45+ active members to foster collaboration and growth.",
+      "Organized 15+ high-impact events annually, including coding competitions, speaker panels, and workshops.",
+      "Delegated responsibilities and managed executive board operations to ensure smooth execution of chapter initiatives.",
+    ],
+    technologies: [
+      "Leadership",
+      "Public Speaking",
+      "Event Management",
+      "Mentorship",
     ],
   },
 ];
