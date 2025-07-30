@@ -4,9 +4,35 @@ import { Badge } from "@/components/ui/badge";
 
 const experiences = [
   {
+    title: "Software Developer",
+    company: "Spiritual Data",
+    period: "Aug 2025 – Present",
+    description: [],
+    technologies: ["HTML", "TypeScript", "JavaScript", "Frontend Development"],
+  },
+  {
+    title: "Founding Engineer",
+    company: "Full Send AI Consulting",
+    period: "Jul 2025 – Present",
+    description: [
+      "Designed and launched Full Send's flagship chatbot using OpenAI APIs, React, and Node.js, improving lead response time by 70% and streamlining customer interactions.",
+      "Built and delivered production-ready AI agents for clients by integrating LLM workflows with custom frontends, automated APIs, and deployment pipelines.",
+      "Led UI/UX design and full-stack development of the company website and contact form, enhancing brand identity and increasing visitor engagement by 60%.",
+    ],
+    technologies: [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "OpenAI APIs",
+      "LLMs",
+      "UI/UX Design",
+      "Full Stack Development",
+    ],
+  },
+  {
     title: "Software Engineering Intern",
     company: "Retail Hedging LLC",
-    period: "Feb 2025 - May2025",
+    period: "Mar 2025 – May2025",
     description: [
       "Architected and delivered a production-grade, fully responsive splash page and authentication system using React, TypeScript, and Material UI, emphasizing accessibility, performance, and mobile-first design.",
       "Engineered a secure, end-to-end authentication and access control system integrating Auth0 and Stripe, leveraging custom JWT flows, asymmetric encryption, and tier-based feature gating.",
@@ -29,7 +55,7 @@ const experiences = [
   {
     title: "Full Stack Intern",
     company: "PlaytoonIt Inc",
-    period: "June 2025 - Present",
+    period: "June 2025 – Present",
     description: [
       "Spearheaded the development of interactive gaming applications and full-stack solutions using cutting-edge frameworks and cloud technologies.",
       "Engineered scalable, cross-platform game architectures in Unity and C#, integrating advanced AI/LLM features for dynamic gameplay and personalized user experiences.",
@@ -41,8 +67,8 @@ const experiences = [
   },
   {
     title: "Undergraduate Data Science Researcher",
-    company: "The Data Mine - Purdue University",
-    period: "Jan 2025 - Present",
+    company: "The Data Mine – Purdue University",
+    period: "Jan 2025 – Present",
     description: [
       "Conducted advanced analysis of real-world datasets using Python and R, uncovering actionable insights and driving data-driven decision-making.",
       "Led exploratory data analysis, statistical modeling, and interactive data visualization projects, presenting findings to academic and industry stakeholders.",
@@ -62,7 +88,7 @@ const experiences = [
   {
     title: "Data Science & Statistics Researcher",
     company: "Purdue University",
-    period: "Mar 2025 - Present",
+    period: "Mar 2025 – Present",
     description: [
       "Analyzed 18,000+ student survey responses from Japan and the U.S. to assess evolving educational values and life priorities, leveraging advanced statistical and machine learning techniques.",
       "Modeled sentiment trends pre/during/post-COVID using R and Python, providing actionable insights to guide institutional research and policy.",
@@ -81,7 +107,7 @@ const experiences = [
   {
     title: "President & Co-Founder",
     company: "National Computer Science Honor Society",
-    period: "Aug 2021 - Jun 2023",
+    period: "Aug 2021 – Jun 2023",
     description: [
       "Rebuilt and scaled the chapter, driving over 300% membership growth in the 2022–23 school year.",
       "Led 35+ weekly meetings and mentored 45+ active members to foster collaboration and growth.",
@@ -98,7 +124,7 @@ const experiences = [
   {
     title: "Retail Sales Associate & Web Developer",
     company: "Marcia's Attic",
-    period: "Jun 2022 - Aug 2022",
+    period: "Jun 2022 – Aug 2022",
     description: [
       "Designed, developed, and maintained the company’s e-commerce website, managing product listings, inventory updates, and backend troubleshooting to ensure a seamless shopping experience.",
       "Increased online visibility by 80% through targeted digital marketing campaigns, SEO optimization, and creative content strategies.",

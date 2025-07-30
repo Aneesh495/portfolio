@@ -234,7 +234,7 @@ export default function Games() {
                 }}
                 className="text-3xl"
               >
-                🎮
+                
               </motion.div>
             </h2>
           </motion.div>
