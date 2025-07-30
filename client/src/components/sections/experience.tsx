@@ -30,9 +30,22 @@ const experiences = [
     ],
   },
   {
+    title: "Full Stack Developer Intern",
+    company: "PlaytoonIt Inc",
+    period: "June 2025 – Present",
+    description: [
+      "Spearheaded the development of interactive gaming applications and full-stack solutions using cutting-edge frameworks and cloud technologies.",
+      "Engineered scalable, cross-platform game architectures in Unity and C#, integrating advanced AI/LLM features for dynamic gameplay and personalized user experiences.",
+      "Collaborated with multidisciplinary teams to deliver high-performance, visually engaging games, optimizing for both web and mobile platforms.",
+      "Implemented robust backend systems, real-time multiplayer logic, and secure data pipelines, ensuring seamless user engagement and data integrity.",
+      "Automated CI/CD pipelines and cloud deployments, reducing release cycles and improving code quality through rigorous testing and code reviews.",
+    ],
+    technologies: ["C#", "Unity", "Full Stack Development", "Game Development"],
+  },
+  {
     title: "Software Engineering Intern",
     company: "Retail Hedging LLC",
-    period: "Mar 2025 – May2025",
+    period: "Mar 2025 – Jun 2025",
     description: [
       "Architected and delivered a production-grade, fully responsive splash page and authentication system using React, TypeScript, and Material UI, emphasizing accessibility, performance, and mobile-first design.",
       "Engineered a secure, end-to-end authentication and access control system integrating Auth0 and Stripe, leveraging custom JWT flows, asymmetric encryption, and tier-based feature gating.",
@@ -51,19 +64,6 @@ const experiences = [
       "Stripe",
       "JWT",
     ],
-  },
-  {
-    title: "Full Stack Intern",
-    company: "PlaytoonIt Inc",
-    period: "June 2025 – Present",
-    description: [
-      "Spearheaded the development of interactive gaming applications and full-stack solutions using cutting-edge frameworks and cloud technologies.",
-      "Engineered scalable, cross-platform game architectures in Unity and C#, integrating advanced AI/LLM features for dynamic gameplay and personalized user experiences.",
-      "Collaborated with multidisciplinary teams to deliver high-performance, visually engaging games, optimizing for both web and mobile platforms.",
-      "Implemented robust backend systems, real-time multiplayer logic, and secure data pipelines, ensuring seamless user engagement and data integrity.",
-      "Automated CI/CD pipelines and cloud deployments, reducing release cycles and improving code quality through rigorous testing and code reviews.",
-    ],
-    technologies: ["C#", "Unity", "Full Stack Development", "Game Development"],
   },
   {
     title: "Undergraduate Data Science Researcher",
