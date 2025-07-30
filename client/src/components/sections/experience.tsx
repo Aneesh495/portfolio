@@ -126,7 +126,7 @@ const experiences = [
   {
     title: "President & Co-Founder",
     company: "National Computer Science Honor Society",
-    period: "Aug 2021 – Jun 2023",
+    period: "Sep 2020 – Jun 2024",
     description: [
       "Rebuilt and scaled the chapter, driving over 300% membership growth in the 2022–23 school year.",
       "Led 35+ weekly meetings and mentored 45+ active members to foster collaboration and growth.",
