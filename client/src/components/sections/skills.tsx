@@ -26,7 +26,7 @@ const skillCategories = [
     ],
   },
   {
-    title: "Frameworks & Libraries",
+    title: "Frameworks",
     skills: [
       "React",
       "React Native",
@@ -40,10 +40,12 @@ const skillCategories = [
       "Angular",
       "Vue.js",
       "Matplotlib",
+      "PyTorch",
+      "TensorFlow"
     ],
   },
   {
-    title: "Technologies & Tools",
+    title: "Tools",
     skills: [
       "GitHub",
       "Git",
@@ -57,6 +59,8 @@ const skillCategories = [
       "Docker",
       "Overleaf",
       "EmailJS",
+      "Postman",
+      "Figma",
     ],
   },
   {
