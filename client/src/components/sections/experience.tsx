@@ -45,7 +45,7 @@ const experiences = [
   {
     title: "Software Engineering Intern",
     company: "Retail Hedging LLC",
-    period: "Mar 2025 – Jun 2025",
+    period: "Mar 2025 – May 2025",
     description: [
       "Architected and delivered a production-grade, fully responsive splash page and authentication system using React, TypeScript, and Material UI, emphasizing accessibility, performance, and mobile-first design.",
       "Engineered a secure, end-to-end authentication and access control system integrating Auth0 and Stripe, leveraging custom JWT flows, asymmetric encryption, and tier-based feature gating.",
@@ -68,7 +68,7 @@ const experiences = [
   {
     title: "Undergraduate Data Science Researcher",
     company: "The Data Mine – Purdue University",
-    period: "Jan 2025 – Present",
+    period: "Aug 2024 – Present",
     description: [
       "Conducted advanced analysis of real-world datasets using Python and R, uncovering actionable insights and driving data-driven decision-making.",
       "Led exploratory data analysis, statistical modeling, and interactive data visualization projects, presenting findings to academic and industry stakeholders.",
@@ -88,7 +88,7 @@ const experiences = [
   {
     title: "Data Science & Statistics Researcher",
     company: "Purdue University",
-    period: "Mar 2025 – Present",
+    period: "Mar 2025 – Jun 2025",
     description: [
       "Analyzed 18,000+ student survey responses from Japan and the U.S. to assess evolving educational values and life priorities, leveraging advanced statistical and machine learning techniques.",
       "Modeled sentiment trends pre/during/post-COVID using R and Python, providing actionable insights to guide institutional research and policy.",
