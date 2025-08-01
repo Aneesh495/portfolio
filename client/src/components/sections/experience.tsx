@@ -107,7 +107,7 @@ const experiences = [
   {
     title: "Retail Sales Associate & Web Developer",
     company: "Marcia's Attic",
-    period: "Jun 2022 – Aug 2022",
+    period: "May 2022 – Sep 2022",
     description: [
       "Designed, developed, and maintained the company’s e-commerce website, managing product listings, inventory updates, and backend troubleshooting to ensure a seamless shopping experience.",
       "Increased online visibility by 80% through targeted digital marketing campaigns, SEO optimization, and creative content strategies.",
