@@ -339,13 +339,14 @@ export default function Tetris() {
     isValidPosition,
   ]);
 
-  const hardDrop = useCallback(() => {
-    if (!currentPiece || gameOver || paused) return;
-
-    const ghostPiece = getGhostPiece(currentPiece, board);
-    const dropDistance = ghostPiece.y - currentPiece.y;
-    setCurrentPiece(null);
-    setNextPiece(null);
+  const resetGame = useCallback(() => {
+    setBoard(
+      Array(BOARD_HEIGHT)
+        .fill(null)
+        .map(() => Array(BOARD_WIDTH).fill(EMPTY_CELL))
+    );
+    setCurrentPiece(createPiece(getRandomTetromino()));
+    setNextPiece(getRandomTetromino());
     setHeldPiece(null);
     setCanHold(true);
     setScore(0);
@@ -354,10 +355,14 @@ export default function Tetris() {
     setLinesCleared(0);
     setGameOver(false);
     setPaused(false);
+  }, [createPiece, getRandomTetromino]);
 
-    const firstPiece = getRandomTetromino();
-    setNextPiece(getRandomTetromino());
-    setCurrentPiece(createPiece(firstPiece));
+  const hardDrop = useCallback(() => {
+    if (!currentPiece || gameOver || paused) return;
+
+    const ghostPiece = getGhostPiece(currentPiece, board);
+    setCurrentPiece(ghostPiece);
+    dropPiece();
   }, [getRandomTetromino, createPiece]);
 
   const handleKeyPress = useCallback(
@@ -408,14 +413,23 @@ export default function Tetris() {
     if (!gameOver && !paused) {
       const speed = Math.max(50, 1000 - (level - 1) * 100);
       intervalRef.current = setInterval(dropPiece, speed);
-      return () => {
-        if (intervalRef.current) clearInterval(intervalRef.current);
-      };
     }
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [dropPiece, level, gameOver, paused]);
 
   useEffect(() => {
     resetGame();
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, []);
 
   const renderBoard = () => {

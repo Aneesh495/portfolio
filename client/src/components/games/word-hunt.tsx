@@ -349,6 +349,10 @@ export default function WordHunt() {
     setShowHint(false);
   }, [difficulty, generateGrid]);
 
+  const startNewGame = useCallback(() => {
+    resetGame();
+  }, [resetGame]);
+
   useEffect(() => {
     startNewGame();
   }, [startNewGame]);
@@ -470,12 +474,14 @@ export default function WordHunt() {
     const unfoundWords = gameData.words.filter((w) => !w.found);
     if (unfoundWords.length === 0) return;
 
-    const randomWord =
-      unfoundWords[Math.floor(Math.random() * unfoundWords.length)];
-    setShowHint(true);
-    setHintsUsed((prev) => prev + 1);
-
-    setTimeout(() => setShowHint(false), 3000);
+    const availableWords = gameData.words.filter((w) => !w.found);
+    if (availableWords.length > 0) {
+      const randomHint = availableWords[Math.floor(Math.random() * availableWords.length)];
+      setHintWord(randomHint);
+      setShowHint(true);
+      setHintsUsed((prev) => prev + 1);
+      setTimeout(() => setShowHint(false), 3000);
+    }
   }, [gameData, hintsUsed]);
 
   const formatTime = (seconds: number) => {
@@ -488,12 +494,10 @@ export default function WordHunt() {
     return selectedCells.some((cell) => cell.row === row && cell.col === col);
   };
 
+  const [hintWord, setHintWord] = useState<Word | null>(null);
+
   const isCellInHint = (row: number, col: number) => {
-    if (!showHint || !gameData) return false;
-    const unfoundWords = gameData.words.filter((w) => !w.found);
-    if (unfoundWords.length === 0) return false;
-    const hintWord =
-      unfoundWords[Math.floor(Math.random() * unfoundWords.length)];
+    if (!showHint || !hintWord) return false;
     return hintWord.positions.some((pos) => pos.row === row && pos.col === col);
   };
 

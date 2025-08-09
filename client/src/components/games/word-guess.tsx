@@ -366,9 +366,9 @@ export default function WordGuess() {
     initializeGame();
   }, [initializeGame]);
 
-  const resetGame = useCallback(() => {
+  const resetStats = useCallback(() => {
     logEvent({
-      action: "start_game",
+      action: "reset_stats",
       category: "Game",
       label: "Word Guess"
     });
@@ -379,6 +379,14 @@ export default function WordGuess() {
       maxStreak: 0,
       gamesPlayed: 0,
       guessDistribution: {},
+    });
+  }, []);
+
+  const resetGame = useCallback(() => {
+    logEvent({
+      action: "start_game",
+      category: "Game",
+      label: "Word Guess"
     });
     initializeGame();
   }, [initializeGame]);
