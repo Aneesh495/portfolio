@@ -4,13 +4,6 @@ import { Badge } from "@/components/ui/badge";
 
 const experiences = [
   {
-    title: "Software Developer",
-    company: "Spiritual Data",
-    period: "Aug 2025 – Present",
-    description: [],
-    technologies: ["HTML", "TypeScript", "JavaScript", "Frontend Development"],
-  },
-  {
     title: "Founding Engineer",
     company: "Full Send AI Consulting",
     period: "Jul 2025 – Present",
