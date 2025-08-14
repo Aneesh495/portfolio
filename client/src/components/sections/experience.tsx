@@ -23,7 +23,7 @@ const experiences = [
     ],
   },
   {
-    title: "Full Stack Developer Intern",
+    title: "Software Development Intern",
     company: "PlaytoonIt Inc",
     period: "June 2025 – Present",
     description: [
@@ -59,26 +59,6 @@ const experiences = [
     ],
   },
   {
-    title: "Undergraduate Data Science Researcher",
-    company: "The Data Mine – Purdue University",
-    period: "Aug 2024 – Present",
-    description: [
-      "Conducted advanced analysis of real-world datasets using Python and R, uncovering actionable insights and driving data-driven decision-making.",
-      "Led exploratory data analysis, statistical modeling, and interactive data visualization projects, presenting findings to academic and industry stakeholders.",
-      "Collaborated with interdisciplinary teams to refine research questions, design experiments, and communicate results through technical reports and presentations.",
-      "Developed reproducible data pipelines, automated data cleaning, and implemented best practices for data integrity and version control.",
-      "Demonstrated expertise in data wrangling, feature engineering, and the effective communication of complex results to both technical and non-technical audiences.",
-    ],
-    technologies: [
-      "Python",
-      "R",
-      "Data Analytics",
-      "Statistical Modeling",
-      "Predictive Analytics",
-      "Data Cleansing",
-    ],
-  },
-  {
     title: "Data Science & Statistics Researcher",
     company: "Purdue University",
     period: "Mar 2025 – Jun 2025",
@@ -95,6 +75,26 @@ const experiences = [
       "Sentiment Analysis",
       "Survey Data",
       "Data Preprocessing",
+    ],
+  },
+  {
+    title: "Undergraduate Data Science Researcher",
+    company: "Caterpillar Inc. (Purdue Data Mine)",
+    period: "Aug 2024 – Present",
+    description: [
+      "Conducted advanced analysis of real-world datasets using Python and R, uncovering actionable insights and driving data-driven decision-making.",
+      "Led exploratory data analysis, statistical modeling, and interactive data visualization projects, presenting findings to academic and industry stakeholders.",
+      "Collaborated with interdisciplinary teams to refine research questions, design experiments, and communicate results through technical reports and presentations.",
+      "Developed reproducible data pipelines, automated data cleaning, and implemented best practices for data integrity and version control.",
+      "Demonstrated expertise in data wrangling, feature engineering, and the effective communication of complex results to both technical and non-technical audiences.",
+    ],
+    technologies: [
+      "Python",
+      "R",
+      "Data Analytics",
+      "Statistical Modeling",
+      "Predictive Analytics",
+      "Data Cleansing",
     ],
   },
   {
