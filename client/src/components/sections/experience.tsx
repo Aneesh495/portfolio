@@ -4,6 +4,25 @@ import { Badge } from "@/components/ui/badge";
 
 const experiences = [
   {
+    title: "Undergraduate Data Science Researcher",
+    company: "Caterpillar Inc. (Purdue Data Mine)",
+    period: "Aug 2025 – Present",
+    description: [
+      "Increased Caterpillar’s paint material usage tracking efficiency by integrating data sources into a centralized database.",
+      "Reduced time to evaluate process improvements by developing a Power BI dashboard that visualized consumer trends.",
+      "Collaborated with interdisciplinary teams to refine research questions, design experiments, and communicate results through technical reports and presentations.",
+      "Minimized unplanned production downtime by 25% by creating a Django-based reporting tool for system anomalies",
+    ],
+    technologies: [
+      "Python",
+      "R",
+      "Data Analytics",
+      "Statistical Modeling",
+      "Predictive Analytics",
+      "Data Cleansing",
+    ],
+  },
+  {
     title: "Founding Engineer",
     company: "Full Send AI Consulting",
     period: "Jul 2025 – Present",
@@ -75,26 +94,6 @@ const experiences = [
       "Sentiment Analysis",
       "Survey Data",
       "Data Preprocessing",
-    ],
-  },
-  {
-    title: "Undergraduate Data Science Researcher",
-    company: "Caterpillar Inc. (Purdue Data Mine)",
-    period: "Aug 2024 – Present",
-    description: [
-      "Conducted advanced analysis of real-world datasets using Python and R, uncovering actionable insights and driving data-driven decision-making.",
-      "Led exploratory data analysis, statistical modeling, and interactive data visualization projects, presenting findings to academic and industry stakeholders.",
-      "Collaborated with interdisciplinary teams to refine research questions, design experiments, and communicate results through technical reports and presentations.",
-      "Developed reproducible data pipelines, automated data cleaning, and implemented best practices for data integrity and version control.",
-      "Demonstrated expertise in data wrangling, feature engineering, and the effective communication of complex results to both technical and non-technical audiences.",
-    ],
-    technologies: [
-      "Python",
-      "R",
-      "Data Analytics",
-      "Statistical Modeling",
-      "Predictive Analytics",
-      "Data Cleansing",
     ],
   },
   {
