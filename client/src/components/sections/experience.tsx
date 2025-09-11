@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 
 const experiences = [
   {
-    title: "Undergraduate Data Science Researcher",
+    title: "Data Science Researcher",
     company: "Caterpillar Inc. (Purdue Data Mine)",
     period: "Aug 2025 – Present",
     description: [
@@ -23,28 +23,9 @@ const experiences = [
     ],
   },
   {
-    title: "Founding Engineer",
-    company: "Full Send AI Consulting",
-    period: "Jul 2025 – Present",
-    description: [
-      "Designed and launched Full Send's flagship chatbot using OpenAI APIs, React, and Node.js, improving lead response time by 70% and streamlining customer interactions.",
-      "Built and delivered production-ready AI agents for clients by integrating LLM workflows with custom frontends, automated APIs, and deployment pipelines.",
-      "Led UI/UX design and full-stack development of the company website and contact form, enhancing brand identity and increasing visitor engagement by 60%.",
-    ],
-    technologies: [
-      "JavaScript",
-      "React",
-      "Node.js",
-      "OpenAI APIs",
-      "LLMs",
-      "UI/UX Design",
-      "Full Stack Development",
-    ],
-  },
-  {
     title: "Software Development Intern",
     company: "PlaytoonIt Inc",
-    period: "June 2025 – Present",
+    period: "Jun 2025 – Aug 2025",
     description: [
       "Spearheaded the development of interactive gaming applications and full-stack solutions using cutting-edge frameworks and cloud technologies.",
       "Engineered scalable, cross-platform game architectures in Unity and C#, integrating advanced AI/LLM features for dynamic gameplay and personalized user experiences.",
@@ -80,7 +61,7 @@ const experiences = [
   {
     title: "Data Science & Statistics Researcher",
     company: "Purdue University",
-    period: "Mar 2025 – Jun 2025",
+    period: "Jan 2025 – Mar 2025",
     description: [
       "Analyzed 18,000+ student survey responses from Japan and the U.S. to assess evolving educational values and life priorities, leveraging advanced statistical and machine learning techniques.",
       "Modeled sentiment trends pre/during/post-COVID using R and Python, providing actionable insights to guide institutional research and policy.",
@@ -94,6 +75,25 @@ const experiences = [
       "Sentiment Analysis",
       "Survey Data",
       "Data Preprocessing",
+    ],
+  },
+  {
+    title: "Founding Engineer",
+    company: "Full Send AI Consulting",
+    period: "Aug 2024 – Present",
+    description: [
+      "Designed and launched Full Send's flagship chatbot using OpenAI APIs, React, and Node.js, improving lead response time by 70% and streamlining customer interactions.",
+      "Built and delivered production-ready AI agents for clients by integrating LLM workflows with custom frontends, automated APIs, and deployment pipelines.",
+      "Led UI/UX design and full-stack development of the company website and contact form, enhancing brand identity and increasing visitor engagement by 60%.",
+    ],
+    technologies: [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "OpenAI APIs",
+      "LLMs",
+      "UI/UX Design",
+      "Full Stack Development",
     ],
   },
   {
