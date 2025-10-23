@@ -5,8 +5,8 @@ import { Badge } from "@/components/ui/badge";
 const experiences = [
   {
     title: "Data Science Researcher",
-    company: "Caterpillar Inc. (Purdue Data Mine)",
-    period: "Aug 2025 – Present",
+    company: "Caterpillar (Data Mine)",
+    period: "Aug – Present",
     description: [
       "Increased Caterpillar’s paint material usage tracking efficiency by integrating data sources into a centralized database.",
       "Reduced time to evaluate process improvements by developing a Power BI dashboard that visualized consumer trends.",
@@ -38,7 +38,7 @@ const experiences = [
   {
     title: "Software Engineering Intern",
     company: "Retail Hedging LLC",
-    period: "Mar 2025 – May 2025",
+    period: "Mar – May 2025",
     description: [
       "Architected and delivered a production-grade, fully responsive splash page and authentication system using React, TypeScript, and Material UI, emphasizing accessibility, performance, and mobile-first design.",
       "Engineered a secure, end-to-end authentication and access control system integrating Auth0 and Stripe, leveraging custom JWT flows, asymmetric encryption, and tier-based feature gating.",
@@ -59,9 +59,9 @@ const experiences = [
     ],
   },
   {
-    title: "Data Science & Statistics Researcher",
-    company: "Purdue University",
-    period: "Jan 2025 – Mar 2025",
+    title: "Data Science Researcher",
+    company: "Purdue CILMAR",
+    period: "Jan – Mar 2025",
     description: [
       "Analyzed 18,000+ student survey responses from Japan and the U.S. to assess evolving educational values and life priorities, leveraging advanced statistical and machine learning techniques.",
       "Modeled sentiment trends pre/during/post-COVID using R and Python, providing actionable insights to guide institutional research and policy.",
@@ -99,7 +99,7 @@ const experiences = [
   {
     title: "Retail Sales Associate & Web Developer",
     company: "Marcia's Attic",
-    period: "May 2022 – Sep 2022",
+    period: "May – Sep 2022",
     description: [
       "Designed, developed, and maintained the company’s e-commerce website, managing product listings, inventory updates, and backend troubleshooting to ensure a seamless shopping experience.",
       "Increased online visibility by 80% through targeted digital marketing campaigns, SEO optimization, and creative content strategies.",
@@ -116,7 +116,7 @@ const experiences = [
     ],
   },
   {
-    title: "President & Co-Founder",
+    title: "President & Founder",
     company: "National Computer Science Honor Society",
     period: "Sep 2020 – Jun 2024",
     description: [
