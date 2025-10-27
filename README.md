@@ -53,7 +53,3 @@ A modern, high-performing, animated personal portfolio website built with React,
 
 ## Tech Stack
 - React, TypeScript, Vite, Tailwind CSS, Framer Motion
-
----
-
-**Built with ❤️ by Aneesh Krishna** 
