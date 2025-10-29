@@ -2,7 +2,7 @@
 
 A modern, high-performing, animated personal portfolio website built with React, TypeScript, and Vite. Showcases projects, skills, and a suite of interactive games with beautiful UI and smooth transitions.
 
-## ✨ Features
+## Features
 
 - **Modern Design**: Clean, responsive, and visually appealing layout.
 - **Animated Light/Dark Mode**: Simple, gentle fade transition for theme switching.
@@ -13,7 +13,7 @@ A modern, high-performing, animated personal portfolio website built with React,
 - **Contact Form**: Submissions are routed to your email.
 - **Mobile Friendly**: Works great on all devices.
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Clone the repo:**
    ```sh
@@ -37,23 +37,19 @@ A modern, high-performing, animated personal portfolio website built with React,
    npm run build
    ```
 
-## 🕹️ Game Highlights
+## Game Highlights
 
 - **Battleship**: Spacious, easy-to-use board, auto-miss for sunk ships, beautiful colors.
 - **Word Hunt**: Click or drag to guess, only straight lines, found words stay highlighted.
 - **Word Guess**: Real 5-letter words, always 5 boxes, smooth feedback.
 - **Chess, Connect Four, and more**: Smart AI, difficulty levels, and modern UI.
 
-## 🌓 Light/Dark Mode
+## Light/Dark Mode
 - Toggle with the switch in the navbar.
 - Enjoy a soft fade transition for a pleasant experience.
 
-## 📬 Contact
+## Contact
 - All form submissions go to your configured email.
 
-## 📦 Tech Stack
+## Tech Stack
 - React, TypeScript, Vite, Tailwind CSS, Framer Motion
-
----
-
-**Built with ❤️ by Aneesh Krishna** 
