@@ -132,8 +132,7 @@ export default function Contact() {
               <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
               <p className="text-muted-foreground mb-8">
                 I'm always open to discussing new opportunities, innovative
-                projects, or just having a conversation about technology and
-                software development.
+                projects, or just having a conversation about tech!.
               </p>
             </div>
 
@@ -179,7 +178,7 @@ export default function Contact() {
                 <Github className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">GitHub</h4>
-                  <p className="text-muted-foreground"> Check out more of my work</p>
+                  <p className="text-muted-foreground"> More of my work</p>
                 </div>
               </motion.a>
 
@@ -200,7 +199,7 @@ export default function Contact() {
                 <div>
                   <h4 className="font-semibold">Spotify</h4>
                   <p className="text-muted-foreground">
-                    Check out my music taste
+                    My music
                   </p>
                 </div>
               </motion.a>
@@ -258,7 +257,7 @@ export default function Contact() {
                         type="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        placeholder="your.email@example.com"
+                        placeholder="email@abc.com"
                         required
                       />
                     </div>

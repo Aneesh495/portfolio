@@ -57,8 +57,7 @@ export default function About() {
               >
                 <GraduationCap className="text-primary mr-3 h-5 w-5" />
                 <span>
-                  B.S. Computer Science (Machine Intelligence) + Applied
-                  Statistics @ Purdue Honors
+                  BS Computer Science & Statistics @ Purdue Honors
                 </span>
               </motion.div>
               <motion.div
@@ -69,7 +68,7 @@ export default function About() {
               >
                 <Users className="text-primary mr-3 h-5 w-5" />
                 <span>
-                  Active in Boiler Blockchain, The Data Mine, Purdue Cricket
+                  Active in Boiler Blockchain, Data Mine, Purdue Cricket
                 </span>
               </motion.div>
               <motion.div
