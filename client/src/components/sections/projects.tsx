@@ -8,8 +8,7 @@ const projects = [
   {
     title: "Vibe - Social Media App",
     description: [
-      "Scaled a Java socket-based chat system to 100+ concurrent users with sub-50ms latency using thread pooling",
-      "Improved session reliability by 75% through persistent user authentication and synchronized worker threads",
+      "Scaled a Java socket-based chat system to 100+ concurrent users with sub-50ms latency using thread pooling. Improved session reliability by 75% through persistent user authentication and synchronized worker threads",
     ],
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -24,8 +23,7 @@ const projects = [
   {
     title: "Freelance DAO - Smart Contract Platform",
     description: [
-      "Achieved 99% uptime by designing a fault-tolerant freelance platform with a multi-signature dispute resolution system",
-      "Reduced gas costs by 60% by benchmarking smart contracts using Hardhat testing and custom optimization passes",
+      "Achieved 99% uptime by designing a fault-tolerant freelance platform with a multi-signature dispute resolution system. Reduced gas costs by 60% by benchmarking smart contracts using Hardhat testing and custom optimization passes",
     ],
     image:
       "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -41,8 +39,7 @@ const projects = [
   {
     title: "Portfolio Website",
     description: [
-      "Developed a professional portfolio website using JavaScript, Tailwind CSS, & Vercel, attracting 10,000+ visitors",
-      "Achieved 100% SEO, 98% best practices, and 96% accessibility Lighthouse scores via code-splitting and targeted optimization",
+      "Developed a professional portfolio website using JavaScript, Tailwind CSS, & Vercel, attracting 10,000+ visitors. Achieved 100% SEO, 98% best practices, and 96% accessibility Lighthouse scores via code-splitting and targeted optimization",
     ],
     image:
       "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -59,8 +56,7 @@ const projects = [
   {
     title: "Priced-In Splash Page",
     description: [
-      "Delivered a production-grade splash page for Priced-In, leveraging React, TypeScript, and Material UI",
-      "Integrated custom theming, animated transitions, and real-time analytics to drive a 30% increase in sign-up rates.",
+      "Delivered a production-grade splash page for Priced-In, leveraging React, TypeScript, and Material UI. Integrated custom theming, animated transitions, and real-time analytics to drive a 30% increase in sign-up rates.",
     ],
       image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -75,8 +71,7 @@ const projects = [
   {
     title: " Quiz Stats - Analytics Dashboard",
     description: [
-      "Transformed raw student data into AI-powered insights by engineering a high-performance analytics engine (Pandas, NumPy)",
-      "Integrated custom theming, animated transitions, and real-time analytics to drive a 30% increase in sign-up rates.",
+      "Transformed raw student data into AI-powered insights by engineering a high-performance analytics engine. Integrated custom theming, animated transitions, and real-time analytics to drive a 30% increase in sign-up rates.",
     ],
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -91,8 +86,7 @@ const projects = [
   {
     title: "AI Contract & Resume Analyzer",
     description: [
-      "Engineered a full-stack AI-powered platform to parse, analyze, and summarize resumes and contracts using LLMs and NLP",
-      "Designed a responsive UI and modular backend to streamline hiring and legal workflows with 99% accuracy.",
+      "Engineered a full-stack AI-powered platform to parse, analyze, and summarize resumes and contracts using LLMs and NLP. Designed a responsive UI and modular backend to streamline hiring and legal workflows with 99% accuracy.",
     ],
       image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&h=400&q=80",

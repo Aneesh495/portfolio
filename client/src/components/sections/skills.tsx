@@ -40,7 +40,6 @@ const skillCategories = [
       "Machine Learning",
       "Blockchain",
       "Algorithm Design",
-      "Big-O Analysis",
     ],
   },
 ];

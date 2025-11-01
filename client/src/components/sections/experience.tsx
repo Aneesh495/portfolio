@@ -10,7 +10,7 @@ const experiences = [
     description: [
       "Increased CAT’s paint usage efficiency by 10% by consolidating multiple production feeds into a single database",
       "Reduced process evaluation time by 15% with a Power BI dashboard that visualized consumer trends",
-      "Minimized unplanned production downtime by 5% using a Django-based reporting tool for system anomalies.",
+      "Minimized unplanned production downtime by 5% using a Django-based reporting tool for system anomalies",
     ],
     technologies: ["Python", "Power BI", "Django", "Statistical Modeling"],
   },
@@ -61,11 +61,11 @@ const experiences = [
   {
     title: "Retail Sales Associate & Web Developer",
     company: "Marcia's Attic",
-    period: "May – Sep 2022",
+    period: "May 2022 – Sep 2022",
     description: [
-      "Designed, developed, and maintained the company’s e-commerce website, managing product listings, inventory updates, and backend troubleshooting to ensure a seamless shopping experience.",
-      "Increased online visibility by 80% through targeted digital marketing campaigns, SEO optimization, and creative content strategies.",
-      "Blended creative writing with technical web design to enhance product presentation, resulting in higher engagement and conversion rates.",
+      "Developed company’s e-commerce website, managing product listings, inventory updates, and backend troubleshooting",
+      "Increased online visibility by 80% through targeted digital marketing campaigns and SEO optimization",
+      "Blended creative writing with technical web design to enhance product presentation, resulting in higher engagement",
     ],
     technologies: [
       "Web Development",
@@ -79,9 +79,9 @@ const experiences = [
     company: "National Computer Science Honor Society",
     period: "Sep 2020 – Jun 2024",
     description: [
-      "Rebuilt and scaled the chapter, driving over 300% membership growth in the 2022–23 school year.",
-      "Led 35+ weekly meetings and mentored 45+ active members to foster collaboration and growth.",
-      "Organized 15+ high-impact events annually, including coding competitions, speaker panels, and workshops.",
+      "Rebuilt and scaled the chapter, driving over 300% membership growth",
+      "Led 35+ weekly meetings and mentored 45+ active members to foster collaboration and growth",
+      "Organized 15+ high-impact events annually, including coding competitions, speaker panels, and tech workshops",
     ],
     technologies: ["Public Speaking", "Event Management"],
   },
