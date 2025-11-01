@@ -12,27 +12,18 @@ const projects = [
     ],
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: [
-      "Java Swing",
-      "Socket Programming",
-      "Multi-threading",
-    ],
+    technologies: ["Java Swing", "Socket Programming", "Multi-threading"],
     githubUrl: "https://github.com/Aneesh495/VibeSocialMedia",
     liveUrl: "https://github.com/Aneesh495/VibeSocialMedia",
   },
   {
     title: "Freelance DAO - Smart Contract Platform",
     description: [
-      "Achieved 99% uptime by designing a fault-tolerant freelance platform with a multi-signature dispute resolution system. Reduced gas costs by 60% by benchmarking smart contracts using Hardhat testing and custom optimization passes",
+      "Achieved 99% uptime by designing a fault-tolerant freelance platform with a multi-signature dispute resolution system. Reduced gas costs by 60% by benchmarking smart contracts using Hardhat testing and custom optimizations",
     ],
     image:
       "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: [
-      "Solidity",
-      "Ethereum",
-      "MetaMask",
-      "Smart Contracts",
-    ],
+    technologies: ["Solidity", "Ethereum", "MetaMask", "Smart Contracts"],
     githubUrl: "https://github.com/Aneesh495/freelanceDAO",
     liveUrl: "https://github.com/Aneesh495/freelanceDAO",
   },
@@ -56,45 +47,33 @@ const projects = [
   {
     title: "Priced-In Splash Page",
     description: [
-      "Delivered a production-grade splash page for Priced-In, leveraging React, TypeScript, and Material UI. Integrated custom theming, animated transitions, and real-time analytics to drive a 30% increase in sign-up rates.",
+      "Delivered a production-grade splash page for Priced-In, leveraging React, TypeScript, and Material UI. Integrated custom theming, animated transitions, and real-time analytics to drive a 30% increase in sign-ups",
     ],
-      image:
+    image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: [
-      "HTML5",
-      "JavaScript",
-      "CSS Animations",
-    ],
+    technologies: ["HTML5", "JavaScript", "CSS Animations"],
     githubUrl: "https://github.com/Aneesh495/priced-in",
     liveUrl: "https://priced-in.com/",
   },
   {
     title: " Quiz Stats - Analytics Dashboard",
     description: [
-      "Transformed raw student data into AI-powered insights by engineering a high-performance analytics engine. Integrated custom theming, animated transitions, and real-time analytics to drive a 30% increase in sign-up rates.",
+      "Transformed raw student data into AI-powered insights by engineering a high-performance analytics engine. Automated performance insights and difficulty analysis through dynamic visualizations and personalized benchmarks",
     ],
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: [
-      "Express.js",
-      "Pandas",
-      "NumPy",
-    ],
+    technologies: ["Express.js", "Pandas", "NumPy"],
     githubUrl: "https://github.com/Aneesh495/LocalStorageStats",
     liveUrl: "https://local-storage-stats.vercel.app/",
   },
   {
     title: "AI Contract & Resume Analyzer",
     description: [
-      "Engineered a full-stack AI-powered platform to parse, analyze, and summarize resumes and contracts using LLMs and NLP. Designed a responsive UI and modular backend to streamline hiring and legal workflows with 99% accuracy.",
+      "Engineered a full-stack AI-powered platform to parse, analyze, and summarize resumes and contracts using LLMs and NLP. Designed a responsive UI and modular backend to streamline hiring and legal workflows with 99% accuracy",
     ],
-      image:
+    image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&h=400&q=80",
-    technologies: [
-      "Node.js",
-      "Fast API",
-      "Multer",
-    ],
+    technologies: ["Node.js", "Fast API", "Multer"],
     githubUrl: "https://github.com/Aneesh495/Contract-Analyzer",
     liveUrl: "https://github.com/Aneesh495/Contract-Analyzer",
   },
