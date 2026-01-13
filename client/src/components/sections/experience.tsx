@@ -4,9 +4,13 @@ import { Badge } from "@/components/ui/badge";
 
 const experiences = [
   {
-    title: "Incoming Software Engineer Intern",
+    title: "Software Engineer Intern",
     company: "ING Americas",
     period: "Jun 2026 - Aug 2026",
+    description: [
+      "Incoming intern",
+    ],
+    technologies: ["TBD"],
   },
   {
     title: "Data Science Researcher",
