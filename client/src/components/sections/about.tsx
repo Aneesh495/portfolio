@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Users, Code, Download } from "lucide-react";
 import babyPhoto from "@assets/IMG_5011 2_1751406011156.png";
-//import resumePdf from "@assets/Aneesh Resume.docx (17)_1751406011157.pdf"; //for later use lol
 import resumePdf from "./resume.pdf";
 import { logEvent } from "@/hooks/useGoogleAnalytics";
 
