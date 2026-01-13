@@ -4,6 +4,11 @@ import { Badge } from "@/components/ui/badge";
 
 const experiences = [
   {
+    title: "Incoming Software Engineer Intern",
+    company: "ING Americas",
+    period: "Jun 2026 - Aug 2026",
+  },
+  {
     title: "Data Science Researcher",
     company: "Caterpillar (Data Mine)",
     period: "Aug 2025 – Present",
@@ -15,7 +20,7 @@ const experiences = [
     technologies: ["Python", "Power BI", "Django", "Statistical Modeling"],
   },
   {
-    title: "Software Developer Intern",
+    title: "Software Developer",
     company: "Playtoon It",
     period: "Jun 2025 – Aug 2025",
     description: [
@@ -26,7 +31,7 @@ const experiences = [
     technologies: ["C#", "Unity", "Game Development"],
   },
   {
-    title: "Software Engineer Intern",
+    title: "Software Engineer",
     company: "Retail Hedging",
     period: "Mar 2025 – May 2025",
     description: [
@@ -59,7 +64,7 @@ const experiences = [
     technologies: ["JavaScript", "React", "Node.js", "UI/UX Design"],
   },
   {
-    title: "Retail Sales Associate & Web Developer",
+    title: "Web Developer",
     company: "Marcia's Attic",
     period: "May 2022 – Sep 2022",
     description: [
