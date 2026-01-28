@@ -39,8 +39,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed">
-              Computer Science student at Purdue University passionate about
-              building innovative software solutions that make a difference.
+              Engineering with intent
             </p>
           </motion.div>
 
@@ -146,8 +145,7 @@ export default function Footer() {
               </motion.a>
             </div>
             <p className="text-slate-400 text-xs leading-relaxed">
-              Open to new opportunities and exciting collaborations. Feel free
-              to reach out!
+              Always open to new opportunities
             </p>
           </motion.div>
         </div>

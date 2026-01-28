@@ -42,7 +42,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto"
         >
-          Honors CS + Stats @ Purdue | Full-Stack & Data-Driven
+          SysDev @ Amazon | Purdue CS
         </motion.p>
 
         <motion.div

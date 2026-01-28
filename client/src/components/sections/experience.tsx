@@ -4,9 +4,9 @@ import { Badge } from "@/components/ui/badge";
 
 const experiences = [
   {
-    title: "Software Engineer Intern",
-    company: "ING Americas",
-    period: "Jun 2026 - Aug 2026",
+    title: "SysDev Intern",
+    company: "Amazon",
+    period: "May 2026 - Jul 2026",
     description: [
       "Incoming intern",
     ],
@@ -32,7 +32,7 @@ const experiences = [
       "Cut latency spikes by 50% through event-driven architecture and object pooling, reducing player churn by 20%",
       "Reduced bandwidth by 35% by compressing serialized data and implementing delta updates",
     ],
-    technologies: ["C#", "Unity", "Game Development"],
+    technologies: ["C#", "Unity"],
   },
   {
     title: "Software Engineer",
@@ -43,7 +43,7 @@ const experiences = [
       "Increased payment reliability to 100% by implementing a secure Auth0–Stripe integration with RS256-signed JWTs",
       "Replaced continuous client polling with a one-time token fetch pipeline, tripling API throughput and improving scalability",
     ],
-    technologies: ["React", "TypeScript", "Auth0/Stripe", "JWTs"],
+    technologies: ["React", "TypeScript", "JWTs"],
   },
   {
     title: "Data Science Researcher",
@@ -54,7 +54,7 @@ const experiences = [
       "Discovered a 30% increase in intercultural learning metrics post-pandemic through longitudinal statistical analysis",
       "Engineered automated data pipelines for 18K survey responses, reducing preprocessing time by 70%",
     ],
-    technologies: ["R", "SQL", "Sentiment Analysis", "Data Preprocessing"],
+    technologies: ["R", "SQL", "Sentiment Analysis"],
   },
   {
     title: "Founding Engineer",
@@ -65,7 +65,7 @@ const experiences = [
       "Designed Full Send’s production chatbot using APIs, React, & Node.js, improving lead response rate by 80% ",
       "Led end-to-end UI/UX revamp of company website and branding, increasing engagement time by 60%",
     ],
-    technologies: ["JavaScript", "React", "Node.js", "UI/UX Design"],
+    technologies: ["JavaScript", "React", "Node.js"],
   },
   {
     title: "Web Developer",
@@ -85,14 +85,14 @@ const experiences = [
   },
   {
     title: "President & Founder",
-    company: "National Computer Science Honor Society",
+    company: "Computer Science Honor Society",
     period: "Sep 2020 – Jun 2024",
     description: [
       "Rebuilt and scaled the chapter, driving over 300% membership growth",
       "Led 35+ weekly meetings and mentored 45+ active members to foster collaboration and growth",
       "Organized 15+ high-impact events annually, including coding competitions, speaker panels, and tech workshops",
     ],
-    technologies: ["Public Speaking", "Event Management"],
+    technologies: ["Java"],
   },
 ];
 

@@ -300,7 +300,7 @@ export default function Contact() {
                       htmlFor="not-robot"
                       className="text-sm text-muted-foreground"
                     >
-                      I pinky promise I'm not a robot 🤖
+                      I swear I'm not a bot 🤖
                     </Label>
                   </div>
 
