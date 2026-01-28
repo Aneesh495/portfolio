@@ -1,12 +1,4 @@
-import {
-  Github,
-  Linkedin,
-  Mail,
-  Heart,
-  Code,
-  Coffee,
-  Youtube,
-} from "lucide-react";
+import {Github, Linkedin, Mail, Heart, Code, Coffee, Youtube,} from "lucide-react";
 import { SiInstagram, SiSpotify } from "react-icons/si";
 import { motion } from "framer-motion";
 import { logEvent } from "@/hooks/useGoogleAnalytics";
@@ -126,16 +118,6 @@ export default function Footer() {
                 <SiInstagram className="h-5 w-5 text-slate-300 group-hover:text-pink-400" />
               </motion.a>
               <motion.a
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
-                whileHover={{ scale: 1.1, rotate: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-slate-800 hover:bg-slate-700 p-3 rounded-lg transition-colors group"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Youtube className="h-5 w-5 text-slate-300 group-hover:text-red-500" />
-              </motion.a>
-              <motion.a
                 href="mailto:aneeshkrishnaparthasarathy@gmail.com"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
@@ -144,9 +126,6 @@ export default function Footer() {
                 <Mail className="h-5 w-5 text-slate-300 group-hover:text-green-400" />
               </motion.a>
             </div>
-            <p className="text-slate-400 text-xs leading-relaxed">
-              Always open to new opportunities
-            </p>
           </motion.div>
         </div>
       </div>
@@ -161,9 +140,7 @@ export default function Footer() {
               transition={{ delay: 0.4 }}
               className="flex items-center space-x-2 text-slate-400 text-sm"
             >
-              <span>© {currentYear} Aneesh Krishna Parthasarathy.</span>
-              <span>•</span>
-              <span>All rights reserved.</span>
+              <span>© {currentYear} Aneesh Krishna</span>
             </motion.div>
 
             <motion.div
