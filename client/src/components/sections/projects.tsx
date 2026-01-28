@@ -6,7 +6,7 @@ import { Github, ExternalLink } from "lucide-react";
 
 const projects = [
   {
-    title: "Vibe - Social Media App",
+    title: "Vibe",
     description: [
       "Scaled a Java socket-based chat system to 100+ concurrent users with sub-50ms latency using thread pooling. Improved session reliability by 75% through persistent user authentication and synchronized worker threads",
     ],
@@ -28,35 +28,7 @@ const projects = [
     liveUrl: "https://github.com/Aneesh495/freelanceDAO",
   },
   {
-    title: "Portfolio Website",
-    description: [
-      "Developed a professional portfolio website using JavaScript, Tailwind CSS, & Vercel, attracting 10,000+ visitors. Achieved 100% SEO, 98% best practices, and 96% accessibility Lighthouse scores via code-splitting and targeted optimization",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: [
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion",
-      "Vite",
-    ],
-    githubUrl: "https://github.com/Aneesh495/Portfolio-Website",
-    liveUrl: "https://portfolio-website-tau-weld-45.vercel.app/",
-  },
-  {
-    title: "Priced-In Splash Page",
-    description: [
-      "Delivered a production-grade splash page for Priced-In, leveraging React, TypeScript, and Material UI. Integrated custom theming, animated transitions, and real-time analytics to drive a 30% increase in sign-ups",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["HTML5", "JavaScript", "CSS Animations"],
-    githubUrl: "https://github.com/Aneesh495/priced-in",
-    liveUrl: "https://priced-in.com/",
-  },
-  {
-    title: " Quiz Stats - Analytics Dashboard",
+    title: " Quiz Stats",
     description: [
       "Transformed raw student data into AI-powered insights by engineering a high-performance analytics engine. Automated performance insights and difficulty analysis through dynamic visualizations and personalized benchmarks",
     ],
