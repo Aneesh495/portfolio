@@ -42,10 +42,6 @@ export default function About() {
             <h3 className="text-2xl font-semibold mb-6">
               Hello! I'm Aneesh Krishna
             </h3>
-            <p className="text-muted-foreground mb-6 leading-relaxed">
-              Honors CS + Stats @ Purdue | SWE @ Retail Hedging | Full
-              Stack @PlaytoonIt | Product Oriented & Data-Driven
-            </p>
 
             <div className="space-y-4 mb-8">
               <motion.div
@@ -56,7 +52,7 @@ export default function About() {
               >
                 <GraduationCap className="text-primary mr-3 h-5 w-5" />
                 <span>
-                  BS Computer Science & Statistics @ Purdue Honors
+                  BS Computer Science @ Purdue
                 </span>
               </motion.div>
               <motion.div
@@ -67,7 +63,7 @@ export default function About() {
               >
                 <Users className="text-primary mr-3 h-5 w-5" />
                 <span>
-                  Active in Boiler Blockchain, Data Mine, Purdue Cricket
+                  Active in Data Mine & Purdue Cricket
                 </span>
               </motion.div>
               <motion.div

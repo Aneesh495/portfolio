@@ -131,8 +131,7 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
               <p className="text-muted-foreground mb-8">
-                I'm always open to discussing new opportunities, innovative
-                projects, or just having a conversation about tech!.
+                Always open to new projects!
               </p>
             </div>
 
@@ -146,7 +145,6 @@ export default function Contact() {
                 <Mail className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <p className="text-muted-foreground">Best way to reach me</p>
                 </div>
               </motion.a>
 
@@ -161,9 +159,6 @@ export default function Contact() {
                 <Linkedin className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">LinkedIn</h4>
-                  <p className="text-muted-foreground">
-                    Connect with me professionally
-                  </p>
                 </div>
               </motion.a>
 
@@ -178,7 +173,6 @@ export default function Contact() {
                 <Github className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">GitHub</h4>
-                  <p className="text-muted-foreground"> More of my work</p>
                 </div>
               </motion.a>
 
@@ -198,9 +192,6 @@ export default function Contact() {
                 <SiSpotify className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Spotify</h4>
-                  <p className="text-muted-foreground">
-                    My music
-                  </p>
                 </div>
               </motion.a>
 
@@ -220,9 +211,6 @@ export default function Contact() {
                 <SiInstagram className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Instagram</h4>
-                  <p className="text-muted-foreground">
-                    Connect with me personally
-                  </p>
                 </div>
               </motion.a>
             </div>
@@ -262,7 +250,6 @@ export default function Contact() {
                       />
                     </div>
                   </div>
-
                   <div className="space-y-2">
                     <Label htmlFor="subject">Subject</Label>
                     <Input

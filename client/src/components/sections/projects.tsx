@@ -12,18 +12,18 @@ const projects = [
     ],
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["Java Swing", "Socket Programming", "Multi-threading"],
+    technologies: ["Socket Programming", "Multi-threading"],
     githubUrl: "https://github.com/Aneesh495/VibeSocialMedia",
     liveUrl: "https://github.com/Aneesh495/VibeSocialMedia",
   },
   {
-    title: "Freelance DAO - Smart Contract Platform",
+    title: "Freelance DAO",
     description: [
-      "Achieved 99% uptime by designing a fault-tolerant freelance platform with a multi-signature dispute resolution system. Reduced gas costs by 60% by benchmarking smart contracts using Hardhat testing and custom optimizations",
+      "Designed a fault-tolerant freelance platform with a multi-signature dispute resolution system. Reduced gas costs by 60% by benchmarking smart contracts using Hardhat testing and custom compiler tweaks",
     ],
     image:
       "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["Solidity", "Ethereum", "MetaMask", "Smart Contracts"],
+    technologies: ["Solidity", "Ethereum", "Smart Contracts"],
     githubUrl: "https://github.com/Aneesh495/freelanceDAO",
     liveUrl: "https://github.com/Aneesh495/freelanceDAO",
   },
@@ -39,7 +39,7 @@ const projects = [
     liveUrl: "https://local-storage-stats.vercel.app/",
   },
   {
-    title: "AI Contract & Resume Analyzer",
+    title: "AI Contract Analyzer",
     description: [
       "Engineered a full-stack AI-powered platform to parse, analyze, and summarize resumes and contracts using LLMs and NLP. Designed a responsive UI and modular backend to streamline hiring and legal workflows with 99% accuracy",
     ],
