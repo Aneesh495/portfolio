@@ -14,7 +14,7 @@ const experiences = [
   },
   {
     title: "Data Science Researcher",
-    company: "Caterpillar (Data Mine)",
+    company: "Caterpillar",
     period: "Aug 2025 – Present",
     description: [
       "Increased CAT’s paint usage efficiency by 10% by consolidating multiple production feeds into a single database",
