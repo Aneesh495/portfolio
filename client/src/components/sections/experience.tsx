@@ -8,7 +8,7 @@ const experiences = [
     company: "Amazon",
     period: "May 2026 - Jul 2026",
     description: [
-      "Incoming summer 2026",
+      "Incoming Summer 2026",
     ],
     technologies: ["TBD"],
   },
