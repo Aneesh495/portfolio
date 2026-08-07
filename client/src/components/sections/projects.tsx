@@ -6,6 +6,28 @@ import { Github, ExternalLink } from "lucide-react";
 
 const projects = [
   {
+    title: "Cathode",
+    description: [
+      "Built a real-time CPU graphics engine with hand-written AArch64 NEON kernels and from-scratch NTSC/CRT signal DSP — no GPU, no external libraries. Ships 50+ scenes (rasterizer, ray-marcher, physics, path tracer) verified by a 115-point cross-language test suite across ~24k lines of C, Rust, C++, and assembly",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+    technologies: ["C", "AArch64 NEON", "Rust", "C++"],
+    githubUrl: "https://github.com/Aneesh495/cathode",
+    liveUrl: "https://github.com/Aneesh495/cathode",
+  },
+  {
+    title: "Boiler Reviews",
+    description: [
+      "Built a Flask + SQLite course review platform with full CRUD, filtered statistical reports, and per-course aggregates. Hardened every query with parameterized statements and server-side validation to prevent SQL injection",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1456513080800-b6bbe4ed8adb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+    technologies: ["Flask", "SQLite", "Python", "Bootstrap"],
+    githubUrl: "https://github.com/Aneesh495/Boiler-Reviews",
+    liveUrl: "https://github.com/Aneesh495/Boiler-Reviews",
+  },
+  {
     title: "Vibe",
     description: [
       "Scaled a Java socket-based chat system to 100+ concurrent users with sub-50ms latency using thread pooling. Improved session reliability by 75% through persistent user authentication and synchronized worker threads",

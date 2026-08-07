@@ -8,9 +8,12 @@ const experiences = [
     company: "Amazon",
     period: "May 2026 - Jul 2026",
     description: [
-      "Incoming Summer 2026",
+      "Built a FastAPI automation service on AWS, cutting tier-generation time by 98% across 100MiB Excel workbooks",
+      "Orchestrated a 6-stage async data processing pipeline, scaling backend throughput by 20x across 10,000+ jobs",
+      "Developed a low-level XML ZIP manipulation layer, ensuring 100% byte-fidelity for 5,000 corporate assets",
+      "Automated live distributed data enrichment from Redshift, eliminating 12,000 manual reconciliation steps",
     ],
-    technologies: ["TBD"],
+    technologies: ["FastAPI", "AWS", "Redshift", "Python"],
   },
   {
     title: "Data Science Researcher",
