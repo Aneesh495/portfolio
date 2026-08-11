@@ -27,26 +27,26 @@ const experiences = [
     technologies: ["Python", "Power BI", "Django", "Statistical Modeling"],
   },
   {
-    title: "Software Developer",
-    company: "Playtoon It",
-    period: "Jun 2025 – Aug 2025",
-    description: [
-      "Scaled to 250+ concurrent players by optimizing ECS & Netcode, cutting server costs by 40% and packet loss by 25%",
-      "Cut latency spikes by 50% through event-driven architecture and object pooling, reducing player churn by 20%",
-      "Reduced bandwidth by 35% by compressing serialized data and implementing delta updates",
-    ],
-    technologies: ["C#", "Unity"],
-  },
-  {
     title: "Software Engineer",
-    company: "Retail Hedging",
-    period: "Mar 2025 – May 2025",
+    company: "Stealth Startup",
+    period: "Jun 2025 – Aug 2025",
     description: [
       "Cut login latency in half by optimizing Auth0 token exchange and introducing lazy-loaded React components",
       "Increased payment reliability to 100% by implementing a secure Auth0–Stripe integration with RS256-signed JWTs",
       "Replaced continuous client polling with a one-time token fetch pipeline, tripling API throughput and improving scalability",
     ],
     technologies: ["React", "TypeScript", "JWTs"],
+  },
+  {
+    title: "Software Developer",
+    company: "Playtoon It",
+    period: "Mar 2025 – May 2025",
+    description: [
+      "Scaled to 250+ concurrent players by optimizing ECS & Netcode, cutting server costs by 40% and packet loss by 25%",
+      "Cut latency spikes by 50% through event-driven architecture and object pooling, reducing player churn by 20%",
+      "Reduced bandwidth by 35% by compressing serialized data and implementing delta updates",
+    ],
+    technologies: ["C#", "Unity"],
   },
   {
     title: "Data Science Researcher",
