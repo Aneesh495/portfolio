@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,8 +9,9 @@ import { useToast } from "@/hooks/use-toast";
 import { Mail, Github, Linkedin } from "lucide-react";
 import { SiInstagram } from "react-icons/si";
 import { Checkbox } from "@/components/ui/checkbox";
-import emailjs from "emailjs-com";
 import { logEvent } from "@/hooks/useGoogleAnalytics";
+
+const CONTACT_EMAIL = "aneeshkrishnaparthasarathy@gmail.com";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -22,11 +23,6 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-
-  // Initialize EmailJS
-  useEffect(() => {
-    emailjs.init("3szyYwUHYkxdKk9K5");
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,53 +38,66 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      // Send contact form email
-      const contactResult = await emailjs.send(
-        "Portfolio",
-        "template_20kxpp9",
+      const response = await fetch(
+        `https://formsubmit.co/ajax/${CONTACT_EMAIL}`,
         {
-          user_name: formData.name,
-          user_email: formData.email,
-          subject: formData.subject,
-          user_message: formData.message,
-        },
-        "3szyYwUHYkxdKk9K5"
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            _replyto: formData.email,
+            _subject: formData.subject || "New portfolio message",
+            _template: "table",
+            _captcha: "false",
+            _autoresponse:
+              "Thanks for reaching out. I got your message and will get back to you soon.",
+          }),
+        }
       );
 
-      // Send auto-reply email
-      const autoReplyResult = await emailjs.send(
-        "Portfolio",
-        "template_fzcofzq",
-        {
-          user_name: formData.name,
-          user_email: formData.email,
-          subject: formData.subject,
-        },
-        "3szyYwUHYkxdKk9K5"
-      );
+      const result = await response.json();
+      const failed =
+        !response.ok || result.success === false || result.success === "false";
 
-      if (contactResult.status === 200 && autoReplyResult.status === 200) {
-        toast({
-          title: "Message Sent!",
-          description: "Thanks for the message. I'll get back to you soon!",
-        });
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-          notRobot: false,
-        });
-        logEvent({
-          action: "submit_contact_form",
-          category: "Contact",
-          label: "Contact Section",
-        });
-      } else {
-        throw new Error("Failed to send email");
+      if (failed) {
+        const activationNeeded =
+          typeof result.message === "string" &&
+          /confirm|activat/i.test(result.message);
+        if (activationNeeded) {
+          toast({
+            title: "Confirm your email",
+            description:
+              "Check Gmail for a FormSubmit confirmation link, click it, then send again.",
+          });
+          return;
+        }
+        throw new Error(result.message || "Failed to send email");
       }
+
+      toast({
+        title: "Message Sent!",
+        description: "Thanks for the message. I'll get back to you soon!",
+      });
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+        notRobot: false,
+      });
+      logEvent({
+        action: "submit_contact_form",
+        category: "Contact",
+        label: "Contact Section",
+      });
     } catch (error) {
-      console.error("EmailJS Error:", error);
+      console.error("Contact form error:", error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again later.",
