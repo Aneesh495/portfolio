@@ -55,28 +55,6 @@ export default function About() {
                   BS Computer Science @ Purdue
                 </span>
               </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-                className="flex items-center"
-              >
-                <Users className="text-primary mr-3 h-5 w-5" />
-                <span>
-                  Active in Data Mine & Purdue Cricket
-                </span>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.3 }}
-                className="flex items-center"
-              >
-                <Code className="text-primary mr-3 h-5 w-5" />
-                <span>
-                  Software Engineer, Data Scientist & Blockchain Developer
-                </span>
-              </motion.div>
             </div>
 
             <Button
