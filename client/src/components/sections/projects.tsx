@@ -8,7 +8,7 @@ const projects = [
   {
     title: "Cathode",
     description: [
-      "Built a real-time CPU graphics engine with hand-written AArch64 NEON kernels and from-scratch NTSC/CRT signal DSP — no GPU, no external libraries. Ships 50+ scenes (rasterizer, ray-marcher, physics, path tracer) verified by a 115-point cross-language test suite across ~24k lines of C, Rust, C++, and assembly",
+      "Graphics engine that runs entirely on the CPU. Hand-wrote the NEON kernels and the CRT/NTSC pipeline — no GPU, no libraries. Rasterizer, ray marcher, path tracer, physics. It got a little out of hand.",
     ],
     image:
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
@@ -18,7 +18,7 @@ const projects = [
   {
     title: "Boiler Reviews",
     description: [
-      "Built a Flask + SQLite course review platform with full CRUD, filtered statistical reports, and per-course aggregates. Hardened every query with parameterized statements and server-side validation to prevent SQL injection",
+      "Purdue course reviews. Flask, SQLite, the usual CRUD, some stats per class. Parameterized the queries because SQL injection is embarrassing.",
     ],
     image:
       "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
@@ -28,7 +28,7 @@ const projects = [
   {
     title: "Vibe",
     description: [
-      "Scaled a Java socket-based chat system to 100+ concurrent users with sub-50ms latency using thread pooling. Improved session reliability by 75% through persistent user authentication and synchronized worker threads",
+      "A Java socket chat. Thread pooling, persistent sessions. Holds up fine with a bunch of people on at once.",
     ],
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -38,7 +38,7 @@ const projects = [
   {
     title: "Freelance DAO",
     description: [
-      "Designed a fault-tolerant freelance platform with a multi-signature dispute resolution system. Reduced gas costs by 60% by benchmarking smart contracts using Hardhat testing and custom compiler tweaks",
+      "Freelance work on-chain, with multi-sig if people start arguing. Tweaked the contracts so they cost less gas. That's pretty much it.",
     ],
     image:
       "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -48,7 +48,7 @@ const projects = [
   {
     title: " Quiz Stats",
     description: [
-      "Transformed raw student data into AI-powered insights by engineering a high-performance analytics engine. Automated performance insights and difficulty analysis through dynamic visualizations and personalized benchmarks",
+      "Takes quiz results and turns them into charts and difficulty stats. Pandas, some graphs. Nothing fancy.",
     ],
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -58,7 +58,7 @@ const projects = [
   {
     title: "AI Contract Analyzer",
     description: [
-      "Engineered a full-stack AI-powered platform to parse, analyze, and summarize resumes and contracts using LLMs and NLP. Designed a responsive UI and modular backend to streamline hiring and legal workflows with 99% accuracy",
+      "Drops resumes and contracts into an LLM and spits out summaries. Full stack. Does what it says on the tin.",
     ],
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&h=400&q=80",
