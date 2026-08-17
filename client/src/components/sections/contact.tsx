@@ -8,7 +8,6 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Github, Linkedin } from "lucide-react";
 import { SiInstagram } from "react-icons/si";
-import { Checkbox } from "@/components/ui/checkbox";
 import { logEvent } from "@/hooks/useGoogleAnalytics";
 
 const CONTACT_EMAIL = "aneeshkrishnaparthasarathy@gmail.com";
@@ -19,21 +18,12 @@ export default function Contact() {
     email: "",
     subject: "",
     message: "",
-    notRobot: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.notRobot) {
-      toast({
-        title: "OOPS!",
-        description: "Please pinky promise you're not a robot first!",
-        variant: "destructive",
-      });
-      return;
-    }
 
     setIsSubmitting(true);
 
@@ -89,7 +79,6 @@ export default function Contact() {
         email: "",
         subject: "",
         message: "",
-        notRobot: false,
       });
       logEvent({
         action: "submit_contact_form",
@@ -263,22 +252,6 @@ export default function Contact() {
                       className="min-h-[120px] resize-none"
                       required
                     />
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="not-robot"
-                      checked={formData.notRobot}
-                      onCheckedChange={(checked) =>
-                        setFormData({ ...formData, notRobot: !!checked })
-                      }
-                    />
-                    <Label
-                      htmlFor="not-robot"
-                      className="text-sm text-muted-foreground"
-                    >
-                      I swear I'm not a bot 🤖
-                    </Label>
                   </div>
 
                   <Button
