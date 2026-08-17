@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink } from "lucide-react";
+import { Github } from "lucide-react";
 
 const projects = [
   {
@@ -14,7 +14,6 @@ const projects = [
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
     technologies: ["C", "AArch64 NEON", "Rust", "C++"],
     githubUrl: "https://github.com/Aneesh495/cathode",
-    liveUrl: "https://github.com/Aneesh495/cathode",
   },
   {
     title: "Boiler Reviews",
@@ -25,7 +24,6 @@ const projects = [
       "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
     technologies: ["Flask", "SQLite", "Python", "Bootstrap"],
     githubUrl: "https://github.com/Aneesh495/Boiler-Reviews",
-    liveUrl: "https://github.com/Aneesh495/Boiler-Reviews",
   },
   {
     title: "Vibe",
@@ -36,7 +34,6 @@ const projects = [
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
     technologies: ["Socket Programming", "Multi-threading"],
     githubUrl: "https://github.com/Aneesh495/VibeSocialMedia",
-    liveUrl: "https://github.com/Aneesh495/VibeSocialMedia",
   },
   {
     title: "Freelance DAO",
@@ -46,8 +43,7 @@ const projects = [
     image:
       "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
     technologies: ["Solidity", "Ethereum", "Smart Contracts"],
-    githubUrl: "https://github.com/Aneesh495/freelanceDAO",
-    liveUrl: "https://github.com/Aneesh495/freelanceDAO",
+    githubUrl: "https://github.com/Aneesh495/freelance-DAO",
   },
   {
     title: " Quiz Stats",
@@ -58,7 +54,6 @@ const projects = [
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
     technologies: ["Express.js", "Pandas", "NumPy"],
     githubUrl: "https://github.com/Aneesh495/LocalStorageStats",
-    liveUrl: "https://local-storage-stats.vercel.app/",
   },
   {
     title: "AI Contract Analyzer",
@@ -69,7 +64,6 @@ const projects = [
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&h=400&q=80",
     technologies: ["Node.js", "Fast API", "Multer"],
     githubUrl: "https://github.com/Aneesh495/Contract-Analyzer",
-    liveUrl: "https://github.com/Aneesh495/Contract-Analyzer",
   },
 ];
 
@@ -127,14 +121,6 @@ export default function Projects() {
                     >
                       <Github className="mr-1 h-4 w-4" />
                       Code
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => window.open(project.liveUrl, "_blank")}
-                    >
-                      <ExternalLink className="mr-1 h-4 w-4" />
-                      Live Demo
                     </Button>
                   </div>
                 </CardContent>

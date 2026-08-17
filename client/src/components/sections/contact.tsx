@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Github, Linkedin } from "lucide-react";
-import { SiInstagram, SiSpotify } from "react-icons/si";
+import { SiInstagram } from "react-icons/si";
 import { Checkbox } from "@/components/ui/checkbox";
 import emailjs from "emailjs-com";
 import { logEvent } from "@/hooks/useGoogleAnalytics";
@@ -173,25 +173,6 @@ export default function Contact() {
                 <Github className="text-primary text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">GitHub</h4>
-                </div>
-              </motion.a>
-
-              <motion.a
-                href="https://open.spotify.com/user/wrljxtsfh4n10lh6r3r50m9yf?si=f07588f60ddb43ec"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex items-center p-4 bg-card rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                onClick={() => logEvent({
-                  action: "click_social_link",
-                  category: "Social",
-                  label: "Spotify"
-                })}
-              >
-                <SiSpotify className="text-primary text-xl mr-4" />
-                <div>
-                  <h4 className="font-semibold">Spotify</h4>
                 </div>
               </motion.a>
 
