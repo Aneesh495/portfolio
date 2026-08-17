@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Users, Code, Download } from "lucide-react";
-import babyPhoto from "@assets/IMG_5011 2_1751406011156.png";
+import headshot from "@assets/headshot copy.jpeg";
 import resumePdf from "./resume.pdf";
 import { logEvent } from "@/hooks/useGoogleAnalytics";
 
@@ -27,8 +27,8 @@ export default function About() {
             className="order-2 lg:order-1"
           >
             <img
-              src={babyPhoto}
-              alt="Aneesh Krishna - Baby photo"
+              src={headshot}
+              alt="Aneesh Krishna"
               className="rounded-2xl shadow-2xl w-full max-w-md mx-auto"
             />
           </motion.div>

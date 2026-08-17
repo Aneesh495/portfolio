@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import headshot from "@assets/IMG_5011 2_1751406011156.png";
+import headshot from "@assets/headshot copy.jpeg";
 
 export default function Hero() {
   return (
