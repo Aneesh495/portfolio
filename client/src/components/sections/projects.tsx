@@ -8,7 +8,7 @@ const projects = [
   {
     title: "Cathode",
     description: [
-      "Real-time CPU graphics with handwritten AArch64 NEON kernels and from-scratch NTSC/CRT DSP — rasterizer, ray marcher, physics, path tracer. No GPU, no libraries.",
+      "Real-time CPU graphics with handwritten AArch64 NEON kernels and from-scratch NTSC/CRT DSP. Rasterizer, ray marcher, physics, path tracer. No GPU, no libraries.",
     ],
     image:
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
@@ -48,7 +48,7 @@ const projects = [
   {
     title: " Quiz Stats",
     description: [
-      "Quiz analytics — performance insights, difficulty analysis, and personalized benchmarks.",
+      "Quiz analytics with performance insights, difficulty analysis, and personalized benchmarks.",
     ],
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
