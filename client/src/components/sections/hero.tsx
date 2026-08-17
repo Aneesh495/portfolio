@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import headshot from "@assets/headshot copy.jpeg";
 
 export default function Hero() {
   return (
@@ -16,9 +17,25 @@ export default function Hero() {
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8">
         <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="mb-8 flex justify-center"
+        >
+          <div className="relative">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-primary to-purple-600 opacity-80 blur-sm" />
+            <img
+              src={headshot}
+              alt="Aneesh Krishna"
+              className="relative h-40 w-40 md:h-52 md:w-52 rounded-full object-cover border-4 border-background shadow-2xl"
+            />
+          </div>
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
           className="animate-bounce-slow"
         >
           <h1 className="text-5xl md:text-7xl font-bold mb-4">
