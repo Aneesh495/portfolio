@@ -8,7 +8,7 @@ const projects = [
   {
     title: "Cathode",
     description: [
-      "Graphics engine that runs entirely on the CPU. Hand-wrote the NEON kernels and the CRT/NTSC pipeline — no GPU, no libraries. Rasterizer, ray marcher, path tracer, physics. It got a little out of hand.",
+      "Real-time CPU graphics with handwritten AArch64 NEON kernels and from-scratch NTSC/CRT DSP — rasterizer, ray marcher, physics, path tracer. No GPU, no libraries.",
     ],
     image:
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
@@ -18,7 +18,7 @@ const projects = [
   {
     title: "Boiler Reviews",
     description: [
-      "Purdue course reviews. Flask, SQLite, the usual CRUD, some stats per class. Parameterized the queries because SQL injection is embarrassing.",
+      "Course reviews, filtered reports, and per-course aggregates on Flask + SQLite. Parameterized queries, server-side validation.",
     ],
     image:
       "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
@@ -28,7 +28,7 @@ const projects = [
   {
     title: "Vibe",
     description: [
-      "A Java socket chat. Thread pooling, persistent sessions. Holds up fine with a bunch of people on at once.",
+      "Java socket chat with thread pooling, persistent sessions, and synchronized workers.",
     ],
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -38,7 +38,7 @@ const projects = [
   {
     title: "Freelance DAO",
     description: [
-      "Freelance work on-chain, with multi-sig if people start arguing. Tweaked the contracts so they cost less gas. That's pretty much it.",
+      "On-chain freelance platform with multi-sig dispute resolution. Smart contracts benchmarked and tuned for gas.",
     ],
     image:
       "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -48,7 +48,7 @@ const projects = [
   {
     title: " Quiz Stats",
     description: [
-      "Takes quiz results and turns them into charts and difficulty stats. Pandas, some graphs. Nothing fancy.",
+      "Quiz analytics — performance insights, difficulty analysis, and personalized benchmarks.",
     ],
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -58,7 +58,7 @@ const projects = [
   {
     title: "AI Contract Analyzer",
     description: [
-      "Drops resumes and contracts into an LLM and spits out summaries. Full stack. Does what it says on the tin.",
+      "LLM pipeline for parsing and summarizing resumes and contracts.",
     ],
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&h=400&q=80",
