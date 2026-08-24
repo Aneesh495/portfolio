@@ -31,9 +31,9 @@ const experiences = [
     technologies: ["PyTorc", "Azure", "Kubernetes", "MLOps"],
   },
   {
-    title: "Software Engineer",
+    title: "Founding Engineer",
     company: "Stealth Startup",
-    period: "May 2025 – Jul 2025",
+    period: "Aug 2024 – Jul 2025",
     description: [
       "JWT payments + high-throughput APIs",
     ],
