@@ -6,9 +6,7 @@ import SectionHeading from "@/components/fx/section-heading";
 import { cn } from "@/lib/utils";
 
 export default function Projects() {
-  const [openTitles, setOpenTitles] = useState<Set<string>>(
-    () => new Set(PROJECTS[0] ? [PROJECTS[0].title] : [])
-  );
+  const [openTitles, setOpenTitles] = useState<Set<string>>(() => new Set());
 
   const toggle = (title: string) => {
     setOpenTitles((prev) => {
@@ -50,9 +48,6 @@ export default function Projects() {
                         {project.blurb}
                       </span>
                     </div>
-                    <p className="mt-2 font-mono text-[12px] text-muted-foreground sm:pl-8">
-                      {project.signal}
-                    </p>
                   </button>
 
                   <div className="flex shrink-0 items-center gap-3 pt-1">
@@ -91,10 +86,13 @@ export default function Projects() {
                       className="overflow-hidden"
                     >
                       <div className="pt-5 sm:pl-8">
-                        <p className="sm:hidden mb-3 text-[13px] text-muted-foreground">
+                        <p className="sm:hidden mb-2 text-[13px] text-muted-foreground">
                           {project.blurb}
                         </p>
-                        <ul className="max-w-2xl space-y-2.5 text-[14px] leading-relaxed text-muted-foreground">
+                        <p className="font-mono text-[12px] text-muted-foreground">
+                          {project.signal}
+                        </p>
+                        <ul className="mt-3 max-w-2xl space-y-2.5 text-[14px] leading-relaxed text-muted-foreground">
                           {project.bullets.map((bullet) => (
                             <li key={bullet} className="flex gap-3">
                               <span className="mt-[9px] h-px w-3 shrink-0 bg-border" />

@@ -5,9 +5,7 @@ import SectionHeading from "@/components/fx/section-heading";
 import { cn } from "@/lib/utils";
 
 export default function Experience() {
-  const [openIds, setOpenIds] = useState<Set<string>>(
-    () => new Set(EXPERIENCES[0] ? [EXPERIENCES[0].id] : [])
-  );
+  const [openIds, setOpenIds] = useState<Set<string>>(() => new Set());
 
   const toggle = (id: string) => {
     setOpenIds((prev) => {
@@ -51,14 +49,6 @@ export default function Experience() {
                     <span className="mt-1 block font-mono text-[11px] text-muted-foreground md:hidden">
                       {job.period}
                     </span>
-                    <span
-                      className={cn(
-                        "mt-2 block max-w-2xl text-[14px] leading-relaxed text-muted-foreground transition-colors",
-                        open && "text-foreground/80"
-                      )}
-                    >
-                      {job.summary}
-                    </span>
                   </span>
 
                   <span
@@ -82,7 +72,10 @@ export default function Experience() {
                       className="overflow-hidden"
                     >
                       <div className="pb-8 md:pl-[10.5rem]">
-                        <ul className="max-w-2xl space-y-2.5 text-[14px] leading-relaxed text-muted-foreground">
+                        <p className="max-w-2xl text-[14px] leading-relaxed text-muted-foreground">
+                          {job.summary}
+                        </p>
+                        <ul className="mt-3 max-w-2xl space-y-2.5 text-[14px] leading-relaxed text-muted-foreground">
                           {job.bullets.map((bullet) => (
                             <li key={bullet} className="flex gap-3">
                               <span className="mt-[9px] h-px w-3 shrink-0 bg-border" />
