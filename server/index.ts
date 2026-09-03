@@ -59,11 +59,15 @@ app.use((req, res, next) => {
   // ALWAYS serve the app on port 5001
   // this serves both the API and the client.
   const port = 5001;
-  server.listen({
+  const listenOpts: { port: number; host: string; reusePort?: boolean } = {
     port,
     host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
+  };
+  // SO_REUSEPORT is not supported on macOS with recent Node.
+  if (process.platform !== "darwin") {
+    listenOpts.reusePort = true;
+  }
+  server.listen(listenOpts, () => {
     log(`serving on port ${port}`);
   });
 })();

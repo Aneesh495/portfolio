@@ -1,132 +1,122 @@
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
-
-const projects = [
-  {
-    title: "Cathode",
-    description: [
-      "Real-time CPU graphics with handwritten AArch64 NEON kernels and from-scratch NTSC/CRT DSP. Rasterizer, ray marcher, physics, path tracer. No GPU, no libraries.",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-    technologies: ["C", "AArch64 NEON", "Rust", "C++"],
-    githubUrl: "https://github.com/Aneesh495/cathode",
-  },
-  {
-    title: "Boiler Reviews",
-    description: [
-      "Course reviews, filtered reports, and per-course aggregates on Flask + SQLite. Parameterized queries, server-side validation.",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-    technologies: ["Flask", "SQLite", "Python", "Bootstrap"],
-    githubUrl: "https://github.com/Aneesh495/Boiler-Reviews",
-  },
-  {
-    title: "Vibe",
-    description: [
-      "Java socket chat with thread pooling, persistent sessions, and synchronized workers.",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["Socket Programming", "Multi-threading"],
-    githubUrl: "https://github.com/Aneesh495/VibeSocialMedia",
-  },
-  {
-    title: "Freelance DAO",
-    description: [
-      "On-chain freelance platform with multi-sig dispute resolution. Smart contracts benchmarked and tuned for gas.",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["Solidity", "Ethereum", "Smart Contracts"],
-    githubUrl: "https://github.com/Aneesh495/freelance-DAO",
-  },
-  {
-    title: " Quiz Stats",
-    description: [
-      "Quiz analytics with performance insights, difficulty analysis, and personalized benchmarks.",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["Express.js", "Pandas", "NumPy"],
-    githubUrl: "https://github.com/Aneesh495/LocalStorageStats",
-  },
-  {
-    title: "AI Contract Analyzer",
-    description: [
-      "LLM pipeline for parsing and summarizing resumes and contracts.",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&h=400&q=80",
-    technologies: ["Node.js", "Fast API", "Multer"],
-    githubUrl: "https://github.com/Aneesh495/Contract-Analyzer",
-  },
-];
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import { PROJECTS } from "@/lib/content";
+import SectionHeading from "@/components/fx/section-heading";
+import { cn } from "@/lib/utils";
 
 export default function Projects() {
-  return (
-    <section id="projects" className="py-20 bg-muted/50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
-          <p className="text-xl text-muted-foreground">
-            Some of my recent work
-          </p>
-        </motion.div>
+  const [openTitles, setOpenTitles] = useState<Set<string>>(
+    () => new Set(PROJECTS[0] ? [PROJECTS[0].title] : [])
+  );
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
-              <Card className="project-card h-full shadow-lg">
-                <div className="relative overflow-hidden rounded-t-lg">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex space-x-3">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => window.open(project.githubUrl, "_blank")}
+  const toggle = (title: string) => {
+    setOpenTitles((prev) => {
+      const next = new Set(prev);
+      if (next.has(title)) next.delete(title);
+      else next.add(title);
+      return next;
+    });
+  };
+
+  return (
+    <section id="projects" className="py-24 md:py-32">
+      <div className="mx-auto max-w-page px-6 md:px-10 lg:px-12">
+        <SectionHeading index="02" title="Selected work" />
+
+        <div className="space-y-3">
+          {PROJECTS.map((project, i) => {
+            const open = openTitles.has(project.title);
+            return (
+              <article
+                key={project.title}
+                className="border-t border-border pt-6 last:border-b last:pb-6"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <button
+                    type="button"
+                    onClick={() => toggle(project.title)}
+                    className="min-w-0 flex-1 text-left"
+                    aria-expanded={open}
+                  >
+                    <div className="flex items-baseline gap-3">
+                      <span className="font-mono text-[11px] text-muted-foreground">
+                        0{i + 1}
+                      </span>
+                      <h3 className="text-lg font-medium tracking-tight text-foreground md:text-xl">
+                        {project.title}
+                      </h3>
+                      <span className="hidden text-[13px] text-muted-foreground sm:inline">
+                        {project.blurb}
+                      </span>
+                    </div>
+                    <p className="mt-2 font-mono text-[12px] text-muted-foreground sm:pl-8">
+                      {project.signal}
+                    </p>
+                  </button>
+
+                  <div className="flex shrink-0 items-center gap-3 pt-1">
+                    {project.href && (
+                      <a
+                        href={project.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-0.5 text-[13px] text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {project.hrefLabel}
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => toggle(project.title)}
+                      className={cn(
+                        "font-mono text-[11px] text-muted-foreground transition-transform duration-200",
+                        open && "rotate-45"
+                      )}
+                      aria-label={open ? "Collapse" : "Expand"}
                     >
-                      <Github className="mr-1 h-4 w-4" />
-                      Code
-                    </Button>
+                      +
+                    </button>
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                </div>
+
+                <AnimatePresence initial={false}>
+                  {open && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-5 sm:pl-8">
+                        <p className="sm:hidden mb-3 text-[13px] text-muted-foreground">
+                          {project.blurb}
+                        </p>
+                        <ul className="max-w-2xl space-y-2.5 text-[14px] leading-relaxed text-muted-foreground">
+                          {project.bullets.map((bullet) => (
+                            <li key={bullet} className="flex gap-3">
+                              <span className="mt-[9px] h-px w-3 shrink-0 bg-border" />
+                              <span>{bullet}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-4 flex flex-wrap items-center gap-x-2 font-mono text-[11px] text-muted-foreground">
+                          {project.technologies.map((tech, i) => (
+                            <span key={tech} className="flex items-center gap-x-2">
+                              {i > 0 && <span aria-hidden>·</span>}
+                              <span>{tech}</span>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
