@@ -1,107 +1,110 @@
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-
-const experiences = [
-  {
-    title: "Systems Development Engineer Intern",
-    company: "Amazon",
-    period: "May 2026 - Jul 2026",
-    description: [
-      "pricing infra + zero-trust auth",
-    ],
-    technologies: ["FastAPI", "AWS", "Redshift", "Python"],
-  },
-  {
-    title: "AI Engineer",
-    company: "Handshake",
-    period: "Jan 2026 - Apr 2026",
-    description: [
-      "rlhf pipelines + model alignment",
-    ],
-    technologies: ["LLM Finetuning", "RLHF", "Code Sandboxing"],
-  },
-  {
-    title: "Machine Learning Intern",
-    company: "Caterpillar",
-    period: "Aug 2025 – Dec 2025",
-    description: [
-      "forecasting + ml inference",
-    ],
-    technologies: ["PyTorc", "Azure", "Kubernetes", "MLOps"],
-  },
-  {
-    title: "Founding Engineer",
-    company: "Stealth Startup",
-    period: "Aug 2024 – Jul 2025",
-    description: [
-      "JWT payments + high-throughput APIs",
-    ],
-    technologies: ["React", "TypeScript", "JWTs"],
-  },
-];
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { EXPERIENCES } from "@/lib/content";
+import SectionHeading from "@/components/fx/section-heading";
+import { cn } from "@/lib/utils";
 
 export default function Experience() {
+  const [openIds, setOpenIds] = useState<Set<string>>(
+    () => new Set(EXPERIENCES[0] ? [EXPERIENCES[0].id] : [])
+  );
+
+  const toggle = (id: string) => {
+    setOpenIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
   return (
-    <section id="experience" className="py-20 bg-card">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold mb-4">Experience</h2>
-          <p className="text-xl text-muted-foreground">
-            My professional journey
-          </p>
-        </motion.div>
+    <section id="experience" className="py-24 md:py-32">
+      <div className="mx-auto max-w-page px-6 md:px-10 lg:px-12">
+        <SectionHeading index="01" title="Experience" />
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-border hidden md:block"></div>
+        <div className="divide-y divide-border border-y border-border">
+          {EXPERIENCES.map((job) => {
+            const open = openIds.has(job.id);
+            return (
+              <article key={job.id}>
+                <button
+                  type="button"
+                  onClick={() => toggle(job.id)}
+                  className="group flex w-full items-start gap-6 py-6 text-left transition-colors md:gap-10 md:py-7"
+                  aria-expanded={open}
+                >
+                  <span className="hidden w-36 shrink-0 pt-1 font-mono text-[11px] leading-relaxed text-muted-foreground md:block">
+                    {job.period}
+                  </span>
 
-          <div className="space-y-12">
-            {experiences.map((experience, index) => (
-              <motion.div
-                key={experience.title}
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="timeline-item relative md:pl-12"
-              >
-                <Card className="shadow-lg">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">
-                      {experience.title}
-                    </h3>
-                    <p className="text-primary font-medium mb-2">
-                      {experience.company}
-                    </p>
-                    <p className="text-muted-foreground mb-4">
-                      {experience.period}
-                    </p>
-                    <ul className="list-disc list-inside text-foreground mb-4">
-                      {experience.description.map((bullet, bulletIndex) => (
-                        <li key={bulletIndex}>{bullet}</li>
-                      ))}
-                    </ul>
-                    <div className="flex flex-wrap gap-2">
-                      {experience.technologies.map((tech) => (
-                        <Badge
-                          key={tech}
-                          variant="secondary"
-                          className="text-xs"
-                        >
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                      <span className="text-[15px] font-semibold text-foreground md:text-base">
+                        {job.company}
+                      </span>
+                      <span className="text-muted-foreground">·</span>
+                      <span className="text-[15px] text-foreground/80 md:text-base">
+                        {job.role}
+                      </span>
+                    </span>
+                    <span className="mt-1 block font-mono text-[11px] text-muted-foreground md:hidden">
+                      {job.period}
+                    </span>
+                    <span
+                      className={cn(
+                        "mt-2 block max-w-2xl text-[14px] leading-relaxed text-muted-foreground transition-colors",
+                        open && "text-foreground/80"
+                      )}
+                    >
+                      {job.summary}
+                    </span>
+                  </span>
+
+                  <span
+                    className={cn(
+                      "mt-1 font-mono text-[11px] text-muted-foreground transition-transform duration-200",
+                      open && "rotate-45"
+                    )}
+                    aria-hidden
+                  >
+                    +
+                  </span>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {open && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pb-8 md:pl-[10.5rem]">
+                        <ul className="max-w-2xl space-y-2.5 text-[14px] leading-relaxed text-muted-foreground">
+                          {job.bullets.map((bullet) => (
+                            <li key={bullet} className="flex gap-3">
+                              <span className="mt-[9px] h-px w-3 shrink-0 bg-border" />
+                              <span>{bullet}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-5 flex flex-wrap items-center gap-x-2 font-mono text-[11px] text-muted-foreground">
+                          {job.technologies.map((tech, i) => (
+                            <span key={tech} className="flex items-center gap-x-2">
+                              {i > 0 && <span aria-hidden>·</span>}
+                              <span>{tech}</span>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

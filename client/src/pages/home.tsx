@@ -1,60 +1,55 @@
 import { useEffect } from "react";
 import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
 import Hero from "@/components/sections/hero";
-import Projects from "@/components/sections/projects";
 import Experience from "@/components/sections/experience";
-import Skills from "@/components/sections/skills";
+import Projects from "@/components/sections/projects";
 import Contact from "@/components/sections/contact";
 
 export default function Home() {
   useEffect(() => {
-    // Smooth scrolling for navigation links
     const handleNavClick = (e: Event) => {
       const target = e.target as HTMLAnchorElement;
-      if (target.href && target.href.includes('#')) {
-        e.preventDefault();
-        const id = target.href.split('#')[1];
+      if (target.href && target.href.includes("#")) {
+        const id = target.href.split("#")[1];
+        if (!id) return;
         const element = document.getElementById(id);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          e.preventDefault();
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       }
     };
 
-    // Navigation active state
     const updateActiveNav = () => {
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('.nav-link');
-      
-      let current = '';
-      sections.forEach(section => {
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll(".nav-link");
+      let current = "";
+      sections.forEach((section) => {
         const sectionTop = section.getBoundingClientRect().top;
-        const sectionHeight = section.clientHeight;
-        if (sectionTop <= 200 && sectionTop + sectionHeight > 200) {
-          current = section.getAttribute('id') || '';
+        const sectionHeight = (section as HTMLElement).clientHeight;
+        if (sectionTop <= 160 && sectionTop + sectionHeight > 160) {
+          current = section.getAttribute("id") || "";
         }
       });
-
-      navLinks.forEach(link => {
-        const href = (link as HTMLAnchorElement).getAttribute('href');
+      navLinks.forEach((link) => {
+        const href = (link as HTMLAnchorElement).getAttribute("href");
         if (href === `#${current}`) {
-          link.classList.add('text-foreground');
-          link.classList.remove('text-muted-foreground');
+          link.classList.add("text-foreground");
+          link.classList.remove("text-muted-foreground");
         } else {
-          link.classList.remove('text-foreground');
-          link.classList.add('text-muted-foreground');
+          link.classList.remove("text-foreground");
+          link.classList.add("text-muted-foreground");
         }
       });
     };
 
-    document.addEventListener('click', handleNavClick);
-    window.addEventListener('scroll', updateActiveNav);
-    updateActiveNav(); // Call once on load
+    document.addEventListener("click", handleNavClick);
+    window.addEventListener("scroll", updateActiveNav, { passive: true });
+    updateActiveNav();
 
     return () => {
-      document.removeEventListener('click', handleNavClick);
-      window.removeEventListener('scroll', updateActiveNav);
+      document.removeEventListener("click", handleNavClick);
+      window.removeEventListener("scroll", updateActiveNav);
     };
   }, []);
 
@@ -63,12 +58,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Projects />
         <Experience />
-        <Skills />
+        <Projects />
         <Contact />
       </main>
-      <Footer />
     </div>
   );
 }
