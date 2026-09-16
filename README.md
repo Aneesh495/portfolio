@@ -1,43 +1,57 @@
-# Portfolio site
+# Portfolio
 
-Personal portfolio built as a single deployable web app: a Vite-powered React
-client, an Express API, and shared TypeScript types in one repository.
+Single-repo full stack: Vite/React client, Express API, and Drizzle schema shared through `shared/`. One `npm run build` emits both the static client and a bundled Node server for production.
 
 ## Architecture
 
 ```mermaid
-flowchart LR
-  Browser --> Client[client/ React + Vite]
-  Client -->|REST / JSON| Server[server/ Express]
-  Server --> DB[(Neon Postgres via Drizzle)]
-  Client --- Shared[shared/ schema and types]
+flowchart TB
+  Browser --> Client[client/ Vite + React]
+  Client -->|fetch JSON| Server[server/ Express]
+  Server --> ORM[Drizzle]
+  ORM --> PG[(Neon Postgres)]
+  Client --- Shared[shared/schema.ts]
   Server --- Shared
 ```
 
-| Layer | Role |
-| --- | --- |
-| `client/` | Routes, UI components, theme, analytics hooks |
-| `server/` | HTTP API, auth helpers, static hosting in production |
-| `shared/` | Drizzle schema and types consumed by both sides |
+Production path: esbuild bundles `server/index.ts` with externalized node modules; client assets land under `dist/public` and are served by the same process.
 
-## Development
+## Client
+
+- React 18, Wouter routing, TanStack Query
+- Radix-based UI, theme provider, GA hook (`useGoogleAnalytics`)
+- Strict TypeScript; `@/` alias to `client/src`
+
+## Server
+
+- Express HTTP API, session-aware helpers under `server/`
+- Drizzle + Neon serverless driver (`server/db.ts`)
+- Vite dev middleware in development; static `serveStatic` in production
+
+## Commands
 
 ```bash
 npm install
-npm run dev
+npm run dev          # API + Vite concurrently via tsx
+npm run build        # client + server bundles
+npm run start        # node dist/index.js
+npm run check        # tsc
+npm run db:push      # drizzle-kit push
 ```
 
-Other scripts:
+Configure `DATABASE_URL` and session secrets expected by `server/db.ts` and auth modules. See `drizzle.config.ts` for schema location.
 
-- `npm run build` - production client bundle + server bundle
-- `npm run start` - run the compiled server
-- `npm run check` - TypeScript project check
-- `npm run db:push` - apply Drizzle schema to the configured database
+## CI
 
-## Configuration
+`.github/workflows/ci.yml` runs `npm run check` on push.
 
-Set database and session secrets via environment variables expected by
-`server/db.ts` and the auth module. See `drizzle.config.ts` for schema location.
+## Layout
+
+| Path | Role |
+| --- | --- |
+| `client/` | Pages, components, hooks |
+| `server/` | Routes, DB, production static |
+| `shared/` | Drizzle schema + shared types |
 
 ## License
 
