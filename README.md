@@ -27,6 +27,18 @@ npm install
 npm run dev
 ```
 
+Other scripts:
+
+- `npm run build` - production client bundle + server bundle
+- `npm run start` - run the compiled server
+- `npm run check` - TypeScript project check
+- `npm run db:push` - apply Drizzle schema to the configured database
+
+## Configuration
+
+Set database and session secrets via environment variables expected by
+`server/db.ts` and the auth module. See `drizzle.config.ts` for schema location.
+
 ## License
 
 MIT
