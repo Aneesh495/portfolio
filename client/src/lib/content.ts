@@ -128,17 +128,4 @@ export const PROJECTS = [
     href: "https://github.com/Aneesh495/cathode",
     hrefLabel: "GitHub",
   },
-  {
-    title: "Lancechain",
-    kind: "Protocol",
-    blurb: "On-chain escrow",
-    signal: "Solidity, Hardhat, wallet console",
-    bullets: [
-      "Escrow that holds funds on-chain until the client confirms the work is done.",
-      "Hardhat contracts and an ethers.js console for create, complete, dispute, and release.",
-    ],
-    technologies: ["Solidity", "Hardhat", "ethers.js"],
-    href: "https://github.com/Aneesh495/lancechain",
-    hrefLabel: "GitHub",
-  },
 ];
