@@ -131,13 +131,13 @@ export const PROJECTS = [
   {
     title: "Glyph",
     kind: "Language",
-    blurb: "Small language project",
-    signal: "OCaml, a few compiler ideas",
+    blurb: "Functional language toolchain",
+    signal: "OCaml, Hindley-Milner inference, SSA research",
     bullets: [
-      "A little language project I've been working on.",
-      "The frontend works; the rest is still taking shape.",
+      "Working frontend for a strict functional language with parsing, algebraic data types, pattern matching, and Hindley-Milner type inference.",
+      "Research modules cover HIR, SSA, optimization passes, bytecode, and a VM; the full pipeline is still being wired together.",
     ],
-    technologies: ["OCaml"],
+    technologies: ["OCaml", "Compilers", "Type Systems"],
     href: "https://github.com/Aneesh495/glyph",
     hrefLabel: "GitHub",
   },
