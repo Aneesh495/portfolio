@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
 import { Settings, RotateCcw, Trophy } from "lucide-react";
+import { logEvent } from "@/hooks/useGoogleAnalytics";
 
 const BOARD_SIZE = 20;
 const INITIAL_SNAKE = [{ x: 10, y: 10 }];

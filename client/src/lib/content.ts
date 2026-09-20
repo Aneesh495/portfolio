@@ -128,4 +128,17 @@ export const PROJECTS = [
     href: "https://github.com/Aneesh495/cathode",
     hrefLabel: "GitHub",
   },
+  {
+    title: "Glyph",
+    kind: "Language",
+    blurb: "Small language project",
+    signal: "OCaml, a few compiler ideas",
+    bullets: [
+      "A little language project I've been working on.",
+      "The frontend works; the rest is still taking shape.",
+    ],
+    technologies: ["OCaml"],
+    href: "https://github.com/Aneesh495/glyph",
+    hrefLabel: "GitHub",
+  },
 ];
