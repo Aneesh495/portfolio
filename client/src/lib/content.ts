@@ -11,8 +11,8 @@ export const EXPERIENCES = [
   {
     id: "amazon",
     company: "Amazon",
-    role: "Systems Development Engineer Intern",
-    period: "May 2026 - Aug 2026",
+    role: "Engineering",
+    period: "2026",
     location: "Internship",
     summary: "Pricing infrastructure and data pipelines on AWS.",
     bullets: [
@@ -22,23 +22,10 @@ export const EXPERIENCES = [
     technologies: ["AWS", "Redshift", "Python"],
   },
   {
-    id: "handshake",
-    company: "Handshake",
-    role: "AI Engineer",
-    period: "Jan 2026 - Apr 2026",
-    location: "AI / Alignment",
-    summary: "RLHF and evaluation for code models.",
-    bullets: [
-      "Built an RLHF pipeline from preference data through training.",
-      "Wrote a sandboxed harness to score generated code off-host.",
-    ],
-    technologies: ["Python", "RLHF", "LLMs"],
-  },
-  {
     id: "caterpillar",
     company: "Caterpillar",
-    role: "Machine Learning Intern",
-    period: "Aug 2025 - Dec 2025",
+    role: "Engineering",
+    period: "2025",
     location: "ML / Forecasting",
     summary: "Forecasting models and production inference.",
     bullets: [
@@ -48,10 +35,23 @@ export const EXPERIENCES = [
     technologies: ["PyTorch", "Kubernetes", "Azure", "MLOps"],
   },
   {
+    id: "handshake",
+    company: "Handshake",
+    role: "Engineering",
+    period: "2025",
+    location: "AI / Alignment",
+    summary: "RLHF and evaluation for code models.",
+    bullets: [
+      "Built an RLHF pipeline from preference data through training.",
+      "Wrote a sandboxed harness to score generated code off-host.",
+    ],
+    technologies: ["Python", "RLHF", "LLMs"],
+  },
+  {
     id: "stealth",
     company: "Stealth Startup",
-    role: "Founding Engineer",
-    period: "Aug 2024 - Jul 2025",
+    role: "Engineering",
+    period: "2024",
     location: "Startup",
     summary: "Realtime simulation and engine infrastructure.",
     bullets: [
