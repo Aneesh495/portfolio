@@ -22,8 +22,8 @@ export default function Hero() {
         </h1>
 
         <p className="mt-8 max-w-3xl text-[17px] leading-relaxed text-muted-foreground md:text-lg">
-          I study computer science at Purdue. Recently I worked on systems at
-          Amazon, alignment at Handshake, and forecasting at Caterpillar.
+          Incoming @ Optiver. CS at Purdue. Previously Amazon, Handshake,
+          and Caterpillar.
         </p>
 
         <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-[13px]">
