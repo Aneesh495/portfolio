@@ -75,22 +75,26 @@ export default function Experience() {
                         <p className="max-w-2xl text-[14px] leading-relaxed text-muted-foreground">
                           {job.summary}
                         </p>
-                        <ul className="mt-3 max-w-2xl space-y-2.5 text-[14px] leading-relaxed text-muted-foreground">
-                          {job.bullets.map((bullet) => (
-                            <li key={bullet} className="flex gap-3">
-                              <span className="mt-[9px] h-px w-3 shrink-0 bg-border" />
-                              <span>{bullet}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="mt-5 flex flex-wrap items-center gap-x-2 font-mono text-[11px] text-muted-foreground">
-                          {job.technologies.map((tech, i) => (
-                            <span key={tech} className="flex items-center gap-x-2">
-                              {i > 0 && <span aria-hidden>·</span>}
-                              <span>{tech}</span>
-                            </span>
-                          ))}
-                        </div>
+                        {job.bullets.length > 0 && (
+                          <ul className="mt-3 max-w-2xl space-y-2.5 text-[14px] leading-relaxed text-muted-foreground">
+                            {job.bullets.map((bullet) => (
+                              <li key={bullet} className="flex gap-3">
+                                <span className="mt-[9px] h-px w-3 shrink-0 bg-border" />
+                                <span>{bullet}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {job.technologies.length > 0 && (
+                          <div className="mt-5 flex flex-wrap items-center gap-x-2 font-mono text-[11px] text-muted-foreground">
+                            {job.technologies.map((tech, i) => (
+                              <span key={tech} className="flex items-center gap-x-2">
+                                {i > 0 && <span aria-hidden>·</span>}
+                                <span>{tech}</span>
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   )}
