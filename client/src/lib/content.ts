@@ -47,7 +47,7 @@ export const EXPERIENCES = [
   {
     id: "handshake",
     company: "Handshake",
-    role: "Engineering",
+    role: "AI Engineer",
     period: "2025",
     location: "AI / Alignment",
     summary: "RLHF and evaluation for code models.",
