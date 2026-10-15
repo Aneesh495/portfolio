@@ -21,7 +21,7 @@ export const EXPERIENCES = [
   {
     id: "amazon",
     company: "Amazon",
-    role: "Engineering",
+    role: "Systems Development Intern",
     period: "2026",
     location: "Internship",
     summary: "Pricing infrastructure and data pipelines on AWS.",
@@ -34,7 +34,7 @@ export const EXPERIENCES = [
   {
     id: "caterpillar",
     company: "Caterpillar",
-    role: "Engineering",
+    role: "Machine Learning Intern",
     period: "2025",
     location: "ML / Forecasting",
     summary: "Forecasting models and production inference.",
@@ -60,7 +60,7 @@ export const EXPERIENCES = [
   {
     id: "stealth",
     company: "Stealth Startup",
-    role: "Engineering",
+    role: "Founding Engineer",
     period: "2024",
     location: "Startup",
     summary: "Realtime simulation and engine infrastructure.",
