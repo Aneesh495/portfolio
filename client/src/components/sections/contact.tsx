@@ -1,28 +1,11 @@
 import { PROFILE } from "@/lib/content";
 import SectionHeading from "@/components/fx/section-heading";
-import { useToast } from "@/hooks/use-toast";
 import { logEvent } from "@/hooks/useGoogleAnalytics";
 
 const linkClass =
   "block max-w-full break-all text-left font-display text-xl italic tracking-tight text-foreground transition-opacity hover:opacity-70 sm:text-3xl";
 
 export default function Contact() {
-  const { toast } = useToast();
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(PROFILE.email);
-      toast({ title: "Copied", description: PROFILE.email });
-      logEvent({
-        action: "copy_email",
-        category: "Contact",
-        label: "Email",
-      });
-    } catch {
-      window.location.href = `mailto:${PROFILE.email}`;
-    }
-  };
-
   const githubLabel = PROFILE.github.replace(/^https?:\/\//, "").replace(/^www\./, "");
   const linkedinLabel = PROFILE.linkedin.replace(/^https?:\/\//, "").replace(/^www\./, "");
 
@@ -36,9 +19,19 @@ export default function Contact() {
         </p>
 
         <div className="mt-8 space-y-4">
-          <button type="button" onClick={copyEmail} className={linkClass}>
+          <a
+            href={`mailto:${PROFILE.email}`}
+            onClick={() =>
+              logEvent({
+                action: "click_email",
+                category: "Contact",
+                label: "Email",
+              })
+            }
+            className={linkClass}
+          >
             {PROFILE.email}
-          </button>
+          </a>
           <a
             href={PROFILE.github}
             target="_blank"
