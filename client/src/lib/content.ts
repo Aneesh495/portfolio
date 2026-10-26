@@ -109,7 +109,7 @@ export const PROJECTS = [
       "Original UEFI loader, virtio drivers, journaled StrataFS, and a TCP/IP stack",
     ],
     technologies: ["C", "x86-64 Assembly", "SMP", "Kernel"],
-    href: "https://github.com/Aneesh495/stratum-os",
+    href: "https://github.com/Aneesh495/stratum",
     hrefLabel: "GitHub",
   },
   {
