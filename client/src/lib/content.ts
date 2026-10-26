@@ -1,6 +1,6 @@
 export const PROFILE = {
   name: "Aneesh Krishna",
-  email: "aneeshkrishnaparthasarathy@gmail.com",
+  email: "parthas6@purdue.edu",
   location: "New York City",
   university: "Purdue University",
   github: "https://github.com/Aneesh495",
