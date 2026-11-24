@@ -139,32 +139,6 @@ export const PROJECTS = [
     hrefLabel: "GitHub",
   },
   {
-    title: "Glyph",
-    kind: "Language",
-    blurb: "Functional language compiler",
-    signal: "Hindley-Milner inference, pattern compilation, SSA, copying GC",
-    bullets: [
-      "A strict functional language with algebraic data types, Hindley-Milner inference, and Maranget pattern decision trees",
-      "Lowers through optimized SSA and verified register bytecode to a VM with a Cheney copying collector",
-    ],
-    technologies: ["OCaml", "Type Systems", "SSA", "Garbage Collection"],
-    href: "https://github.com/Aneesh495/glyph",
-    hrefLabel: "GitHub",
-  },
-  {
-    title: "Lockstep",
-    kind: "Systems",
-    blurb: "Exchange matching engine",
-    signal: "Price-time priority, fixed pools, WAL recovery",
-    bullets: [
-      "Deterministic exchange core with pre-trade risk and fixed order pools on the matching path",
-      "TCP order entry, redundant UDP feeds, gap recovery, and CRC32C WAL/snapshot replay",
-    ],
-    technologies: ["C++20", "TCP/UDP", "WAL", "Deterministic Replay"],
-    href: "https://github.com/Aneesh495/lockstep",
-    hrefLabel: "GitHub",
-  },
-  {
     title: "Cathode",
     kind: "Systems",
     blurb: "CPU graphics engine",
