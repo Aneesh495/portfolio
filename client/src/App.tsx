@@ -1,4 +1,5 @@
 import { Switch, Route } from "wouter";
+import { MotionConfig } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { useGoogleAnalytics } from "./hooks/useGoogleAnalytics";
@@ -24,14 +25,16 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-          <Analytics />
-          <SpeedInsights />
-        </TooltipProvider>
-      </ThemeProvider>
+      <MotionConfig reducedMotion="user">
+        <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+            <Analytics />
+            <SpeedInsights />
+          </TooltipProvider>
+        </ThemeProvider>
+      </MotionConfig>
     </QueryClientProvider>
   );
 }

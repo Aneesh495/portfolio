@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import { Container } from "@/components/layout/page-shell";
 import { useTheme } from "@/components/ui/theme-provider";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
-];
+  { id: "experience", href: "#experience", label: "Experience" },
+  { id: "projects", href: "#projects", label: "Projects" },
+  { id: "contact", href: "#contact", label: "Contact" },
+] as const;
 
-export default function Navbar() {
+export default function Navbar({ activeId }: { activeId?: string }) {
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -31,22 +32,29 @@ export default function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border"
+        scrolled || open
+          ? "border-b border-border bg-background/85 backdrop-blur-md"
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-page items-center justify-between px-6 md:px-10 lg:px-12">
-        <nav className="hidden items-center gap-8 md:flex">
-          {NAV.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="nav-link text-[13px] text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {item.label}
-            </a>
-          ))}
+      <Container className="flex h-16 items-center justify-between">
+        <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
+          {NAV.map((item) => {
+            const active = activeId === item.id;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "location" : undefined}
+                className={cn(
+                  "text-[13px] transition-colors hover:text-foreground",
+                  active ? "text-foreground" : "text-muted-foreground"
+                )}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
         <button
@@ -56,7 +64,7 @@ export default function Navbar() {
           aria-label={open ? "Close menu" : "Menu"}
           aria-expanded={open}
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </button>
 
         <button
@@ -67,22 +75,27 @@ export default function Navbar() {
         >
           {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
         </button>
-      </div>
+      </Container>
 
       {open && (
-        <div className="border-t border-border bg-background px-6 py-4 md:hidden">
-          <div className="flex flex-col gap-3">
+        <div className="border-t border-border bg-background md:hidden">
+          <Container className="flex flex-col gap-2.5 py-3.5">
             {NAV.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm text-muted-foreground"
+                className={cn(
+                  "text-sm transition-colors",
+                  activeId === item.id
+                    ? "text-foreground"
+                    : "text-muted-foreground"
+                )}
                 onClick={() => setOpen(false)}
               >
                 {item.label}
               </a>
             ))}
-          </div>
+          </Container>
         </div>
       )}
     </header>

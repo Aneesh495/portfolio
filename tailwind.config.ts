@@ -52,7 +52,7 @@ export default {
       },
       maxWidth: {
         reading: "46rem",
-        page: "80rem",
+        page: "58rem",
       },
       keyframes: {
         "accordion-down": {
