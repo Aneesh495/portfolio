@@ -1,4 +1,6 @@
 import { Switch, Route } from "wouter";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { useGoogleAnalytics } from "./hooks/useGoogleAnalytics";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -26,6 +28,8 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <Analytics />
+          <SpeedInsights />
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
